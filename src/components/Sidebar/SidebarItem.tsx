@@ -26,12 +26,12 @@ const SidebarItem = ({
     <>
       <Link to={route} onClick={onClick} className='w-full'>
         <div
-          className={`flex w-full py-[12px] px-[12px] cursor-pointer select-none gap-[10px] transition-all rounded-lg hover:text-[#0074B5] ${isSidebarOpen ? 'justify-start' : 'justify-center'
+          className={`flex w-full py-[12px] px-[12px] cursor-pointer select-none gap-[10px] transition-all rounded-lg hover:text-[#0074B5] items-center ${isSidebarOpen ? 'justify-start' : 'justify-center'
             } ${isActive ? 'text-[#0074B5]' : 'text-[#004468]'} ${className}`}
           data-testid={testId}
         >
           <div>{icon}</div>
-          {isSidebarOpen && <p>{name}</p>}
+          {isSidebarOpen && <p className='text-lg font-medium'>{name}</p>}
         </div>
       </Link>
 

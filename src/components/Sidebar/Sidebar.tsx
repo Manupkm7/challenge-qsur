@@ -3,7 +3,7 @@ import { MdDashboard as DashboardIcon } from '@react-icons/all-files/md/MdDashbo
 import { MdPerson as PersonIcon } from '@react-icons/all-files/md/MdPerson';
 import { MdSettings as SettingsIcon } from '@react-icons/all-files/md/MdSettings';
 import { MdHelp as HelpIcon } from '@react-icons/all-files/md/MdHelp';
-import { FaArrowRight as Arrow } from '@react-icons/all-files/fa/FaArrowRight';
+import { MdDehaze as MenuIcon } from "@react-icons/all-files/md/MdDehaze";
 import { isSidebarOpenAtom } from '../../atoms';
 import { useRecoilState } from 'recoil';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -51,18 +51,19 @@ export function AppSidebar() {
 
     return (
         <aside className={`transition-all ${isSidebarOpen ? 'w-[280px]' : 'w-[80px]'}`}>
-            <section className={`h-full flex flex-col justify-between items-center p-[10px] gap-y-[10px]`}>
+            <section className={`h-full flex flex-col justify-between items-center p-[10px] gap-y-[10px] border-r`}>
                 <div className='h-full flex flex-col gap-y-[10px] overflow-y-auto overflow-x-hidden'>
                     {/* Open/Close sidebar */}
-                    <div className='flex items-center justify-between gap-[5px] pr-[4px]'>
-                        <div className='flex-1 border border-[#0074B5]/20' />
+                    <div className='flex items-center justify-between gap-[5px] px-[12px]'>
+                        {isSidebarOpen && <p className='text-lg font-medium'>Gestion de Items</p>}
+
                         <Button
-                            variant='primary'
+                            variant='secondary'
                             className={`w-[26px] max-h-[26px] flex items-center justify-center rounded-full cursor-pointer`}
                             onClick={handleOnClickSidebar}
                             data-testid='sidebar-handler-btn'
                         >
-                            <Arrow color='white' size='10' strokeWidth='2' direction={isSidebarOpen ? 'left' : 'right'} />
+                            <MenuIcon color='red' size='20' strokeWidth='1' />
                         </Button>
                     </div>
 
