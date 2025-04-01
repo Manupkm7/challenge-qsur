@@ -1,13 +1,15 @@
-import { useState } from 'react'
+import { Outlet } from "react-router-dom"
 
 function App() {
 
   return (
-    <>
-      <div className='w-full mx-auto px-2 max-w-full mt-2'>
-        <h1 className='text-3xl font-bold text-red-500'>Hello World</h1>
-      </div>
-    </>
+    <div className='min-h-screen font-roboto h-screen flex flex-col md:flex-row bg-[#F1F1F1] p-[12px] gap-4'>
+      {/* <SidebarDesktop /> */}
+      <section className='ml-[10px] flex-1 flex flex-col'>
+        <Outlet />
+      </section>
+
+    </div>
   )
 }
 

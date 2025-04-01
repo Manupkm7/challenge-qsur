@@ -1,10 +1,28 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
+import 'react-toastify/dist/ReactToastify.css';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+import ReactDOM from 'react-dom/client';
+import { ToastContainer } from 'react-toastify';
+import { RecoilRoot } from 'recoil';
+import { BrowserRouter } from 'react-router-dom';
+import { Landing } from './pages/Landing';
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <BrowserRouter>
+    <RecoilRoot>
+      <ToastContainer
+        position='top-center'
+        autoClose={2000}
+        hideProgressBar={true}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={true}
+        theme='colored'
+        toastStyle={{ backgroundColor: '#5577F1', color: 'white', borderRadius: '15px' }}
+      />
+      <Landing />
+    </RecoilRoot>
+  </BrowserRouter>,
+);
