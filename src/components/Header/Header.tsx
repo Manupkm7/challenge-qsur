@@ -1,15 +1,52 @@
 import { useState } from "react"
-import { MdSearch as Search } from "@react-icons/all-files/md/MdSearch"
 import { useLocation } from "react-router-dom"
 
 
 import Button from "../Button"
 import { Select } from "../Select"
 import Input from "../Input"
+import { darkModeAtom } from "@/atoms/index"
+import { useRecoilValue } from "recoil"
 
-export function AppHeader() {
+export type FilterState = {
+    status: LabelValue
+    sort: LabelValue
+    search: string
+}
+
+type AppHeaderProps = {
+    filters: FilterState
+    onFiltersChange: (filters: FilterState) => void
+}
+
+type LabelValue = {
+    label: string
+    value: string
+}
+
+const statusMap = {
+    "Todos": "all",
+    "Activo": "active",
+    "Inactivo": "inactive"
+}
+
+const STATUS_OPTIONS = [
+    { label: "Todos", value: "all" },
+    { label: "Activo", value: "active" },
+    { label: "Inactivo", value: "inactive" }
+]
+
+const SORT_OPTIONS = [
+    { label: "Más recientes", value: "recents" },
+    { label: "Más antiguos", value: "oldest" },
+    { label: "Nombre", value: "name" }
+]
+
+
+export function AppHeader({ filters, onFiltersChange }: AppHeaderProps) {
     const [searchQuery, setSearchQuery] = useState("")
     const location = useLocation()
+    const dark = useRecoilValue(darkModeAtom)
 
     // Format the pathname to create a readable title
     const formatPathname = (path: string) => {
@@ -24,6 +61,22 @@ export function AppHeader() {
 
     const pageTitle = formatPathname(location.pathname)
 
+    const handleStatusChange = (value: LabelValue) => {
+        console.log(value)
+
+        onFiltersChange({ ...filters, status: value })
+    }
+
+    const handleSortChange = (value: LabelValue) => {
+        onFiltersChange({ ...filters, sort: value })
+    }
+
+    const handleSearchChange = (value: string) => {
+        setSearchQuery(value)
+        onFiltersChange({ ...filters, search: value })
+    }
+
+
     return (
         <header className="sticky top-0 z-10 border-b bg-background">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-3.5">
@@ -33,19 +86,28 @@ export function AppHeader() {
 
                 <div className="flex flex-col gap-4 md:flex-row md:items-center">
                     <div className="flex gap-2">
-                        <Select options={["Todos", "Activos", "Inactivos"]} />
-                        <Select options={["Más recientes", "Más antiguos", "Nombre"]} />
+                        <Select<LabelValue> dark={dark} value={filters.status}
+                            onChange={handleStatusChange}
+                            options={STATUS_OPTIONS}
+                            extractLabel={(option) => option.label}
+                            extractValue={(option) => option.value}
+                        />
 
+                        <Select<LabelValue> dark={dark}
+                            value={filters.sort}
+                            onChange={(value: LabelValue) => handleSortChange(value)}
+                            options={SORT_OPTIONS} extractLabel={(option) => option.label}
+                            extractValue={(option) => option.value}
+                        />
                     </div>
 
-                    <div className="relative">
-                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <div>
                         <Input
                             type="search"
                             placeholder="Buscar..."
-                            className="w-full pl-8 md:w-[250px]"
+                            className="w-full"
                             value={searchQuery}
-                            onChange={(value) => setSearchQuery(value)}
+                            onChange={(value) => handleSearchChange(value)}
                         />
                     </div>
 

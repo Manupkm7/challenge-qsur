@@ -4,11 +4,12 @@ import { MdPerson as PersonIcon } from '@react-icons/all-files/md/MdPerson';
 import { MdSettings as SettingsIcon } from '@react-icons/all-files/md/MdSettings';
 import { MdHelp as HelpIcon } from '@react-icons/all-files/md/MdHelp';
 import { MdDehaze as MenuIcon } from "@react-icons/all-files/md/MdDehaze";
-import { isSidebarOpenAtom } from '../../atoms';
-import { useRecoilState } from 'recoil';
+import { darkModeAtom, isSidebarOpenAtom } from '../../atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import Button from '../Button';
 import SidebarItem from './SidebarItem';
+import clsx from 'clsx';
 
 // Navigation items
 const navItems = [
@@ -32,15 +33,11 @@ const navItems = [
         icon: SettingsIcon,
         url: "/settings",
     },
-    {
-        title: "Ayuda",
-        icon: HelpIcon,
-        url: "/help",
-    },
 ]
 
 export function AppSidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useRecoilState(isSidebarOpenAtom);
+    const dark = useRecoilValue(darkModeAtom);
     const [, setIsSidebarOpenStored] = useLocalStorage<boolean>('isSidebarOpen', !isSidebarOpen);
 
 
@@ -59,7 +56,7 @@ export function AppSidebar() {
 
                         <Button
                             variant='secondary'
-                            className={`w-[26px] max-h-[26px] flex items-center justify-center rounded-full cursor-pointer`}
+                            className={`w-[26px] max-h-[26px] flex items-center justify-center rounded-full cursor-pointer bg-transparent border-none`}
                             onClick={handleOnClickSidebar}
                             data-testid='sidebar-handler-btn'
                         >
@@ -83,6 +80,23 @@ export function AppSidebar() {
                                     />
                                 )
                             })}
+                            <div className='px-3 mt-4'>
+                                {isSidebarOpen ? <label
+                                    className={clsx(
+                                        'flex rounded-2xl text-lg transition-all',
+                                        dark ? 'text-white' : 'text-[#0074B5]'
+                                    )}>
+                                    Soporte
+                                </label> : null}
+                                <SidebarItem
+                                    route="/help"
+                                    onClick={() => { }}
+                                    name="Ayuda"
+                                    icon={<HelpIcon color='currentColor' size='24' />}
+                                    className='px-0'
+                                    testId={`sidebar-soporte-btn`}
+                                />
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -91,66 +105,4 @@ export function AppSidebar() {
         </aside>
 
     )
-}
-/**
- *         <Sidebar variant="inset" collapsible="icon">
-            <SidebarHeader className="flex items-center p-4">
-                <div className="flex items-center gap-2 cursor-pointer" onClick={toggleSidebar}>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                        <Menu className="h-4 w-4" />
-                    </div>
-                    <span className="font-semibold">Mi Aplicación</span>
-                </div>
-            </SidebarHeader>
-            <SidebarContent>
-                <SidebarGroup>
-                    <SidebarGroupLabel>Navegación</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            {navItems.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild tooltip={item.title}>
-                                        <a href={item.url}>
-                                            <item.icon className="h-4 w-4" />
-                                            <span>{item.title}</span>
-                                        </a>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-                <SidebarGroup>
-                    <SidebarGroupLabel>Soporte</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton asChild tooltip="Ayuda">
-                                    <a href="/help">
-                                        <HelpCircle className="h-4 w-4" />
-                                        <span>Ayuda</span>
-                                    </a>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-            </SidebarContent>
-            <SidebarFooter>
-                <SidebarMenu>
-                    <SidebarMenuItem>
-                        <SidebarMenuButton asChild tooltip="Cerrar sesión">
-                            <a href="/logout">
-                                <LogOut className="h-4 w-4" />
-                                <span>Cerrar sesión</span>
-                            </a>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                </SidebarMenu>
-            </SidebarFooter>
-            <SidebarRail />
-            <SidebarTrigger className="absolute right-4 top-4 md:hidden" />
-        </Sidebar>
- * 
- * 
- */
+};

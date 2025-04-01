@@ -26,7 +26,8 @@
       "@/lib/*": ["src/lib/*"],
       "@/types/*": ["src/types/*"],
       "@/shared/*": ["src/components/shared/*"],
-      "@/utils/*": ["src/utils/*"]
+      "@/utils/*": ["src/utils/*"],
+      "@/atoms/*": ["src/atoms/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],
