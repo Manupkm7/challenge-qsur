@@ -27,13 +27,15 @@ type EditItemModalProps = {
 }
 
 export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: EditItemModalProps) {
-    const dark = useRecoilValue(darkModeAtom)
-    const [price, setPrice] = useState<string>("")
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [status, setStatus] = useState<LabelValue>({ label: "Activo", value: "active" })
-    const [imagePreview, setImagePreview] = useState<string | null>(null)
-    const fileInputRef = useRef<HTMLInputElement>(null)
+    const dark = useRecoilValue(darkModeAtom);
+    const [price, setPrice] = useState<string>("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [status, setStatus] = useState<LabelValue>({ label: "Activo", value: "active" });
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [quantity, setQuantity] = useState<string>("1")
+
 
     // Update form when card changes
     useEffect(() => {
@@ -42,8 +44,18 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
             setDescription(card.description)
             setStatus({ label: card.status === "active" ? "Activo" : "Inactivo", value: card.status })
             setImagePreview(card.image || null)
+            setPrice(card.price !== undefined ? card.price.toString() : "")
+            setQuantity(card.quantity !== undefined ? card.quantity.toString() : "1")
         }
     }, [card])
+
+    // Modificar el useEffect para actualizar la cantidad a 0 cuando el estado cambia a inactivo
+    useEffect(() => {
+        if (status.value === "inactive") {
+            setQuantity("0")
+        }
+    }, [status])
+
 
     const handleImageClick = () => {
         fileInputRef.current?.click()
@@ -97,7 +109,8 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
             status: status.value as "active" | "inactive",
             image: imagePreview || undefined,
             createdAt: card?.createdAt || new Date(),
-            price
+            price: price,
+            quantity: parseInt(quantity)
         })
 
         // Reset form
@@ -129,10 +142,16 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
         }
     }
 
-    const handlePriceChange = (e: string) => {
+    const handlePriceChange = (num: string) => {
         // Only allow numbers and decimal point
-        const value = e.replace(/[^0-9.]/g, "")
+        const value = num.replace(/[^0-9.]/g, "")
         setPrice(value)
+    }
+
+    const handleQuantityChange = (num: string) => {
+        // Only allow positive integers
+        const value = num.replace(/[^0-9]/g, "")
+        setQuantity(value)
     }
 
 
@@ -195,6 +214,18 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             value={price}
                             onChange={(e) => handlePriceChange(e)}
                             placeholder="0.00"
+                            className="font-mono"
+                        />
+                    </div>
+                    {/* Quantity */}
+                    <div className="grid gap-2">
+                        <label htmlFor="edit-quantity">Cantidad</label>
+                        <Input
+                            id="edit-quantity"
+                            type="text"
+                            value={quantity}
+                            onChange={handleQuantityChange}
+                            placeholder="1"
                             className="font-mono"
                         />
                     </div>

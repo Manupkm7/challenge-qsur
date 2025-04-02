@@ -2,11 +2,13 @@ import { useState, useRef } from "react"
 import { MdClose as CloseIcon } from "@react-icons/all-files/md/MdClose";
 import { MdFileUpload as UploadIcon } from "@react-icons/all-files/md/MdFileUpload";
 import { MdImage as ImageIcon } from "@react-icons/all-files/md/MdImage";
+import { MdCheckCircle as CheckCircle } from "@react-icons/all-files/md/MdCheckCircle";
 
 import { toast } from 'react-toastify';
 
 import Button from "../Button";
 import { Badge } from "../Badge";
+import ToolTip from "../Tooltip";
 
 type CardProductBaseProps = {
     id: number
@@ -16,15 +18,17 @@ type CardProductBaseProps = {
     price: string;
     createdAt: Date
     image?: string
+    quantity: number
 }
 
 export type CardProductProps = CardProductBaseProps & {
     viewMode: "grid" | "list"
     onImageChange?: (id: number, image: string | null) => void
     onCardClick?: (card: Omit<CardProductBaseProps, "viewMode">) => void
+    onStatusChange?: (id: number) => void
 }
 
-export function CardProduct({ id, title, description, status, createdAt, image, onImageChange, onCardClick, viewMode, price }: CardProductProps) {
+export function CardProduct({ id, title, description, status, createdAt, image, onImageChange, onCardClick, viewMode, price, onStatusChange, quantity }: CardProductProps) {
     const [imagePreview, setImagePreview] = useState<string | null>(image || null)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -84,9 +88,15 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
             status,
             createdAt,
             image: imagePreview || undefined,
-            price
+            price,
+            quantity
         })
 
+    }
+
+    const handleMarkAsSold = (e: React.MouseEvent) => {
+        e.stopPropagation() // Prevent card click when marking as sold
+        onStatusChange?.(id)
     }
 
     // Format price with currency
@@ -136,12 +146,23 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
                             <div>
                                 <h2 className="font-semibold">{title}</h2>
                                 {price !== undefined && <div className="text-sm font-medium text-primary">{formatPrice(price)}</div>}
+                                <div className="text-sm font-medium">Stock: {quantity}</div>
+
                             </div>
                             <Badge variant={status === "active" ? "default" : "secondary"}>
                                 {status === "active" ? "Activo" : "Inactivo"}
                             </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground flex-1">{description}</p>
+                        <div className="flex items-center justify-between gap-2">
+                            <p className="text-sm text-muted-foreground">{description}</p>
+
+                            {status === "active" && price !== undefined && (
+                                <ToolTip tooltip="Vender una unidad">
+                                    <Button variant="primary" className="h-[30px] w-[30px] py-[4px] px-[4px]" onClick={handleMarkAsSold}>
+                                        <CheckCircle className="h-4 w-4" />
+                                    </Button></ToolTip>
+                            )}
+                        </div>
                         <div className="text-xs text-muted-foreground mt-2">Creado: {formatDate(createdAt)}</div>
                     </div>
                 </div>
@@ -183,14 +204,31 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
             <div className="p-4 border-t-2">
                 <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                        <h2 className="font-semibold">{title}</h2>
-                        <span className="text-sm text-muted-foreground">{price ? formatPrice(price) : "Fuera de stock"}</span>
+                        <h2 className="font-semibold text-lg leading-none">{title}</h2>
+                        <span className="text-muted-foreground text-lg leading-none">{price ? formatPrice(price) : "Fuera de stock"}</span>
+
                     </div>
-                    <Badge variant={status === "active" ? "default" : status === "inactive" ? "secondary" : "outline"}>
-                        {status === "active" ? "Activo" : "Inactivo"}
-                    </Badge>
+                    <div className="flex items-center gap-2">
+                        <Badge variant={status === "active" ? "default" : status === "inactive" ? "secondary" : "outline"}>
+                            {status === "active" ? "Activo" : "Inactivo"}
+                        </Badge>
+                        {status === "active" && price !== undefined && (
+                            <ToolTip tooltip="Vender una unidad">
+                                <div>
+                                    <Button variant="primary" className="h-[30px] w-[30px] py-[4px] px-[4px]" onClick={handleMarkAsSold}>
+                                        <CheckCircle className="h-4 w-4" />
+                                    </Button>
+                                </div>
+                            </ToolTip>
+                        )}
+                    </div>
+
                 </div>
-                <p className="text-sm text-muted-foreground">{description}</p>
+                <div className="flex items-center justify-between gap-2">
+                    <p className="text-sm text-muted-foreground">{description}</p>
+                    <div className="text-sm font-[600]">Stock: {quantity}</div>
+
+                </div>
             </div>
 
             <div className="border-t-2 bg-muted/30 px-4 py-2">

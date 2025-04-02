@@ -5,6 +5,7 @@ interface SoldItem {
   title: string
   price: number
   soldAt: Date
+  quantity: number
 }
 
 export const soldItemsState = atom<SoldItem[]>({
@@ -16,7 +17,7 @@ export const totalSalesState = selector({
   key: "totalSalesState",
   get: ({ get }) => {
     const soldItems = get(soldItemsState)
-    return soldItems.reduce((total, item) => total + item.price, 0)
+    return soldItems.reduce((total, item) => total + (item.price * item.quantity), 0)
   },
 })
 
@@ -35,7 +36,7 @@ export const salesByMonthState = selector({
     // Sumar ventas por mes
     soldItems.forEach((item) => {
       const month = months[item.soldAt.getMonth()]
-      salesByMonth[month] += item.price
+      salesByMonth[month] += item.price * item.quantity
     })
 
     return salesByMonth

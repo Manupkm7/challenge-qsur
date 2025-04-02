@@ -31,6 +31,8 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
     const [status, setStatus] = useState<LabelValue>({ label: "Activo", value: "active" })
     const [imagePreview, setImagePreview] = useState<string | null>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
+    const [quantity, setQuantity] = useState<string>("1")
+
 
     const handleImageClick = () => {
         fileInputRef.current?.click()
@@ -82,7 +84,8 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
             description,
             status: status.value as "active" | "inactive",
             image: imagePreview || undefined,
-            price
+            price,
+            quantity: parseInt(quantity)
         })
 
         // Reset form
@@ -111,6 +114,11 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
         // Only allow numbers and decimal point
         const value = e.replace(/[^0-9.]/g, "")
         setPrice(value)
+    }
+    const handleQuantityChange = (num: string) => {
+        // Only allow positive integers
+        const value = num.replace(/[^0-9]/g, "")
+        setQuantity(value)
     }
 
     return (
@@ -171,6 +179,17 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                             value={price}
                             onChange={(e) => handlePriceChange(e)}
                             placeholder="0.00"
+                            className="font-mono"
+                        />
+                    </div>
+                    <div className="grid gap-2">
+                        <label htmlFor="edit-quantity">Cantidad</label>
+                        <Input
+                            id="edit-quantity"
+                            type="text"
+                            value={quantity}
+                            onChange={handleQuantityChange}
+                            placeholder="1"
                             className="font-mono"
                         />
                     </div>

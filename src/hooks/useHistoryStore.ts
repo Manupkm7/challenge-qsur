@@ -88,31 +88,40 @@ export function useHistoryLogger() {
 
         if (oldCard.title !== newCard.title) {
             changes.push(`título cambiado de "${oldCard.title}" a "${newCard.title}"`)
-        }
-
-        if (oldCard.status !== newCard.status) {
+          }
+        
+          if (oldCard.status !== newCard.status) {
             changes.push(
-                `estado cambiado de "${oldCard.status === "active" ? "Activo" : "Inactivo"}" a "${newCard.status === "active" ? "Activo" : "Inactivo"}"`,
+              `estado cambiado de "${oldCard.status === "active" ? "Activo" : "Inactivo"}" a "${newCard.status === "active" ? "Activo" : "Inactivo"}"`,
             )
-        }
-
-        if (oldCard.description !== newCard.description) {
+          }
+        
+          if (oldCard.description !== newCard.description) {
             changes.push("descripción actualizada")
-        }
-
-        if ((oldCard.image || "") !== (newCard.image || "")) {
+          }
+        
+          if ((oldCard.image || "") !== (newCard.image || "")) {
             changes.push(newCard.image ? (oldCard.image ? "imagen actualizada" : "imagen añadida") : "imagen eliminada")
-        }
-
-        if (changes.length === 0) {
+          }
+        
+          if ((oldCard.price || 0) !== (newCard.price || 0)) {
+            changes.push(`precio cambiado de "${oldCard.price || 0}" a "${newCard.price || 0}"`)
+          }
+        
+          if ((oldCard.quantity || 0) !== (newCard.quantity || 0)) {
+            changes.push(`cantidad cambiada de ${oldCard.quantity || 0} a ${newCard.quantity || 0}`)
+          }
+        
+          if (changes.length === 0) {
             changes.push("sin cambios detectados")
-        }
+          }
 
         addEvent({
             action: "update",
             cardId: newCard.id,
             cardTitle: newCard.title,
             details: `Tarjeta actualizada: ${changes.join(", ")}`,
+            
         })
     }
 
@@ -125,10 +134,20 @@ export function useHistoryLogger() {
         })
     }
 
+    const logItemSold = (card: Omit<CardProductProps, "viewMode">) => {
+        addEvent({
+            action: "update",
+            cardId: card.id,
+            cardTitle: card.title,
+            details: `Se vendió una unidad del producto. Quedan ${(card.quantity || 0) - 1} unidades.`,
+        })
+    }
+
     return {
         logCardCreation,
         logCardUpdate,
         logCardDeletion,
+        logItemSold,
     }
 }
 

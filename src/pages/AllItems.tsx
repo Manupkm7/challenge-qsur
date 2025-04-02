@@ -19,7 +19,7 @@ export const AllItems = () => {
     const [isNewCardModalOpen, setIsNewCardModalOpen] = useRecoilState(isNewCardModalOpenAtom)
     const [isEditCardModalOpen, setIsEditCardModalOpen] = useState(false)
     const [selectedCard, setSelectedCard] = useState<CardProductBase | null>(null)
-    const { logCardCreation, logCardDeletion, logCardUpdate } = useHistoryLogger()
+    const { logCardCreation, logCardDeletion, logCardUpdate, logItemSold } = useHistoryLogger()
     const [viewMode, setViewMode] = useRecoilState(viewModeAtom);
     const filters = useRecoilValue(filtersAtom)
     const { markAsSold } = useSales()
@@ -205,6 +205,32 @@ export const AllItems = () => {
         setItemsPerPage(parseInt(value))
     }
 
+    // Handle selling one item
+    const handleSellOne = (id: number) => {
+        // Find the card to update
+        const cardToUpdate = cards.find((card) => card.id === id)
+
+        if (cardToUpdate && cardToUpdate.quantity && cardToUpdate.quantity > 0) {
+            // Create a copy of the card with reduced quantity
+            const updatedCard = {
+                ...cardToUpdate,
+                quantity: cardToUpdate.quantity - 1,
+                // If quantity becomes 0, set status to inactive
+                status: cardToUpdate.quantity - 1 > 0 ? cardToUpdate.status : "inactive",
+            }
+
+            // Update the card in the state
+            setCards((prevCards) => prevCards.map((card) => (card.id === id ? updatedCard : card)))
+
+            // Registrar la venta individual
+            markAsSold(cardToUpdate)
+
+            // Log the sale in the history
+            logItemSold(cardToUpdate)
+        }
+    }
+
+
     return (
         <div className="p-3.5 overflow-y-auto">
             <NewCardModal open={isNewCardModalOpen} onOpenChange={setIsNewCardModalOpen} onSave={handleNewCard} />
@@ -247,7 +273,7 @@ export const AllItems = () => {
             ) : (
                 <div className={viewMode === "grid" ? "flex flex-wrap gap-6" : "flex flex-col gap-4"}>
                     {paginatedCards.map((card) => (
-                        <CardProduct key={card.id} {...card} viewMode={viewMode} onImageChange={handleImageChange} onCardClick={handleCardClick} />
+                        <CardProduct key={card.id} {...card} viewMode={viewMode} onImageChange={handleImageChange} onCardClick={handleCardClick} onStatusChange={handleSellOne} />
                     ))}
                     {totalPages > 1 && (
                         <>
@@ -298,4 +324,8 @@ export const AllItems = () => {
             )}
         </div>
     )
+}
+
+function markAsSold(cardToUpdate: CardProductBase) {
+    throw new Error("Function not implemented.")
 }
