@@ -1,21 +1,14 @@
 import { CardProduct, CardProductProps } from "@/components/Cards/CardProduct"
 import { useMemo, useState } from "react"
-import { useRecoilValue } from "recoil"
-import { filtersAtom } from "@/atoms/index"
-
-const generateCards = (): CardProductProps[] => {
-    return Array.from({ length: 12 }, (_, i) => ({
-        id: i + 1,
-        title: `Tarjeta ${i + 1}`,
-        description: `Descripción de la tarjeta ${i + 1} con información detallada.`,
-        status: i % 3 === 0 ? "inactive" : "active",
-        createdAt: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000),
-        image: i % 4 === 0 ? `/placeholder.svg?height=400&width=600` : undefined,
-    }))
-}
+import { useRecoilState, useRecoilValue } from "recoil"
+import { cardsAtom, filtersAtom, isNewCardModalOpenAtom } from "@/atoms/index"
+import { NewCardModal } from "@/components/Header/NewItem"
+import Button from "@/components/Button"
 
 export const AllItems = () => {
-    const [cards, setCards] = useState<CardProductProps[]>(generateCards())
+    const [cards, setCards] = useRecoilState<CardProductProps[]>(cardsAtom)
+    const [isNewCardModalOpen, setIsNewCardModalOpen] = useRecoilState(isNewCardModalOpenAtom)
+
     const filters = useRecoilValue(filtersAtom)
 
     // Apply filters and sorting to cards
@@ -52,15 +45,26 @@ export const AllItems = () => {
         setCards((prevCards) => prevCards.map((card) => (card.id === id ? { ...card, image: image || undefined } : card)))
     }
 
+    const handleNewCard = (card: Omit<CardProductProps, "id" | "createdAt">) => {
+        setCards((prevCards) => [...prevCards, { ...card, id: prevCards.length + 1, createdAt: new Date() }])
+    }
+
     return (
         <div className="p-3.5 overflow-y-auto">
+            <NewCardModal open={isNewCardModalOpen} onOpenChange={setIsNewCardModalOpen} onSave={handleNewCard} />
+
             {filteredCards.length === 0 ? (
                 <div className="flex flex-col items-center justify-center p-8 text-center">
-                    <h2 className="text-xl font-semibold">No se encontraron resultados</h2>
-                    <p className="text-muted-foreground">Intenta cambiar los filtros o términos de búsqueda</p>
+                    <h2 className="text-xl font-semibold">No hay items</h2>
+                    <p className="text-muted-foreground mb-4">
+                        {cards.length === 0
+                            ? "Agregue su primer item haciendo clic en el botón 'Nuevo'"
+                            : "No se encontraron resultados con los filtros actuales"}
+                    </p>
+                    {cards.length === 0 && <Button variant="primary" onClick={() => setIsNewCardModalOpen(true)}>Crear nuevo item</Button>}
                 </div>
             ) : (
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div className="flex flex-wrap gap-6">
                     {filteredCards.map((card) => (
                         <CardProduct key={card.id} {...card} onImageChange={handleImageChange} />
                     ))}

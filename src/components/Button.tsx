@@ -29,7 +29,7 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, forwardedRef) => {
             type={type}
             data-variant={variant}
             className={clsx(
-                'flex items-center justify-center gap-[10px] py-[10px] px-[20px] rounded-[8px] text-[16px] leading-[24px] border',
+                'flex items-center justify-center gap-[10px] py-[10px] px-[20px] rounded-[8px] text-[16px] leading-[20px] border',
                 variant === 'primary' && 'bg-primary-500 font-lexend font-bold text-white border-primary-500',
                 variant === 'secondary' && 'bg-white font-inter font-medium text-black border-gray-border',
                 disabled && 'bg-gray-600 text-gray-400 border-gray-600',

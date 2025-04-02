@@ -66,7 +66,7 @@ export const Select = <T,>({
     };
 
     return (
-        <div id={id} className={`relative ${className}`}>
+        <div id={id} className={`relative w-full ${className}`}>
             <div
                 className={clsx(
                     dark ? 'bg-[#111317] text-white' : 'bg-[#FFFFFF] text-gray-500',
@@ -96,8 +96,8 @@ export const Select = <T,>({
                 </SelectPrimitive.SelectTrigger>
 
                 <SelectPrimitive.Portal>
-                    <SelectPrimitive.Content position={position} className={contentClass}>
-                        <SelectPrimitive.Viewport className='p-[2.5px] w-full' contextMenu='px-[5px]'>
+                    <SelectPrimitive.Content position={position} className={contentClass} style={{ width: 'var(--radix-select-trigger-width)' }}>
+                        <SelectPrimitive.Viewport className='p-[2.5px]' contextMenu='px-[5px]'>
                             <div className='flex items-center' onKeyDown={(e) => e.stopPropagation()}>
                                 {activeFilter ? (
                                     <div className='flex items-center border-b w-full' onKeyDown={(e) => e.stopPropagation()}>

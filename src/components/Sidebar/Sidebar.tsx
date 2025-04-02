@@ -31,7 +31,7 @@ const navItems = [
     {
         title: "Configuración",
         icon: SettingsIcon,
-        url: "/settings",
+        url: "settings",
     },
 ]
 
@@ -47,7 +47,7 @@ export function AppSidebar() {
     };
 
     return (
-        <aside className={`transition-all ${isSidebarOpen ? 'w-[280px]' : 'w-[80px]'}`}>
+        <aside className={`bg-white transition-all ${isSidebarOpen ? 'w-[280px]' : 'w-[80px]'}`}>
             <section className={`h-full flex flex-col justify-between items-center p-[10px] gap-y-[10px] border-r`}>
                 <div className='h-full flex flex-col gap-y-[10px] overflow-y-auto overflow-x-hidden'>
                     {/* Open/Close sidebar */}
@@ -60,7 +60,7 @@ export function AppSidebar() {
                             onClick={handleOnClickSidebar}
                             data-testid='sidebar-handler-btn'
                         >
-                            <MenuIcon color='red' size='20' strokeWidth='1' />
+                            <MenuIcon color='#279AF1' size='20' strokeWidth='1' />
                         </Button>
                     </div>
 

@@ -1,4 +1,5 @@
-import { FilterState } from "@/components/Header/Header";
+import { CardProductProps } from "@/components/Cards/CardProduct";
+import { FilterState } from "@/types/common";
 import { atom } from "recoil";
 
 export const isSidebarOpenAtom = atom<boolean>({
@@ -18,4 +19,14 @@ export const filtersAtom = atom<FilterState>({
     sort: { label: "Más recientes", value: "recents" },
     search: "",
   },
+});
+
+export const cardsAtom = atom<CardProductProps[]>({
+  key: "cardsAtom",
+  default: [],
+});
+
+export const isNewCardModalOpenAtom = atom<boolean>({
+  key: "isNewCardModalOpenAtom",
+  default: false,
 });

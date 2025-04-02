@@ -67,20 +67,20 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
             fileInputRef.current.value = ""
         }
     }
-    console.log(status)
+
     return (
-        <div className="overflow-hidden transition-all hover:shadow-md">
+        <div className="overflow-hidden transition-all hover:shadow-md border-2 rounded-lg w-[400px]">
             {/* Image area */}
             <div className="relative">
                 {imagePreview ? (
-                    <div className="relative h-48 w-full">
-                        <image href={imagePreview || "/placeholder.svg"} className="object-cover" />
+                    <div className="h-48 w-full">
+                        <img src={imagePreview || "/placeholder.svg"} alt="Preview" className="object-cover h-[200px] w-full" />
                         <Button
                             variant="secondary"
-                            className="absolute top-2 right-2 h-8 w-8 rounded-full"
+                            className="absolute top-2 right-2 py-2 rounded-full px-2"
                             onClick={handleRemoveImage}
                         >
-                            <CloseIcon className="h-4 w-4" />
+                            <CloseIcon className="h-4 w-4" color="red" />
                         </Button>
                     </div>
                 ) : (
@@ -109,7 +109,7 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
                 <p className="text-sm text-muted-foreground">{description}</p>
             </div>
 
-            <div className="border-t bg-muted/30 px-4 py-2">
+            <div className="border-t-2 bg-muted/30 px-4 py-2">
                 <div className="text-xs text-muted-foreground">Creado: {formatDate(createdAt)}</div>
             </div>
         </div>
