@@ -21,14 +21,14 @@ const STATUS_OPTIONS = [
 type EditItemModalProps = {
     open: boolean
     onOpenChange: (open: boolean) => void
-    card: CardProductProps | null
-    onSave: (card: CardProductProps) => void
+    card: Omit<CardProductProps, "viewMode"> | null
+    onSave: (card: Omit<CardProductProps, "viewMode">) => void
     onDelete: (id: number) => void
 }
 
 export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: EditItemModalProps) {
     const dark = useRecoilValue(darkModeAtom)
-
+    const [price, setPrice] = useState<string>("")
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [status, setStatus] = useState<LabelValue>({ label: "Activo", value: "active" })
@@ -96,7 +96,8 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
             description,
             status: status.value as "active" | "inactive",
             image: imagePreview || undefined,
-            createdAt: card?.createdAt || new Date()
+            createdAt: card?.createdAt || new Date(),
+            price
         })
 
         // Reset form
@@ -127,6 +128,13 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
             onOpenChange(false)
         }
     }
+
+    const handlePriceChange = (e: string) => {
+        // Only allow numbers and decimal point
+        const value = e.replace(/[^0-9.]/g, "")
+        setPrice(value)
+    }
+
 
     if (!card) return null
 
@@ -176,6 +184,18 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             onChange={(e) => setTitle(e)}
                             placeholder="Ingresa un título"
                             required
+                        />
+                    </div>
+                    {/* Price */}
+                    <div className="grid gap-2">
+                        <label htmlFor="price">Precio</label>
+                        <Input
+                            id="price"
+                            type="text"
+                            value={price}
+                            onChange={(e) => handlePriceChange(e)}
+                            placeholder="0.00"
+                            className="font-mono"
                         />
                     </div>
 

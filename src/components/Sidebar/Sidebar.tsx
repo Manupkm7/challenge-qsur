@@ -83,7 +83,7 @@ export function AppSidebar() {
                             <div className='px-3 mt-4'>
                                 {isSidebarOpen ? <label
                                     className={clsx(
-                                        'flex rounded-2xl text-lg transition-all',
+                                        'flex rounded-2xl text-lg',
                                         dark ? 'text-white' : 'text-[#0074B5]'
                                     )}>
                                     Soporte

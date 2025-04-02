@@ -20,12 +20,12 @@ const STATUS_OPTIONS = [
 type NewCardModalProps = {
     open: boolean
     onOpenChange: (open: boolean) => void
-    onSave: (card: Omit<CardProductProps, "id" | "createdAt">) => void
+    onSave: (card: Omit<CardProductProps, "id" | "createdAt" | "viewMode">) => void
 }
 
 export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) {
     const dark = useRecoilValue(darkModeAtom)
-
+    const [price, setPrice] = useState<string>("")
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [status, setStatus] = useState<LabelValue>({ label: "Activo", value: "active" })
@@ -82,7 +82,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
             description,
             status: status.value as "active" | "inactive",
             image: imagePreview || undefined,
-            
+            price
         })
 
         // Reset form
@@ -95,6 +95,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
         setTitle("")
         setDescription("")
         setStatus({ label: "Activo", value: "active" })
+        setPrice("")
         setImagePreview(null)
         if (fileInputRef.current) {
             fileInputRef.current.value = ""
@@ -104,6 +105,12 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
     const handleClose = () => {
         resetForm()
         onOpenChange(false)
+    }
+
+    const handlePriceChange = (e: string) => {
+        // Only allow numbers and decimal point
+        const value = e.replace(/[^0-9.]/g, "")
+        setPrice(value)
     }
 
     return (
@@ -152,6 +159,19 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                             onChange={(e) => setTitle(e)}
                             placeholder="Ingresa un título"
                             required
+                        />
+                    </div>
+
+                    {/* Price */}
+                    <div className="grid gap-2">
+                        <label htmlFor="price">Precio</label>
+                        <Input
+                            id="price"
+                            type="text"
+                            value={price}
+                            onChange={(e) => handlePriceChange(e)}
+                            placeholder="0.00"
+                            className="font-mono"
                         />
                     </div>
 

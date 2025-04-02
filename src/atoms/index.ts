@@ -12,6 +12,11 @@ export const darkModeAtom = atom<boolean>({
   default: window.localStorage.getItem('darkMode') === 'true',
 });
 
+export const viewModeAtom = atom<"grid" | "list">({
+  key: "viewModeAtom",
+  default: "grid",
+});
+
 export const filtersAtom = atom<FilterState>({
   key: "filtersAtom",
   default: {
@@ -21,7 +26,7 @@ export const filtersAtom = atom<FilterState>({
   },
 });
 
-export const cardsAtom = atom<CardProductProps[]>({
+export const cardsAtom = atom<Omit<CardProductProps, "viewMode">[]>({
   key: "cardsAtom",
   default: [],
 });

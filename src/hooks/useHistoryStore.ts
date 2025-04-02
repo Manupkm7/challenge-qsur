@@ -74,7 +74,7 @@ export function useHistory() {
 export function useHistoryLogger() {
     const { addEvent } = useHistory()
 
-    const logCardCreation = (card: CardProductProps) => {
+    const logCardCreation = (card: Omit<CardProductProps, "viewMode">) => {
         addEvent({
             action: "create",
             cardId: card.id,
@@ -83,7 +83,7 @@ export function useHistoryLogger() {
         })
     }
 
-    const logCardUpdate = (oldCard: CardProductProps, newCard: CardProductProps) => {
+    const logCardUpdate = (oldCard: Omit<CardProductProps, "viewMode">, newCard: Omit<CardProductProps, "viewMode">) => {
         const changes: string[] = []
 
         if (oldCard.title !== newCard.title) {
@@ -116,7 +116,7 @@ export function useHistoryLogger() {
         })
     }
 
-    const logCardDeletion = (card: CardProductProps) => {
+    const logCardDeletion = (card: Omit<CardProductProps, "viewMode">) => {
         addEvent({
             action: "delete",
             cardId: card.id,
