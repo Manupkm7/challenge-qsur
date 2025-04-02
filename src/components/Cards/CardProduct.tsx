@@ -158,7 +158,7 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
                         <img src={imagePreview || "/placeholder.svg"} alt="Preview" className="object-cover h-[200px] w-full" />
                         <Button
                             variant="destructive"
-                            className="absolute top-2 right-2 px-[8px] py-[8px] rounded-[50%]"
+                            className="absolute top-2 right-2 px-[6px] py-[6px] !rounded-[50%]"
                             onClick={handleRemoveImage}
                         >
                             <CloseIcon className="h-4 w-4" color="white" />

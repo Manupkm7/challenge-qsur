@@ -202,7 +202,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                     </div>
                 </div>
 
-                <footer className="flex gap-2">
+                <footer className="flex justify-end gap-2">
                     <Button type="button" variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>

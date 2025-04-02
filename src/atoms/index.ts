@@ -35,3 +35,19 @@ export const isNewCardModalOpenAtom = atom<boolean>({
   key: "isNewCardModalOpenAtom",
   default: false,
 });
+
+export const currentPageAtom = atom<number>({
+  key: "currentPageAtom",
+  default: 0,
+});
+
+export const totalPagesAtom = atom<number>({
+  key: "totalPagesAtom",
+  default: 0,
+});
+
+export const itemsPerPageAtom = atom<number>({
+  key: "itemsPerPageAtom",
+  default: 10,
+});
+

@@ -36,6 +36,7 @@ const PaginationLink = ({ className, isActive, ...props }: PaginationLinkProps) 
     <a
         aria-current={isActive ? "page" : undefined}
         className={clsx(isActive ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-secondary text-secondary-foreground hover:bg-secondary/90",
+            "underline px-1.5",
             className,
         )}
         {...props}
@@ -44,7 +45,7 @@ const PaginationLink = ({ className, isActive, ...props }: PaginationLinkProps) 
 PaginationLink.displayName = "PaginationLink"
 
 const PaginationPrevious = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (
-    <PaginationLink aria-label="Go to previous page" className={clsx("gap-1 pl-2.5", className)} {...props}>
+    <PaginationLink aria-label="Go to previous page" className={clsx("gap-1 px-2 flex items-center underline border-2 justify-center rounded", className)} {...props}>
         <ChevronLeft className="h-4 w-4" />
         <span>Anterior</span>
     </PaginationLink>
@@ -52,7 +53,7 @@ const PaginationPrevious = ({ className, ...props }: React.ComponentProps<typeof
 PaginationPrevious.displayName = "PaginationPrevious"
 
 const PaginationNext = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (
-    <PaginationLink aria-label="Go to next page" className={clsx("gap-1 pr-2.5", className)} {...props}>
+    <PaginationLink aria-label="Go to next page" className={clsx("gap-1 px-2 flex items-center underline border-2 justify-center rounded", className)} {...props}>
         <span>Siguiente</span>
         <ChevronRight className="h-4 w-4" />
     </PaginationLink>
@@ -60,7 +61,7 @@ const PaginationNext = ({ className, ...props }: React.ComponentProps<typeof Pag
 PaginationNext.displayName = "PaginationNext"
 
 const PaginationEllipsis = ({ className, ...props }: React.ComponentProps<"span">) => (
-    <span aria-hidden className={clsx("flex h-9 w-9 items-center justify-center", className)} {...props}>
+    <span aria-hidden className={clsx("flex h-9 w-9 items-center justify-center t", className)} {...props}>
         <MoreHorizontal className="h-4 w-4" />
         <span className="sr-only">More pages</span>
     </span>

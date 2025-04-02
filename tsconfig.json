@@ -27,7 +27,8 @@
       "@/types/*": ["src/types/*"],
       "@/shared/*": ["src/components/shared/*"],
       "@/utils/*": ["src/utils/*"],
-      "@/atoms/*": ["src/atoms/*"]
+      "@/atoms/*": ["src/atoms/*"],
+      "@/store/*": ["src/store/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],

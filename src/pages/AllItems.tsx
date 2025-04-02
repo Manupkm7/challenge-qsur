@@ -1,13 +1,17 @@
 import { CardProduct, CardProductProps } from "@/components/Cards/CardProduct"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { cardsAtom, filtersAtom, isNewCardModalOpenAtom, viewModeAtom } from "@/atoms/index"
+import { cardsAtom, currentPageAtom, filtersAtom, isNewCardModalOpenAtom, itemsPerPageAtom, totalPagesAtom, viewModeAtom } from "@/atoms/index"
 import { NewCardModal } from "@/components/Header/NewItem"
 import Button from "@/components/Button"
 import { EditItemModal } from "@/components/Header/EditItemModal"
 import { useHistoryLogger } from "@/hooks/useHistoryStore"
 import { MdFormatListBulleted as List } from "@react-icons/all-files/md/MdFormatListBulleted";
 import { MdGridOn as Grid3x3 } from "@react-icons/all-files/md/MdGridOn";
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/Pagination"
+import { useSales } from "@/hooks/useSales"
+import { Select } from "@/components/Select"
+
 type CardProductBase = Omit<CardProductProps, "viewMode">
 
 export const AllItems = () => {
@@ -18,6 +22,14 @@ export const AllItems = () => {
     const { logCardCreation, logCardDeletion, logCardUpdate } = useHistoryLogger()
     const [viewMode, setViewMode] = useRecoilState(viewModeAtom);
     const filters = useRecoilValue(filtersAtom)
+    const { markAsSold } = useSales()
+
+    // Pagination state
+    const [itemsPerPage, setItemsPerPage] = useRecoilState(itemsPerPageAtom)
+
+    const [currentPage, setCurrentPage] = useRecoilState(currentPageAtom)
+    const [totalPages, setTotalPages] = useRecoilState(totalPagesAtom)
+
 
     // Apply filters and sorting to cards
     const filteredCards = useMemo(() => {
@@ -90,9 +102,107 @@ export const AllItems = () => {
         setIsEditCardModalOpen(true)
     }
 
+
     // Toggle view mode
     const toggleViewMode = () => {
         setViewMode(viewMode === "grid" ? "list" : "grid")
+    }
+
+    // Calculate pagination and update totalPages atom
+    const paginatedCards = useMemo(() => {
+        const calculatedTotalPages = Math.ceil(filteredCards.length / itemsPerPage)
+        setTotalPages(calculatedTotalPages)
+
+        const startIndex = (currentPage - 1) * itemsPerPage
+        return filteredCards.slice(startIndex, startIndex + itemsPerPage)
+    }, [filteredCards, currentPage, itemsPerPage, setTotalPages])
+
+
+    // Reset to first page when filters change
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [filters, setCurrentPage])
+
+    const paginationItems = useMemo(() => {
+        const items = []
+
+        // Always show first page
+        items.push(
+            <PaginationItem key="first">
+                <PaginationLink
+                    href="#"
+                    isActive={currentPage === 1}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        setCurrentPage(1)
+                    }}
+                >
+                    1
+                </PaginationLink>
+            </PaginationItem>,
+        )
+
+        // Show ellipsis if needed
+        if (currentPage > 3) {
+            items.push(
+                <PaginationItem key="ellipsis-1">
+                    <PaginationEllipsis />
+                </PaginationItem>,
+            )
+        }
+
+        // Show current page and surrounding pages
+        for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+            if (i === 1 || i === totalPages) continue // Skip first and last page as they're always shown
+
+            items.push(
+                <PaginationItem key={i}>
+                    <PaginationLink
+                        href="#"
+                        isActive={currentPage === i}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setCurrentPage(i)
+                        }}
+                    >
+                        {i}
+                    </PaginationLink>
+                </PaginationItem>,
+            )
+        }
+
+        // Show ellipsis if needed
+        if (currentPage < totalPages - 2) {
+            items.push(
+                <PaginationItem key="ellipsis-2">
+                    <PaginationEllipsis />
+                </PaginationItem>,
+            )
+        }
+
+        // Always show last page if there's more than one page
+        if (totalPages > 1) {
+            items.push(
+                <PaginationItem key="last">
+                    <PaginationLink
+                        href="#"
+                        isActive={currentPage === totalPages}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setCurrentPage(totalPages)
+                        }}
+                    >
+                        {totalPages}
+                    </PaginationLink>
+                </PaginationItem>,
+            )
+        }
+
+        return items
+    }, [currentPage, totalPages, setCurrentPage])
+
+    const handleItemsPerPageChange = (value: string) => {
+        setItemsPerPage(parseInt(value))
     }
 
     return (
@@ -107,7 +217,7 @@ export const AllItems = () => {
                 onDelete={handleDeleteCard}
             />
             <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-semibold">Tarjetas</h2>
+                <h2 className="text-xl font-semibold">Items</h2>
                 <Button variant="secondary" onClick={toggleViewMode}>
                     {viewMode === "grid" ? (
                         <>
@@ -121,9 +231,11 @@ export const AllItems = () => {
                         </>
                     )}
                 </Button>
+
+
             </div>
             {filteredCards.length === 0 ? (
-                <div className="flex flex-col items-center justify-center p-8 text-center">
+                <div className="flex flex-col items-center justify-center p-8 text-center select-none">
                     <h2 className="text-xl font-semibold">No hay items</h2>
                     <p className="text-muted-foreground mb-4">
                         {cards.length === 0
@@ -134,11 +246,54 @@ export const AllItems = () => {
                 </div>
             ) : (
                 <div className={viewMode === "grid" ? "flex flex-wrap gap-6" : "flex flex-col gap-4"}>
-                    {filteredCards.map((card) => (
+                    {paginatedCards.map((card) => (
                         <CardProduct key={card.id} {...card} viewMode={viewMode} onImageChange={handleImageChange} onCardClick={handleCardClick} />
                     ))}
+                    {totalPages > 1 && (
+                        <>
+                            <Pagination className="mt-8">
+                                <PaginationContent>
+                                    <PaginationItem>
+                                        <PaginationPrevious
+                                            href="#"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                if (currentPage > 1) setCurrentPage(currentPage - 1)
+                                            }}
+                                            className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                                        />
+                                    </PaginationItem>
+
+                                    {paginationItems}
+
+                                    <PaginationItem>
+                                        <PaginationNext
+                                            href="#"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                if (currentPage < totalPages) setCurrentPage(currentPage + 1)
+                                            }}
+                                            className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                                        />
+                                    </PaginationItem>
+                                </PaginationContent>
+                            </Pagination>
+
+                        </>
+
+                    )}
+
                 </div>
             )}
+            <div className="flex items-center justify-center gap-2 mt-4">
+                <Select
+                    label="Items por página"
+                    value={itemsPerPage.toString()}
+                    onChange={handleItemsPerPageChange}
+                    className="w-[100px]"
+                    options={["10", "25", "50", "100"]}
+                />
+            </div>
         </div>
     )
 }
