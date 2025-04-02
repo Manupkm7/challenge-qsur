@@ -285,15 +285,17 @@ export const AllItems = () => {
 
                 </div>
             )}
-            <div className="flex items-center justify-center gap-2 mt-4">
-                <Select
-                    label="Items por página"
-                    value={itemsPerPage.toString()}
-                    onChange={handleItemsPerPageChange}
-                    className="w-[100px]"
-                    options={["10", "25", "50", "100"]}
-                />
-            </div>
+            {filteredCards.length > 0 && (
+                <div className="flex items-center justify-center gap-2 mt-4">
+                    <Select
+                        label="Items por página"
+                        value={itemsPerPage.toString()}
+                        onChange={handleItemsPerPageChange}
+                        className="w-[100px]"
+                        options={["10", "25", "50", "100"]}
+                    />
+                </div>
+            )}
         </div>
     )
 }

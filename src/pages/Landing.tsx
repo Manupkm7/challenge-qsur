@@ -4,6 +4,7 @@ import NotFoundPage from "./NotFoundPage";
 import { AllItems } from "./AllItems";
 import { SettingsPage } from "./Configuration";
 import { History } from "./History";
+import DashboardPage from "./Dashboard";
 
 export const Landing = () => {
     return (
@@ -18,6 +19,7 @@ export const Landing = () => {
                 <Route path='' element={<AllItems />} />
                 <Route path='settings' element={<SettingsPage />} />
                 <Route path='history' element={<History />} />
+                <Route path='dashboard' element={<DashboardPage />} />
             </Route>
             <Route path='*' element={<NotFoundPage />} />
         </Routes>

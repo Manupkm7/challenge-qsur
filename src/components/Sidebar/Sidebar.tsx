@@ -21,7 +21,7 @@ const navItems = [
     {
         title: "Dashboard",
         icon: DashboardIcon,
-        url: "/dashboard",
+        url: "dashboard",
     },
     {
         title: "Historial",
