@@ -16,9 +16,10 @@ export type CardProductProps = {
     createdAt: Date
     image?: string
     onImageChange?: (id: number, image: string | null) => void
+    onCardClick?: (card: CardProductProps) => void
 }
 
-export function CardProduct({ id, title, description, status, createdAt, image, onImageChange }: CardProductProps) {
+export function CardProduct({ id, title, description, status, createdAt, image, onImageChange, onCardClick }: CardProductProps) {
     const [imagePreview, setImagePreview] = useState<string | null>(image || null)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -31,7 +32,8 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
         })
     }
 
-    const handleImageClick = () => {
+    const handleImageClick = (e: React.MouseEvent) => {
+        e.stopPropagation() // Prevent card click when clicking on image upload area
         fileInputRef.current?.click()
     }
 
@@ -60,7 +62,8 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
         reader.readAsDataURL(file)
     }
 
-    const handleRemoveImage = () => {
+    const handleRemoveImage = (e: React.MouseEvent) => {
+        e.stopPropagation() // Prevent card click when removing image
         setImagePreview(null)
         onImageChange?.(id, null)
         if (fileInputRef.current) {
@@ -68,19 +71,31 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
         }
     }
 
+
+    const handleCardClick = () => {
+        onCardClick?.({
+            id,
+            title,
+            description,
+            status,
+            createdAt,
+            image: imagePreview || undefined,
+        })
+    }
+
     return (
-        <div className="overflow-hidden transition-all hover:shadow-md border-2 rounded-lg w-[400px]">
+        <div className="overflow-hidden transition-all hover:shadow-md border-2 rounded-lg w-[400px] bg-white" onClick={handleCardClick}>
             {/* Image area */}
             <div className="relative">
                 {imagePreview ? (
                     <div className="h-48 w-full">
                         <img src={imagePreview || "/placeholder.svg"} alt="Preview" className="object-cover h-[200px] w-full" />
                         <Button
-                            variant="secondary"
-                            className="absolute top-2 right-2 py-2 rounded-full px-2"
+                            variant="destructive"
+                            className="absolute top-2 right-2 px-[8px] rounded-[100%] "
                             onClick={handleRemoveImage}
                         >
-                            <CloseIcon className="h-4 w-4" color="red" />
+                            <CloseIcon className="h-4 w-4" color="white" />
                         </Button>
                     </div>
                 ) : (
@@ -99,7 +114,7 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
             </div>
 
             {/* Card content */}
-            <div className="p-4">
+            <div className="p-4 border-t-2">
                 <div className="flex items-center justify-between mb-2">
                     <h2 className="font-semibold">{title}</h2>
                     <Badge variant={status === "active" ? "default" : status === "inactive" ? "secondary" : "outline"}>

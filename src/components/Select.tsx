@@ -66,7 +66,7 @@ export const Select = <T,>({
     };
 
     return (
-        <div id={id} className={`relative w-full ${className}`}>
+        <div id={id} className={`relative ${className}`}>
             <div
                 className={clsx(
                     dark ? 'bg-[#111317] text-white' : 'bg-[#FFFFFF] text-gray-500',
@@ -122,7 +122,7 @@ export const Select = <T,>({
                                         key={optionValue}
                                         value={optionValue}
                                         className={clsx(
-                                            'h-[40px] flex outline-none items-center px-2.5 cursor-pointer select-none text-sm',
+                                            'h-[40px] flex outline-none items-center px-2.5 cursor-pointer select-none text-sm z-50',
                                             classNameOption,
                                             dark
                                                 ? 'bg-[#111317] focus:bg-[#08080810] focus:text-black text-white'

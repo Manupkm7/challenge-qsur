@@ -4,10 +4,13 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { cardsAtom, filtersAtom, isNewCardModalOpenAtom } from "@/atoms/index"
 import { NewCardModal } from "@/components/Header/NewItem"
 import Button from "@/components/Button"
+import { EditItemModal } from "@/components/Header/EditItemModal"
 
 export const AllItems = () => {
     const [cards, setCards] = useRecoilState<CardProductProps[]>(cardsAtom)
     const [isNewCardModalOpen, setIsNewCardModalOpen] = useRecoilState(isNewCardModalOpenAtom)
+    const [isEditCardModalOpen, setIsEditCardModalOpen] = useState(false)
+    const [selectedCard, setSelectedCard] = useState<CardProductProps | null>(null)
 
     const filters = useRecoilValue(filtersAtom)
 
@@ -49,9 +52,40 @@ export const AllItems = () => {
         setCards((prevCards) => [...prevCards, { ...card, id: prevCards.length + 1, createdAt: new Date() }])
     }
 
+    // Handle card update
+    const handleUpdateCard = (updatedCard: CardProductProps) => {
+        // Find the old card to compare changes
+        const oldCard = cards.find((card) => card.id === updatedCard.id)
+
+        setCards((prevCards) => prevCards.map((card) => (card.id === updatedCard.id ? updatedCard : card)))
+    }
+    // Handle card deletion
+    const handleDeleteCard = (id: number) => {
+        // Find the card to be deleted for logging
+        const cardToDelete = cards.find((card) => card.id === id)
+
+        setCards((prevCards) => prevCards.filter((card) => card.id !== id))
+
+    }
+
+    // Handle card click for editing
+    const handleCardClick = (card: CardProductProps) => {
+        setSelectedCard(card)
+        setIsEditCardModalOpen(true)
+    }
+
+
     return (
         <div className="p-3.5 overflow-y-auto">
             <NewCardModal open={isNewCardModalOpen} onOpenChange={setIsNewCardModalOpen} onSave={handleNewCard} />
+
+            <EditItemModal
+                open={isEditCardModalOpen}
+                onOpenChange={setIsEditCardModalOpen}
+                card={selectedCard}
+                onSave={handleUpdateCard}
+                onDelete={handleDeleteCard}
+            />
 
             {filteredCards.length === 0 ? (
                 <div className="flex flex-col items-center justify-center p-8 text-center">
@@ -66,7 +100,7 @@ export const AllItems = () => {
             ) : (
                 <div className="flex flex-wrap gap-6">
                     {filteredCards.map((card) => (
-                        <CardProduct key={card.id} {...card} onImageChange={handleImageChange} />
+                        <CardProduct key={card.id} {...card} onImageChange={handleImageChange} onCardClick={handleCardClick} />
                     ))}
                 </div>
             )}

@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, forwardRef, MouseEventHandler, ReactNode } from '
 import { clsx } from 'clsx';
 
 type Props = {
-    variant: 'primary' | 'secondary';
+    variant: 'primary' | 'secondary' | 'destructive';
     type?: ButtonHTMLAttributes<unknown>['type'];
     className?: string;
     isLoading?: boolean;
@@ -32,6 +32,7 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, forwardedRef) => {
                 'flex items-center justify-center gap-[10px] py-[10px] px-[20px] rounded-[8px] text-[16px] leading-[20px] border',
                 variant === 'primary' && 'bg-primary-500 font-lexend font-bold text-white border-primary-500',
                 variant === 'secondary' && 'bg-white font-inter font-medium text-black border-gray-border',
+                variant === 'destructive' && 'bg-red-500 font-lexend font-bold text-white border-red-500',
                 disabled && 'bg-gray-600 text-gray-400 border-gray-600',
                 isLoading ? 'min-w-[14px] min-h-[14px]' : 'min-w-min min-h-min',
                 hasError && 'bg-red-500 text-white',

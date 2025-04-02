@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { MdClose as CloseIcon } from "@react-icons/all-files/md/MdClose";
 import { MdFileUpload as Upload } from "@react-icons/all-files/md/MdFileUpload";
 import { MdImage as ImageIcon } from "@react-icons/all-files/md/MdImage";
@@ -12,18 +12,21 @@ import { Select } from "../Select";
 import { LabelValue } from "@/types/common";
 import { useRecoilValue } from "recoil";
 import { darkModeAtom } from "@/atoms/index";
+
 const STATUS_OPTIONS = [
     { label: "Activo", value: "active" },
     { label: "Inactivo", value: "inactive" }
 ]
 
-type NewCardModalProps = {
+type EditItemModalProps = {
     open: boolean
     onOpenChange: (open: boolean) => void
-    onSave: (card: Omit<CardProductProps, "id" | "createdAt">) => void
+    card: CardProductProps | null
+    onSave: (card: CardProductProps) => void
+    onDelete: (id: number) => void
 }
 
-export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) {
+export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: EditItemModalProps) {
     const dark = useRecoilValue(darkModeAtom)
 
     const [title, setTitle] = useState("")
@@ -31,6 +34,16 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
     const [status, setStatus] = useState<LabelValue>({ label: "Activo", value: "active" })
     const [imagePreview, setImagePreview] = useState<string | null>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
+
+    // Update form when card changes
+    useEffect(() => {
+        if (card) {
+            setTitle(card.title)
+            setDescription(card.description)
+            setStatus({ label: card.status === "active" ? "Activo" : "Inactivo", value: card.status })
+            setImagePreview(card.image || null)
+        }
+    }, [card])
 
     const handleImageClick = () => {
         fileInputRef.current?.click()
@@ -76,19 +89,19 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
             return
         }
 
-        // Create new card
+        // Update card
         onSave({
+            id: card?.id || 0,
             title,
             description,
             status: status.value as "active" | "inactive",
             image: imagePreview || undefined,
-            
+            createdAt: card?.createdAt || new Date()
         })
 
         // Reset form
-        resetForm()
         onOpenChange(false)
-        toast.success("Tarjeta creada correctamente");
+        toast.success("Tarjeta actualizada correctamente");
     }
 
     const resetForm = () => {
@@ -106,11 +119,22 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
         onOpenChange(false)
     }
 
+    const handleDelete = () => {
+        if (!card) return
+
+        if (window.confirm("¿Estás seguro de que deseas eliminar esta tarjeta?")) {
+            onDelete(card.id)
+            onOpenChange(false)
+        }
+    }
+
+    if (!card) return null
+
     return (
-        <ModalLayout title="Crear nueva tarjeta" show={open} handleToggle={handleClose}>
+        <ModalLayout title="Editar tarjeta" show={open} handleToggle={handleClose}>
             <form onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-4">
-                    <p className="text-sm text-muted-foreground">Completa los campos para crear una nueva tarjeta.</p>
+                    <p className="text-sm text-muted-foreground">Completa los campos para actualizar la tarjeta.</p>
                 </div>
 
                 <div className="grid gap-4 py-4">
@@ -182,11 +206,17 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                     </div>
                 </div>
 
-                <footer className="flex gap-2">
-                    <Button type="button" variant="secondary" onClick={handleClose}>
-                        Cancelar
+                <footer className="flex gap-2 justify-between items-center">
+                    <Button type="button" variant="primary" className="bg-red-500" onClick={handleDelete}>
+                        Eliminar
                     </Button>
-                    <Button type="submit" variant="primary">Guardar</Button>
+                    <div className="flex gap-2 items-center">
+                        <Button type="button" variant="secondary" onClick={handleClose}>
+                            Cancelar
+                        </Button>
+                        <Button type="submit" variant="primary">Guardar</Button>
+                    </div>
+
                 </footer>
             </form>
         </ModalLayout>
