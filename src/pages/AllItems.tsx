@@ -5,12 +5,14 @@ import { cardsAtom, filtersAtom, isNewCardModalOpenAtom } from "@/atoms/index"
 import { NewCardModal } from "@/components/Header/NewItem"
 import Button from "@/components/Button"
 import { EditItemModal } from "@/components/Header/EditItemModal"
+import { useHistoryLogger } from "@/hooks/useHistoryStore"
 
 export const AllItems = () => {
     const [cards, setCards] = useRecoilState<CardProductProps[]>(cardsAtom)
     const [isNewCardModalOpen, setIsNewCardModalOpen] = useRecoilState(isNewCardModalOpenAtom)
     const [isEditCardModalOpen, setIsEditCardModalOpen] = useState(false)
     const [selectedCard, setSelectedCard] = useState<CardProductProps | null>(null)
+    const { logCardCreation, logCardDeletion, logCardUpdate } = useHistoryLogger()
 
     const filters = useRecoilValue(filtersAtom)
 
@@ -49,7 +51,11 @@ export const AllItems = () => {
     }
 
     const handleNewCard = (card: Omit<CardProductProps, "id" | "createdAt">) => {
-        setCards((prevCards) => [...prevCards, { ...card, id: prevCards.length + 1, createdAt: new Date() }])
+        const newCard = { ...card, id: cards.length + 1, createdAt: new Date() }
+        setCards((prevCards) => [...prevCards, newCard])
+
+        // Log card creation to history
+        logCardCreation(newCard)
     }
 
     // Handle card update
@@ -58,6 +64,10 @@ export const AllItems = () => {
         const oldCard = cards.find((card) => card.id === updatedCard.id)
 
         setCards((prevCards) => prevCards.map((card) => (card.id === updatedCard.id ? updatedCard : card)))
+        // Log card update to history
+        if (oldCard) {
+            logCardUpdate(oldCard, updatedCard)
+        }
     }
     // Handle card deletion
     const handleDeleteCard = (id: number) => {
@@ -65,7 +75,10 @@ export const AllItems = () => {
         const cardToDelete = cards.find((card) => card.id === id)
 
         setCards((prevCards) => prevCards.filter((card) => card.id !== id))
-
+        // Log card deletion to history
+        if (cardToDelete) {
+            logCardDeletion(cardToDelete)
+        }
     }
 
     // Handle card click for editing
@@ -76,7 +89,7 @@ export const AllItems = () => {
 
 
     return (
-        <div className="p-3.5 overflow-y-auto">
+        <div className="py-[12px] px-[24px] overflow-y-auto">
             <NewCardModal open={isNewCardModalOpen} onOpenChange={setIsNewCardModalOpen} onSave={handleNewCard} />
 
             <EditItemModal

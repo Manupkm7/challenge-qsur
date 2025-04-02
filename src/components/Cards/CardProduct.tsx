@@ -84,7 +84,7 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
     }
 
     return (
-        <div className="overflow-hidden transition-all hover:shadow-md border-2 rounded-lg w-[400px] bg-white" onClick={handleCardClick}>
+        <div className="overflow-hidden transition-all hover:shadow-md border-2 rounded-lg w-[400px] bg-white cursor-pointer" onClick={handleCardClick}>
             {/* Image area */}
             <div className="relative">
                 {imagePreview ? (
@@ -101,7 +101,7 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
                 ) : (
                     <div
                         className="flex h-48 w-full cursor-pointer flex-col items-center justify-center bg-muted/50 text-muted-foreground hover:bg-muted/70"
-                        onClick={handleImageClick}
+                        onClick={id ? undefined : handleImageClick}
                     >
                         <ImageIcon className="mb-2 h-10 w-10" />
                         <div className="flex items-center gap-1">
@@ -110,7 +110,7 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
                         </div>
                     </div>
                 )}
-                <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageChange} />
+                <input type="file" ref={fileInputRef} disabled={id ? true : false} className="hidden" accept="image/*" onChange={handleImageChange} />
             </div>
 
             {/* Card content */}

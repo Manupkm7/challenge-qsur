@@ -13,7 +13,7 @@ type Props = {
 
 export const Switch = ({ label, disabled, value, onChange, className, name, id }: Props) => {
     return (
-        <label className={clsx('flex justify-between items-center text-sm leading-normal', className)}>
+        <label className={clsx('flex justify-between items-center text-sm leading-normal select-none', className)}>
             {label}
             <SwitchPrimitive.Root
                 name={name || label}

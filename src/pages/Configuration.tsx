@@ -45,16 +45,16 @@ export const SettingsPage = () => {
     }
 
     return (
-        <div className="px-[12px] py-[12px] overflow-y-auto w-full">
+        <div className="py-[12px] px-[24px] overflow-y-auto w-full">
             <h1 className="text-3xl font-bold mb-6">Configuración</h1>
 
             <div className="gap-6 flex flex-col">
                 <Card title="Apariencia" description="Personaliza la apariencia visual de la aplicación">
-                    <div className="space-y-4">
+                    <div>
                         <div className="flex items-center justify-between">
                             <div className="space-y-0.5">
-                                <label htmlFor="theme-toggle">Tema Oscuro</label>
-                                <p className="text-sm text-muted-foreground">Cambia entre el tema claro y oscuro</p>
+                                <label htmlFor="theme-toggle" className="select-none">Tema Oscuro</label>
+                                <p className="text-sm text-muted-foreground select-none">Cambia entre el tema claro y oscuro</p>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Sun className="h-5 w-5 text-muted-foreground" />
@@ -66,14 +66,19 @@ export const SettingsPage = () => {
                 </Card>
                 <Card title="Idioma" description="Selecciona el idioma de la interfaz">
                     <div className="space-y-4">
-                        <div className="mt-6">
-                            <Button variant="secondary" className="flex items-center gap-2">
-                                <Globe className="h-4 w-4" />
-                                Aplicar cambios de idioma
-                            </Button>
-                            <p className="text-sm text-muted-foreground mt-2">
-                                Los cambios de idioma se aplicarán en la próxima carga de la página
-                            </p>
+                        <div className="mt-6 flex flex-col gap-4">
+                            <RadioButton value={language === "es"} onChange={() => setLanguage("es")} ><label>Español</label></RadioButton>
+                            <RadioButton value={language === "en"} onChange={() => setLanguage("en")} ><label>Ingles</label></RadioButton>
+
+                            <div className="flex flex-col gap-2 w-[350px]">
+                                <Button variant="secondary" className="flex items-center gap-2">
+                                    <Globe className="h-4 w-4" />
+                                    Aplicar cambios de idioma
+                                </Button>
+                                <p className="text-sm text-muted-foreground mt-2">
+                                    Los cambios de idioma se aplicarán en la próxima carga de la página
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </Card>

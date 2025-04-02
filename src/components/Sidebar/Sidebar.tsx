@@ -1,6 +1,6 @@
 import { MdHome as HomeIcon } from '@react-icons/all-files/md/MdHome';
 import { MdDashboard as DashboardIcon } from '@react-icons/all-files/md/MdDashboard';
-import { MdPerson as PersonIcon } from '@react-icons/all-files/md/MdPerson';
+import { MdHistory  as HistoryIcon } from '@react-icons/all-files/md/MdHistory';
 import { MdSettings as SettingsIcon } from '@react-icons/all-files/md/MdSettings';
 import { MdHelp as HelpIcon } from '@react-icons/all-files/md/MdHelp';
 import { MdDehaze as MenuIcon } from "@react-icons/all-files/md/MdDehaze";
@@ -24,9 +24,9 @@ const navItems = [
         url: "/dashboard",
     },
     {
-        title: "Usuarios",
-        icon: PersonIcon,
-        url: "/users",
+        title: "Historial",
+        icon: HistoryIcon,
+        url: "history",
     },
     {
         title: "Configuración",

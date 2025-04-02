@@ -20,7 +20,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         pauseOnFocusLoss
         draggable={true}
         theme='colored'
-        toastStyle={{ backgroundColor: '#5577F1', color: 'white', borderRadius: '15px' }}
       />
       <Landing />
     </RecoilRoot>

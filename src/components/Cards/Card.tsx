@@ -13,10 +13,10 @@ export const Card = ({ className, footer, title, description, children }: CardPr
     return (
         <div className={clsx("rounded-lg border bg-white text-card-foreground shadow-sm", className)}>
             <div className="p-6">
-                <h2 className="text-2xl font-semibold leading-none tracking-tight">
+                <h2 className="text-2xl font-semibold leading-none tracking-tight select-none">
                     {title}
                 </h2>
-                <p className="text-sm text-muted-foreground mt-2">
+                <p className="text-sm text-muted-foreground mt-2 select-none">
                     {description}
                 </p>
                 <div className="p-6">{children}</div>
