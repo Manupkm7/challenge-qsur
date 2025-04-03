@@ -200,8 +200,8 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
   };
 
   return (
-    <ModalLayout title="Crear nueva tarjeta" show={open} handleToggle={handleClose}>
-      <form onSubmit={handleSubmit}>
+    <ModalLayout title="Crear nueva tarjeta" dark={dark} show={open} handleToggle={handleClose}>
+      <form onSubmit={handleSubmit} className={`${dark ? 'bg-[#30302f] text-white' : 'bg-white'}`}>
         <div className="flex flex-col gap-4">
           <p className="text-sm text-muted-foreground">
             Completa los campos para crear una nueva tarjeta.
@@ -258,6 +258,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
               onChange={(e) => setTitle(e)}
               placeholder="Ingresa un título"
               required
+              dark={dark}
               testId="title-input"
             />
             {error.title && (
@@ -277,6 +278,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
               value={price}
               onChange={(e) => handlePriceChange(e)}
               placeholder="0.00"
+              dark={dark}
               testId="price-input"
               className="font-mono"
             />
@@ -295,6 +297,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
               onChange={handleQuantityChange}
               placeholder="1"
               className="font-mono"
+              dark={dark}
               testId="quantity-input"
             />
             {error.quantity && (

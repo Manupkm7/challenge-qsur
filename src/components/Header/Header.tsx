@@ -90,6 +90,7 @@ export function AppHeader({ filters, onFiltersChange, onNewClick }: AppHeaderPro
                 type="search"
                 placeholder="Buscar..."
                 className="w-full"
+                dark={dark}
                 testId="search-input"
                 value={searchQuery}
                 onChange={(value) => handleSearchChange(value)}

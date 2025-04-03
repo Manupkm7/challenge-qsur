@@ -9,6 +9,7 @@ import { MdChevronRight as ChevronDown } from '@react-icons/all-files/md/MdChevr
 import { FaPlusCircle as PlusCircle } from '@react-icons/all-files/fa/FaPlusCircle';
 import { FaPencilAlt as Pencil } from '@react-icons/all-files/fa/FaPencilAlt';
 import { FaTrash as Trash2 } from '@react-icons/all-files/fa/FaTrash';
+import Papa from 'papaparse';
 
 import { Badge } from '@/components/Badge';
 import Dropdown from '@/components/Dropdown';
@@ -60,6 +61,27 @@ export const History = () => {
     return moment(new Date(date)).format('DD/MM/YYYY HH:mm:ss');
   };
 
+  const downloadCSV = () => {
+    const csvData = filteredEvents.map((event) => ({
+      Fecha: moment(new Date(event.timestamp)).format('DD/MM/YYYY HH:mm:ss'),
+      Acción: event.action,
+      'ID Tarjeta': event.cardId,
+      Título: event.cardTitle,
+      Detalles: event.details,
+    }));
+
+    const csv = Papa.unparse(csvData);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'historial.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="px-[24px] py-[12px] overflow-y-auto" data-testid="history">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-6">
@@ -77,6 +99,8 @@ export const History = () => {
               placeholder="Buscar en el historial..."
               className="w-full"
               value={searchQuery}
+              dark={dark}
+              testId="search-input"
               onChange={(e: string) => setSearchQuery(e)}
             />
             <Search className="absolute right-2.5 top-3 h-4 w-4 text-muted-foreground z-10" />
@@ -137,6 +161,9 @@ export const History = () => {
               </Button>
             }
           />
+          <Button variant="primary" type="button" onClick={downloadCSV}>
+            Descargar CSV
+          </Button>
         </div>
       </div>
 

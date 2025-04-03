@@ -59,7 +59,7 @@ export function AppSidebar() {
 
             <Button
               variant="secondary"
-              className={`w-[26px] max-h-[26px] flex items-center justify-center rounded-full cursor-pointer bg-transparent border-none`}
+              className={`w-[26px] max-h-[26px] flex items-center justify-center rounded-full cursor-pointer !bg-transparent border-none`}
               onClick={handleOnClickSidebar}
               testId="sidebar-handler-btn"
             >

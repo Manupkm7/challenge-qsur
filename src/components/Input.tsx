@@ -64,7 +64,8 @@ const Input = forwardRef<HTMLInputElement, Props>(
               ref={forwardedRef}
               className={clsx(
                 'min-h-[44px] w-full text-sm font-light focus:outline-none active:outline-none blur:ring-0 focus:ring-0 focus-within:ring-0 focus-within:border-primary-500',
-                disabled ? 'cursor-not-allowed' : ''
+                disabled ? 'cursor-not-allowed' : '',
+                dark ? "text-white bg-transparent" : "text-black",
               )}
               placeholder={placeholder}
               name={inputProps.name}

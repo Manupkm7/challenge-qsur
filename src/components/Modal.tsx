@@ -7,15 +7,23 @@ type ModalLayoutProps = {
   title: string;
   show: boolean;
   width?: any;
+  dark?: boolean;
 };
 
-const ModalLayout = ({ children, handleToggle, title, show, width = '540' }: ModalLayoutProps) => {
+const ModalLayout = ({
+  children,
+  handleToggle,
+  title,
+  show,
+  width = '540',
+  dark,
+}: ModalLayoutProps) => {
   return (
     <>
       {show ? (
         <div className="fixed flex items-center justify-center inset-0 bg-[rgba(0,0,0,0.3)] w-full z-30">
           <div
-            className="relative w-full px-4 py-5 bg-white rounded-lg"
+            className={`relative w-full px-4 py-5 ${dark ? 'bg-[#30302f] text-white border-2 border-[#fff]' : 'bg-white'} rounded-lg`}
             data-testid="modal-content"
             style={{ maxWidth: `${width}px` }}
           >

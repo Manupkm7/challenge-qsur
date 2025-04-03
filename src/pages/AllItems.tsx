@@ -4,6 +4,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   cardsAtom,
   currentPageAtom,
+  darkModeAtom,
   filtersAtom,
   isNewCardModalOpenAtom,
   itemsPerPageAtom,
@@ -39,6 +40,7 @@ export const AllItems = () => {
   const [viewMode, setViewMode] = useRecoilState(viewModeAtom);
   const filters = useRecoilValue(filtersAtom);
   const { markAsSold } = useSales();
+  const dark = useRecoilValue(darkModeAtom);
 
   // Pagination state
   const [itemsPerPage, setItemsPerPage] = useRecoilState(itemsPerPageAtom);
@@ -353,6 +355,7 @@ export const AllItems = () => {
             value={itemsPerPage.toString()}
             onChange={handleItemsPerPageChange}
             className="w-[100px]"
+            dark={dark}
             options={['10', '25', '50', '100']}
           />
         </div>

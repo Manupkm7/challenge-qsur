@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import Button from '../Button';
 import { Badge } from '../Badge';
 import ToolTip from '../Tooltip';
+import { darkModeAtom } from '@/atoms/index';
+import { useRecoilValue } from 'recoil';
 
 type CardProductBaseProps = {
   id: number;
@@ -44,6 +46,7 @@ export function CardProduct({
 }: CardProductProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(image || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const dark = useRecoilValue(darkModeAtom);
 
   // Format date to a readable string
   const formatDate = (date: Date) => {
@@ -221,7 +224,7 @@ export function CardProduct({
 
   return (
     <div
-      className="overflow-hidden transition-all hover:shadow-md border-2 rounded-lg w-[400px] bg-white cursor-pointer"
+      className={`overflow-hidden transition-all hover:shadow-md border-2 rounded-lg w-[400px] cursor-pointer ${dark ? 'bg-[#30302f] text-white' : 'bg-white'}`}
       onClick={handleCardClick}
     >
       {/* Image area */}
