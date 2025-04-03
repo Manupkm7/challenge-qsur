@@ -286,7 +286,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                                 </div>
                             </div>
                         )}
-                        <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageChange} />
+                        <input type="file" ref={fileInputRef} data-testid="file-input" className="hidden" accept="image/*" onChange={handleImageChange} />
                         {error.image && <p className="text-red-500 text-sm mt-1">{error.image}</p>}
                     </div>
 
@@ -308,7 +308,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             required
                             testId="title-input"
                         />
-                        {error.title && <p className="text-red-500 text-sm">{error.title}</p>}
+                        {error.title && <p className="text-red-500 text-sm" data-testid="error-title">{error.title}</p>}
                     </div>
 
                     {/* Price */}
@@ -323,7 +323,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             testId="price-input"
                             className="font-mono"
                         />
-                        {error.price && <p className="text-red-500 text-sm">{error.price}</p>}
+                        {error.price && <p className="text-red-500 text-sm" data-testid="error-price">{error.price}</p>}
                     </div>
 
                     {/* Quantity */}
@@ -338,7 +338,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             className="font-mono"
                             testId="quantity-input"
                         />
-                        {error.quantity && <p className="text-red-500 text-sm">{error.quantity}</p>}
+                        {error.quantity && <p className="text-red-500 text-sm" data-testid="error-quantity">{error.quantity}</p>}
                     </div>
 
                     {/* Description */}
@@ -359,7 +359,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             className="min-h-[100px]"
                             testId="description-input"
                         />
-                        {error.description && <p className="text-red-500 text-sm">{error.description}</p>}
+                        {error.description && <p className="text-red-500 text-sm" data-testid="error-description">{error.description}</p>}
                     </div>
 
                     {/* Status */}
@@ -372,12 +372,12 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                                 setError({ ...error, status: "" })
                             }}
                             options={STATUS_OPTIONS}
-                            data-testid="status-select"
+                            dataTestId="status"
                             dark={dark}
                             value={status}
                             extractLabel={(option) => option.label}
                             extractValue={(option) => option.value} />
-                        {error.status && <p className="text-red-500 text-sm">{error.status}</p>}
+                        {error.status && <p className="text-red-500 text-sm" data-testid="error-status">{error.status}</p>}
                     </div>
                 </div>
 

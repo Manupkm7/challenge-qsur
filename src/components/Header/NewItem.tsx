@@ -12,6 +12,7 @@ import { Select } from "../Select";
 import { LabelValue } from "@/types/common";
 import { useRecoilValue } from "recoil";
 import { darkModeAtom } from "@/atoms/index";
+
 const STATUS_OPTIONS = [
     { label: "Activo", value: "active" },
     { label: "Inactivo", value: "inactive" }
@@ -23,6 +24,24 @@ type NewCardModalProps = {
     onSave: (card: Omit<CardProductProps, "id" | "createdAt" | "viewMode">) => void
 }
 
+type ErrorMap = {
+    title: string
+    price: string
+    quantity: string
+    description: string
+    status: string
+    image: string
+}
+
+const errorMap = {
+    title: "",
+    price: "",
+    quantity: "",
+    description: "",
+    status: "",
+    image: ""
+}
+
 export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) {
     const dark = useRecoilValue(darkModeAtom)
     const [price, setPrice] = useState<string>("")
@@ -32,7 +51,8 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
     const [imagePreview, setImagePreview] = useState<string | null>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [quantity, setQuantity] = useState<string>("1")
-    const [error, setError] = useState<string | null>(null)
+    const [error, setError] = useState<ErrorMap>(errorMap)
+    const [loading, setLoading] = useState(false)
 
     const handleImageClick = () => {
         fileInputRef.current?.click()
@@ -69,12 +89,70 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
         }
     }
 
+    const validateForm = (): boolean => {
+        setLoading(true)
+        const newErrors: ErrorMap = { ...errorMap }
+        let isValid = true
+
+        // Validar título
+        if (!title.trim()) {
+            newErrors.title = "El título es requerido"
+            isValid = false
+        } else if (title.length < 3) {
+            newErrors.title = "El título debe tener al menos 3 caracteres"
+            isValid = false
+        }
+
+        // Validar precio
+        if (!price.trim()) {
+            newErrors.price = "El precio es requerido"
+            isValid = false
+        } else if (isNaN(Number(price)) || Number(price) <= 0) {
+            newErrors.price = "El precio debe ser un número mayor a 0"
+            isValid = false
+        }
+
+        // Validar cantidad
+        if (!quantity.trim()) {
+            newErrors.quantity = "La cantidad es requerida"
+            isValid = false
+        } else if (isNaN(Number(quantity)) || Number(quantity) < 0) {
+            newErrors.quantity = "La cantidad debe ser un número mayor o igual a 0"
+            isValid = false
+        }
+
+        // Validar descripción
+        if (!description.trim()) {
+            newErrors.description = "La descripción es requerida"
+            isValid = false
+        } else if (description.length < 10) {
+            newErrors.description = "La descripción debe tener al menos 10 caracteres"
+            isValid = false
+        }
+
+        // Validar estado
+        if (!status.value) {
+            newErrors.status = "El estado es requerido"
+            isValid = false
+        }
+
+        // Validar imagen
+        if (!imagePreview) {
+            newErrors.image = "La imagen es requerida"
+            isValid = false
+        }
+
+        setError(newErrors)
+        setLoading(false)
+        return isValid
+    }
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
 
-        // Validate form
-        if (!title.trim()) {
-            setError("Por favor, ingresa un título")
+        e.preventDefault()
+
+        if (!validateForm()) {
             return
         }
 
@@ -169,7 +247,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                             required
                             testId="title-input"
                         />
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
+                        {error.title && <p className="text-red-500 text-sm" data-testid="error-title">{error.title}</p>}
                     </div>
 
                     {/* Price */}
@@ -178,13 +256,14 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                         <Input
                             id="price"
                             type="text"
+                            min={1}
                             value={price}
                             onChange={(e) => handlePriceChange(e)}
                             placeholder="0.00"
                             testId="price-input"
                             className="font-mono"
                         />
-                        {error && <p data-testid="error" className="text-red-500 text-sm">{error}</p>}
+                        {error.price && <p data-testid="error-price" className="text-red-500 text-sm">{error.price}</p>}
                     </div>
                     <div className="grid gap-2">
                         <label htmlFor="edit-quantity">Cantidad</label>
@@ -197,7 +276,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                             className="font-mono"
                             testId="quantity-input"
                         />
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
+                        {error.quantity && <p data-testid="error-quantity" className="text-red-500 text-sm">{error.quantity}</p>}
                     </div>
 
                     {/* Description */}
@@ -211,6 +290,8 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                             className="min-h-[100px]"
                             testId="description-input"
                         />
+                        {error.description && <p data-testid="error-description" className="text-red-500 text-sm">{error.description}</p>}
+
                     </div>
 
                     {/* Status */}
@@ -225,15 +306,15 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                             value={status}
                             extractLabel={(option) => option.label}
                             extractValue={(option) => option.value} />
-                        {error && <p data-testid="error" className="text-red-500 text-sm">{error}</p>}
+                        {error.status && <p data-testid="error-status" className="text-red-500 text-sm">{error.status}</p>}
                     </div>
                 </div>
 
                 <footer className="flex justify-end gap-2">
-                    <Button type="button" testId="cancel-button" variant="secondary" onClick={handleClose}>
+                    <Button type="button" testId="cancel-button" variant="secondary" disabled={loading} onClick={handleClose} isLoading={loading}>
                         Cancelar
                     </Button>
-                    <Button type="submit" testId="save-button" variant="primary">Guardar</Button>
+                    <Button type="submit" testId="save-button" variant="primary" disabled={loading} isLoading={loading}>Guardar</Button>
                 </footer>
             </form>
         </ModalLayout>
