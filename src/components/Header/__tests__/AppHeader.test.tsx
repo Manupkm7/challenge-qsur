@@ -28,7 +28,7 @@ describe('AppHeader', () => {
         (useLocation as jest.Mock).mockReturnValue({ pathname: '/home/settings' })
 
         renderWithRecoil(<AppHeader filters={{ status: { value: 'active' }, search: '', sort: { value: 'recent' } } as any} onFiltersChange={() => { }} onNewClick={() => { }} />)
-        expect(screen.getByText('Home /Settings')).toBeInTheDocument()
+        expect(screen.getByText('Home / Settings')).toBeInTheDocument()
     })
 
     it('renderiza los filtros en la página /home', () => {

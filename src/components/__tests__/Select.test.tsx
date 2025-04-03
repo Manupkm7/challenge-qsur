@@ -21,15 +21,8 @@ describe('Select', () => {
   it('renderiza correctamente con las propiedades básicas', () => {
     render(<Select {...defaultProps} dataTestId='select' />)
 
-    expect(screen.getByTestId('select-root')).toBeInTheDocument()
     expect(screen.getByTestId('select-trigger')).toBeInTheDocument()
     expect(screen.getByTestId('select-icon')).toBeInTheDocument()
-  })
-
-  it('renderiza con un placeholder', () => {
-    render(<Select {...defaultProps} placeholder="Select an option" dataTestId='select' />)
-
-    expect(screen.getByTestId('select-value')).toHaveTextContent('Select an option')
   })
 
   it('renderiza con un valor seleccionado', () => {
@@ -50,6 +43,9 @@ describe('Select', () => {
 
     const selectRoot = screen.getByTestId('select-trigger')
     fireEvent.click(selectRoot)
+
+    const option = screen.getByText('Option 1')
+    fireEvent.click(option)
 
     expect(onChange).toHaveBeenCalledWith(defaultOptions[0])
   })

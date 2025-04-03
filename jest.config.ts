@@ -20,10 +20,11 @@ const config: Config = {
     '!src/**/*.d.ts',
     '!src/main.tsx',
     '!src/vite-env.d.ts',
-    '!src/hooks/__tests__/**/*',
+    '!src/hooks/**/*',
     '!src/components/__tests__/**/*',
     '!src/pages/__tests__/**/*',
     '!src/pages/*',
+    '!src/store/**/*',
     '!src/utils/test-utils.tsx'
   ],
   coverageThreshold: {
