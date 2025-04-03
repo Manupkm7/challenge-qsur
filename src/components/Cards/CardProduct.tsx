@@ -21,7 +21,7 @@ import { MdCheckCircle as CheckCircle } from '@react-icons/all-files/md/MdCheckC
 
 /**
  * Extiende `Card` para mostrar productos con detalles específicos.
- * 
+ *
  * Props:
  * - `id`: Identificador único del producto.
  * - `title`: Título del producto.
@@ -224,14 +224,16 @@ export function CardProduct({
 
               {status === 'active' && price !== undefined && (
                 <ToolTip tooltip="Vender una unidad">
-                  <Button
-                    variant="primary"
-                    testId="sell-button"
-                    className="h-[30px] w-[30px] py-[4px] px-[4px]"
-                    onClick={handleMarkAsSold}
-                  >
-                    <CheckCircle className="h-4 w-4" />
-                  </Button>
+                  <div>
+                    <Button
+                      variant="primary"
+                      testId="sell-button"
+                      className="h-[30px] w-[30px] py-[4px] px-[4px]"
+                      onClick={handleMarkAsSold}
+                    >
+                      <CheckCircle className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </ToolTip>
               )}
             </div>

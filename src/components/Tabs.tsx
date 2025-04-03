@@ -59,7 +59,7 @@ const TabsList = ({ children, className }: { children: ReactNode; className?: st
   return (
     <Tabs.List
       className={clsx(
-        'flex h-10 items-center justify-center rounded-md p-1 text-slate-500',
+        'flex h-10 items-center justify-center rounded-md p-1 text-slate-500 ',
         className
       )}
     >

@@ -26,7 +26,7 @@ import { MdImage as ImageIcon } from '@react-icons/all-files/md/MdImage';
 
 /**
  * Modal para editar un producto existente.
- * 
+ *
  * Props:
  * - `open`: Indica si el modal está abierto.
  * - `onOpenChange`: Callback para manejar el estado del modal.
@@ -275,7 +275,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
   if (!card) return null;
 
   return (
-    <ModalLayout title="Editar tarjeta" show={open} handleToggle={handleClose}>
+    <ModalLayout title="Editar tarjeta" dark={dark} show={open} handleToggle={handleClose}>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
           <p className="text-sm text-muted-foreground">
@@ -297,7 +297,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                   type="button"
                   variant="destructive"
                   className="absolute top-2 right-2 px-[8px] rounded-[100%]"
-                  testId='remove-image-button'
+                  testId="remove-image-button"
                   onClick={handleRemoveImage}
                 >
                   <CloseIcon className="h-4 w-4" />
@@ -336,6 +336,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
             <Input
               id="title"
               value={title}
+              dark={dark}
               onChange={(e) => {
                 setTitle(e);
                 if (e.length < 3) {
@@ -361,6 +362,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
             <Input
               id="price"
               type="text"
+              dark={dark}
               value={price}
               onChange={(e) => handlePriceChange(e)}
               placeholder="0.00"
@@ -381,6 +383,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
               id="edit-quantity"
               type="text"
               value={quantity}
+              dark={dark}
               onChange={handleQuantityChange}
               placeholder="1"
               className="font-mono"

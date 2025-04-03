@@ -280,6 +280,7 @@ export const AllItems = () => {
         onOpenChange={setIsEditCardModalOpen}
         card={selectedCard}
         onSave={handleUpdateCard}
+        
         onDelete={handleDeleteCard}
       />
       <div className="flex justify-between items-center mb-4">

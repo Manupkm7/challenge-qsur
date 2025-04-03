@@ -1,28 +1,18 @@
 // React
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 // Recoil
 import { useRecoilValue } from 'recoil';
 import { darkModeAtom } from '@/atoms/index';
-
-// Librerías externas
-import { toast } from 'react-toastify';
+// Tipos
+import { AppHeaderProps, LabelValue } from '@/types/common';
 
 // Componentes
 import Input from '@/components/Input';
-import { CardProductProps } from '@/components/Cards/CardProduct';
 import Button from '../Button';
-import { Textarea } from '../Textarea';
-import ModalLayout from '../Modal';
+
 import { Select } from '../Select';
-
-// Tipos
-import { LabelValue } from '@/types/common';
-
-// Iconos o SVGs
-import { MdClose as CloseIcon } from '@react-icons/all-files/md/MdClose';
-import { MdFileUpload as Upload } from '@react-icons/all-files/md/MdFileUpload';
-import { MdImage as ImageIcon } from '@react-icons/all-files/md/MdImage';
 
 /**
  * Encabezado principal de la aplicación.
