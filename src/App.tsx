@@ -14,7 +14,7 @@ function App() {
   }
 
   return (
-    <div className='min-h-screen font-roboto h-screen flex flex-col md:flex-row bg-white'>
+    <div className='min-h-screen font-roboto h-screen flex flex-col md:flex-row bg-white' data-testid="app">
       <AppSidebar />
       <section className='flex-1 flex flex-col'>
         <AppHeader filters={filters} onFiltersChange={handleFiltersChange} onNewClick={() => setIsNewCardModalOpen(true)} />

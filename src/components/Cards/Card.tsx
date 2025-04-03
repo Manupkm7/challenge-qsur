@@ -1,5 +1,5 @@
 import * as React from "react"
-import clsx from "clsx"
+import { clsx } from "clsx"
 
 type CardProps = {
     className?: string;
@@ -12,19 +12,19 @@ type CardProps = {
 
 export const Card = ({ className, footer, title, description, children, icon }: CardProps) => {
     return (
-        <div className={clsx("rounded-lg border bg-white text-card-foreground shadow-sm", className)}>
-            <div className="p-6">
-                <div className="flex items-center gap-2">
+        <div data-testid="card" className={clsx("rounded-lg border bg-white text-card-foreground shadow-sm", className)}>
+            <div data-testid="card-header" className="p-6">
+                <div data-testid="card-title-and-icon"  className="flex items-center gap-2">
                     {icon}
-                    <h2 className="text-2xl font-semibold leading-none tracking-tight select-none">
+                    <h2 className="text-2xl font-semibold leading-none tracking-tight select-none" data-testid="card-title">
                         {title}
                     </h2>
                 </div>
-                <p className="text-sm text-muted-foreground mt-2 select-none">
+                <p data-testid="card-description" className="text-sm text-muted-foreground mt-2 select-none">
                     {description}
                 </p>
-                <div className="p-6">{children}</div>
-                <footer className="p-6">{footer}</footer>
+                <div data-testid="card-content" className="p-6">{children}</div>
+                <footer data-testid="card-footer" className="p-6">{footer}</footer>
             </div>
         </div>
     )

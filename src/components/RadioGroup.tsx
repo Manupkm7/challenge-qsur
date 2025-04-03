@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { MdRadioButtonChecked as RadioButtonCheckIcon } from '@react-icons/all-files/md/MdRadioButtonChecked';
 import { MdRadioButtonUnchecked as RadioButtonUncheckIcon } from '@react-icons/all-files/md/MdRadioButtonUnchecked';
-import clsx from 'clsx';
+import { clsx } from "clsx"
 
 export interface RadioButtonProps {
     disabled?: boolean;
@@ -36,6 +36,7 @@ export const RadioButton = ({
 
     return (
         <div
+            data-testid="radio-button"
             className={`${disabled ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'
                 } select-none flex items-center gap-3px ${className}`}
             onClick={handleClick}>
@@ -48,7 +49,7 @@ export const RadioButton = ({
 //Base element of the component
 const RadioGroupRoot = (props: any) => {
     return (
-        <RadioGroup.Root onValueChange={props.onValueChange} required={false} orientation="horizontal">
+        <RadioGroup.Root onValueChange={props.onValueChange} required={false} orientation="horizontal" data-testid="radio-group-root">
             {props.children}
         </RadioGroup.Root>
     );
@@ -63,6 +64,7 @@ const RadioItem = (props: any) => {
     return (
         <RadioGroup.Item
             id={props.id}
+            data-testid="radio-item"
             className={
                 props.selected
                     ? `${props.selectedStyle
@@ -101,6 +103,7 @@ const RadioIndicator = (props: any) => {
 
     return (
         <RadioGroup.Indicator
+            data-testid="radio-indicator"
             className={`${props.style ? props.style : styleRadioGroupIndicatorDefault}`}
             style={{ backgroundColor: `${props.style ? '' : '#279AF1'}` }}
         />
@@ -134,7 +137,7 @@ export const RadixRadioGroup = ({ value, items, onChange = () => { } }: RadixRad
                 <div className="-my-3">
                     {items.map(({ value, label, disabled }, index) => (
                         <RadioOption key={index}>
-                            <RadioItem id={`r-${index}`} value={value} disabled={disabled} selected={currentValue === value}>
+                            <RadioItem id={`r-${index}`} value={value} disabled={disabled} data-testid={`radio-${currentValue === value ? 'checked' : 'unchecked'}`} selected={currentValue === value}>
                                 <RadioIndicator />
                             </RadioItem>
                             <label htmlFor={`r-${index}`} className="ml-3 cursor-pointer select-none">

@@ -1,0 +1,334 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for src/assets/NotFound.tsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/assets</a> NotFound.tsx</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>3/3</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>2/2</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const NotFoundLogoSvg = () =&gt; {
+    return (
+        &lt;svg width='418' height='247' viewBox='0 0 418 247' fill='none' xmlns='http://www.w3.org/2000/svg' data-testid='not-found-logo'&gt;
+            &lt;path
+                d='M139.578 40.7281C139.578 40.7281 176.978 69.11 233.837 16.0408C284.332 -31.0885 325.563 43.2711 325.852 78.8807C326.226 125.009 275.356 161.919 300.043 192.216C324.73 222.514 251.085 272.546 211.394 229.247C162.02 175.384 148.644 219.147 120.501 219.147C100.303 219.147 58.8334 168.959 86.8373 131.621C110.402 100.201 97.5503 89.7736 91.3266 78.8807C82.3488 63.1708 103.669 20.5297 139.578 40.7281Z'
+                fill='#E6F6FF'
+                fillOpacity='0.4'
+            /&gt;
+            &lt;path
+                d='M310.877 92.3374C313.414 93.2801 316.187 93.3429 318.825 92.7373C329.878 90.2003 367.884 83.4828 361.279 112.934C359.841 118.777 337.582 151.5 369.282 163.446C371.604 164.332 374.061 164.816 376.546 164.876C386.306 165.077 405.647 162.773 413.742 154.533C423.52 144.579 412.837 149.3 412.837 149.3C412.837 149.3 375.663 165.522 362.532 148.311C361.07 146.396 360.14 143.615 359.874 141.22C359.411 137.069 361.255 131.583 363.676 126.808C366.954 120.344 382.688 91.2689 348.527 82.7989C340.657 80.9249 329.227 79.2414 314.489 85.4465C305.893 89.0656 307.797 91.193 310.877 92.3374Z'
+                fill='#99DCFF'
+            /&gt;
+            &lt;path
+                d='M318.483 81.4822L308.589 85.1854C305.173 86.4637 303.441 90.2689 304.719 93.6845L305.209 94.995C306.488 98.4105 310.293 100.143 313.708 98.8648L323.603 95.1616C327.019 93.8833 328.751 90.0782 327.473 86.6626L326.982 85.3521C325.704 81.9365 321.899 80.2039 318.483 81.4822Z'
+                fill='#006499'
+            /&gt;
+            &lt;path
+                d='M257.748 92.1982L225.117 104.411C223.409 105.05 222.543 106.953 223.182 108.661L223.31 109.004C223.949 110.712 225.852 111.578 227.56 110.939L260.192 98.7261C261.899 98.087 262.766 96.1844 262.127 94.4766L261.998 94.1332C261.359 92.4254 259.456 91.5591 257.748 92.1982Z'
+                fill='white'
+            /&gt;
+            &lt;path
+                d='M266.857 116.53L234.225 128.743C232.517 129.382 231.651 131.285 232.29 132.993L232.419 133.336C233.058 135.044 234.96 135.91 236.668 135.271L269.3 123.058C271.008 122.419 271.874 120.516 271.235 118.809L271.107 118.465C270.467 116.757 268.565 115.891 266.857 116.53Z'
+                fill='white'
+            /&gt;
+            &lt;path
+                d='M296.983 75.5899L270.536 85.4881C267.12 86.7664 265.388 90.5716 266.666 93.9872L275.696 118.114C276.974 121.529 280.779 123.262 284.195 121.983L310.642 112.085C314.058 110.807 315.791 107.002 314.512 103.586L305.483 79.4597C304.204 76.0441 300.399 74.3115 296.983 75.5899Z'
+                fill='#0085CC'
+            /&gt;
+            &lt;path
+                d='M273.268 81.9219L246.82 91.8201C243.405 93.0985 241.672 96.9037 242.95 100.319L253.723 129.103C255.001 132.519 258.807 134.251 262.222 132.973L288.669 123.075C292.085 121.796 293.818 117.991 292.539 114.575L281.767 85.7917C280.488 82.3761 276.683 80.6436 273.268 81.9219Z'
+                fill='#0096E6'
+            /&gt;
+            &lt;path
+                d='M277.408 76.0785L277.2 76.1561C274.923 77.0084 273.768 79.5451 274.62 81.8222L289.712 122.145C290.564 124.422 293.101 125.577 295.378 124.725L295.585 124.647C297.862 123.795 299.017 121.258 298.165 118.981L283.074 78.6584C282.221 76.3814 279.685 75.2263 277.408 76.0785Z'
+                fill='#004468'
+            /&gt;
+            &lt;path
+                d='M7.73093 101.86C7.73093 101.86 60.8463 86.9334 53.1348 121.323C51.7957 126.765 32.5183 154.783 55.4806 168.235C60.4112 171.124 66.1011 172.404 71.8151 172.374C82.0599 172.32 98.301 170.349 105.597 162.922C115.376 152.968 104.693 157.688 104.693 157.688C104.693 157.688 74.1879 170.236 58.4942 160.234C53.1355 156.819 50.7065 150.206 52.1617 144.02C52.9055 140.948 54.0381 137.982 55.5321 135.196C58.9452 128.804 74.5439 99.6576 40.3821 91.1876C32.5125 89.3135 21.0826 87.6301 6.34487 93.8351C-8.39291 100.04 7.73093 101.86 7.73093 101.86Z'
+                fill='#99DCFF'
+            /&gt;
+            &lt;path
+                d='M112.739 149.994L102.845 153.697C99.429 154.975 97.6964 158.781 98.9748 162.196L99.4653 163.507C100.744 166.922 104.549 168.655 107.964 167.377L117.859 163.673C121.275 162.395 123.007 158.59 121.729 155.174L121.238 153.864C119.96 150.448 116.155 148.716 112.739 149.994Z'
+                fill='#006499'
+            /&gt;
+            &lt;path
+                d='M129.456 133.715L114.792 139.203C111.376 140.481 109.644 144.286 110.922 147.702L117.993 166.595C119.271 170.011 123.077 171.744 126.492 170.465L141.156 164.977C144.572 163.699 146.305 159.893 145.026 156.478L137.955 137.585C136.677 134.169 132.872 132.436 129.456 133.715Z'
+                fill='#0085CC'
+            /&gt;
+            &lt;path
+                d='M153.868 119.169L132 127.353C128.584 128.632 126.852 132.437 128.13 135.852L138.903 164.636C140.181 168.052 143.986 169.784 147.402 168.506L169.27 160.321C172.686 159.043 174.418 155.238 173.14 151.822L162.368 123.039C161.089 119.623 157.284 117.89 153.868 119.169Z'
+                fill='#0096E6'
+            /&gt;
+            &lt;path
+                d='M158.502 113.209L158.295 113.287C156.018 114.139 154.863 116.676 155.715 118.953L170.806 159.276C171.659 161.553 174.195 162.708 176.472 161.856L176.68 161.778C178.957 160.926 180.112 158.389 179.26 156.112L164.168 115.789C163.316 113.512 160.779 112.357 158.502 113.209Z'
+                fill='#004468'
+            /&gt;
+            &lt;path
+                d='M214.346 87.5192C213.559 87.4318 212.836 87.0422 212.33 86.4326C211.823 85.8229 211.574 85.0407 211.633 84.2505L213.264 54.447C213.362 52.6667 214.865 51.3141 216.571 51.4714L218.948 51.6916C220.654 51.8489 221.876 53.4525 221.637 55.2202L217.628 84.8036C217.535 85.5917 217.143 86.3138 216.532 86.8196C215.92 87.3254 215.137 87.576 214.346 87.5192Z'
+                fill='#00A7FF'
+            /&gt;
+            &lt;path
+                d='M200.257 90.0896C200.012 90.1616 199.756 90.1846 199.502 90.1574C199.248 90.1301 199.002 90.0531 198.778 89.9308C198.554 89.8085 198.356 89.6432 198.196 89.4444C198.036 89.2456 197.916 89.0172 197.844 88.7723L192.017 70.2329C191.848 69.7057 191.894 69.1327 192.147 68.6398C192.399 68.1469 192.837 67.7742 193.364 67.6036L194.873 67.1484C195.131 67.0729 195.403 67.0518 195.671 67.0866C195.938 67.1213 196.195 67.2111 196.426 67.3503C196.657 67.4895 196.857 67.6751 197.012 67.8953C197.168 68.1156 197.276 68.3657 197.33 68.6298L201.649 87.6246C201.769 88.1352 201.693 88.6723 201.435 89.1291C201.177 89.586 200.757 89.9289 200.257 90.0896Z'
+                fill='#00A7FF'
+            /&gt;
+            &lt;path
+                d='M192.395 100.78C191.351 102.073 189.251 102.058 187.635 100.745L158.938 77.4299C157.224 76.0373 156.718 73.732 157.826 72.3607L159.37 70.4484C160.477 69.0764 162.752 69.1889 164.374 70.6958L191.527 95.9233C193.056 97.3439 193.439 99.4863 192.395 100.78Z'
+                fill='#00A7FF'
+            /&gt;
+            &lt;path
+                d='M205.657 161.001C206.396 161.286 206.995 161.848 207.329 162.566C207.663 163.285 207.704 164.105 207.446 164.854L198.256 193.252C197.708 194.948 195.909 195.871 194.299 195.284L192.056 194.465C190.447 193.877 189.674 192.014 190.357 190.366L201.79 162.788C202.08 162.049 202.644 161.451 203.364 161.118C204.085 160.785 204.906 160.743 205.657 161.001Z'
+                fill='#00A7FF'
+            /&gt;
+            &lt;path
+                d='M219.934 162.114C220.189 162.107 220.443 162.15 220.682 162.241C220.92 162.333 221.139 162.47 221.324 162.645C221.509 162.821 221.658 163.031 221.763 163.264C221.867 163.497 221.924 163.749 221.931 164.004L222.83 183.417C222.859 183.97 222.668 184.512 222.298 184.924C221.928 185.336 221.409 185.585 220.856 185.615L219.281 185.67C219.012 185.677 218.744 185.628 218.494 185.526C218.244 185.424 218.018 185.271 217.831 185.078C217.643 184.884 217.497 184.654 217.403 184.401C217.309 184.148 217.268 183.879 217.283 183.61L217.96 164.142C217.974 163.618 218.185 163.118 218.551 162.742C218.916 162.366 219.41 162.142 219.934 162.114Z'
+                fill='#00A7FF'
+            /&gt;
+            &lt;path
+                d='M230.267 153.784C231.607 152.8 233.633 153.351 234.861 155.034L256.651 184.903C257.953 186.688 257.853 189.045 256.431 190.089L254.45 191.543C253.029 192.587 250.858 191.897 249.675 190.026L229.864 158.7C228.75 156.937 228.927 154.768 230.267 153.784Z'
+                fill='#00A7FF'
+            /&gt;
+        &lt;/svg&gt;
+    );
+}
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2025-04-03T02:59:31.298Z
+            </div>
+        <script src="../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
+    </body>
+</html>
+    

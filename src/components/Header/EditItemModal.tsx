@@ -35,6 +35,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [quantity, setQuantity] = useState<string>("1")
+    const [error, setError] = useState<string | null>(null)
 
 
     // Update form when card changes
@@ -97,7 +98,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
 
         // Validate form
         if (!title.trim()) {
-            toast.error("Por favor, ingresa un título")
+            setError("Por favor, ingresa un título")
             return
         }
 
@@ -203,7 +204,10 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             onChange={(e) => setTitle(e)}
                             placeholder="Ingresa un título"
                             required
+                            testId="title-input"
                         />
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
+
                     </div>
                     {/* Price */}
                     <div className="grid gap-2">
@@ -214,8 +218,11 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             value={price}
                             onChange={(e) => handlePriceChange(e)}
                             placeholder="0.00"
+                            testId="price-input"
                             className="font-mono"
                         />
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
+
                     </div>
                     {/* Quantity */}
                     <div className="grid gap-2">
@@ -227,7 +234,10 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             onChange={handleQuantityChange}
                             placeholder="1"
                             className="font-mono"
+                            testId="quantity-input"
                         />
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
+
                     </div>
 
                     {/* Description */}
@@ -239,7 +249,10 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             onChange={(e) => setDescription(e.target.value)}
                             placeholder="Ingresa una descripción"
                             className="min-h-[100px]"
+                            testId="description-input"
                         />
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
+
                     </div>
 
                     {/* Status */}
@@ -249,23 +262,25 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             placeholder="Selecciona un estado"
                             onChange={(e) => setStatus(e)}
                             options={STATUS_OPTIONS}
+                            data-testid="status-select"
                             dark={dark}
                             value={status}
                             extractLabel={(option) => option.label}
                             extractValue={(option) => option.value} />
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
 
                     </div>
                 </div>
 
                 <footer className="flex gap-2 justify-between items-center">
-                    <Button type="button" variant="primary" className="bg-red-500" onClick={handleDelete}>
+                    <Button type="button" testId="delete-button" variant="primary" className="bg-red-500" onClick={handleDelete}>
                         Eliminar
                     </Button>
                     <div className="flex gap-2 items-center">
-                        <Button type="button" variant="secondary" onClick={handleClose}>
+                        <Button type="button" testId="cancel-button" variant="secondary" onClick={handleClose}>
                             Cancelar
                         </Button>
-                        <Button type="submit" variant="primary">Guardar</Button>
+                        <Button type="submit" testId="save-button" variant="primary">Guardar</Button>
                     </div>
 
                 </footer>

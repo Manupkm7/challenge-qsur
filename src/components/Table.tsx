@@ -1,5 +1,5 @@
 import * as React from "react"
-import clsx from "clsx"
+import { clsx } from "clsx"
 
 interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
     children: React.ReactNode;

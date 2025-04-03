@@ -232,7 +232,7 @@ export const AllItems = () => {
 
 
     return (
-        <div className="p-3.5 overflow-y-auto">
+        <div className="p-3.5 overflow-y-auto" data-testid="all-items">
             <NewCardModal open={isNewCardModalOpen} onOpenChange={setIsNewCardModalOpen} onSave={handleNewCard} />
 
             <EditItemModal

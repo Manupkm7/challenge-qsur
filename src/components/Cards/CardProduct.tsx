@@ -113,12 +113,13 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
             <div className="overflow-hidden transition-all hover:shadow-md cursor-pointer border-2 rounded-lg" onClick={handleCardClick}>
                 <div className="flex">
                     {/* Image area */}
-                    <div className="relative w-24 sm:w-32 sm:h-32 flex-shrink-0">
+                    <div className="relative w-24 sm:w-32 sm:h-32 flex-shrink-0" data-testid="image-upload-area">
                         {imagePreview ? (
                             <div className="relative h-full w-full">
-                                <img src={imagePreview || "/placeholder.svg"} alt={title} className="object-contain h-full w-full" />
+                                <img src={imagePreview || "/placeholder.svg"} data-testid="image-preview" alt={title} className="object-contain h-full w-full" />
                                 <Button
                                     variant="destructive"
+                                    data-testid="remove-image-button"
                                     className="absolute top-1 right-1 px-[4px] py-[4px] rounded-[50%] opacity-80 hover:opacity-100"
                                     onClick={handleRemoveImage}
                                 >
@@ -128,6 +129,7 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
                         ) : (
                             <div
                                 className="flex h-full w-full cursor-pointer flex-col items-center justify-center bg-muted/50 text-muted-foreground hover:bg-muted/70"
+                                data-testid="image-upload-area"
                                 onClick={handleImageClick}
                             >
                                 <ImageIcon className="h-6 w-6" />
@@ -137,33 +139,33 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
                                 </div>
                             </div>
                         )}
-                        <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageChange} />
+                        <input type="file" ref={fileInputRef} data-testid="file-input" className="hidden" accept="image/*" onChange={handleImageChange} />
                     </div>
 
                     {/* Card content */}
                     <div className="flex flex-col flex-1 p-4">
                         <div className="flex items-center justify-between mb-2">
                             <div>
-                                <h2 className="font-semibold">{title}</h2>
-                                {price !== undefined && <div className="text-sm font-medium text-primary">{formatPrice(price)}</div>}
-                                <div className="text-sm font-medium">Stock: {quantity}</div>
+                                <h2 className="font-semibold" data-testid="title">{title}</h2>
+                                {price !== undefined && <div className="text-sm font-medium text-primary" data-testid="price">{formatPrice(price)}</div>}
+                                <div className="text-sm font-medium" data-testid="stock-quantity">Stock: {quantity}</div>
 
                             </div>
-                            <Badge variant={status === "active" ? "default" : "secondary"}>
+                            <Badge testId="status" variant={status === "active" ? "default" : "secondary"}>
                                 {status === "active" ? "Activo" : "Inactivo"}
                             </Badge>
                         </div>
                         <div className="flex items-center justify-between gap-2">
-                            <p className="text-sm text-muted-foreground">{description}</p>
+                            <p className="text-sm text-muted-foreground" data-testid="description">{description}</p>
 
                             {status === "active" && price !== undefined && (
                                 <ToolTip tooltip="Vender una unidad">
-                                    <Button variant="primary" className="h-[30px] w-[30px] py-[4px] px-[4px]" onClick={handleMarkAsSold}>
+                                    <Button variant="primary" testId="sell-button" className="h-[30px] w-[30px] py-[4px] px-[4px]" onClick={handleMarkAsSold}>
                                         <CheckCircle className="h-4 w-4" />
                                     </Button></ToolTip>
                             )}
                         </div>
-                        <div className="text-xs text-muted-foreground mt-2">Creado: {formatDate(createdAt)}</div>
+                        <div className="text-xs text-muted-foreground mt-2" data-testid="created-date">Creado: {formatDate(createdAt)}</div>
                     </div>
                 </div>
             </div>
@@ -173,7 +175,7 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
     return (
         <div className="overflow-hidden transition-all hover:shadow-md border-2 rounded-lg w-[400px] bg-white cursor-pointer" onClick={handleCardClick}>
             {/* Image area */}
-            <div className="relative">
+            <div className="relative" data-testid="image-upload-area">
                 {imagePreview ? (
                     <div className="h-48 w-full">
                         <img src={imagePreview || "/placeholder.svg"} alt="Preview" className="object-cover h-[200px] w-full" />
@@ -197,25 +199,24 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
                         </div>
                     </div>
                 )}
-                <input type="file" ref={fileInputRef} disabled={id ? true : false} className="hidden" accept="image/*" onChange={handleImageChange} />
+                <input type="file" ref={fileInputRef} data-testid="file-input" disabled={id ? true : false} className="hidden" accept="image/*" onChange={handleImageChange} />
             </div>
 
             {/* Card content */}
             <div className="p-4 border-t-2">
                 <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                        <h2 className="font-semibold text-lg leading-none">{title}</h2>
-                        <span className="text-muted-foreground text-lg leading-none">{price ? formatPrice(price) : "Fuera de stock"}</span>
-
+                        <h2 className="font-semibold text-lg leading-none" data-testid="title">{title}</h2>
+                        <span className="text-muted-foreground text-lg leading-none" data-testid="price">{price ? formatPrice(price) : "Fuera de stock"}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Badge variant={status === "active" ? "default" : status === "inactive" ? "secondary" : "outline"}>
+                        <Badge testId="status" variant={status === "active" ? "default" : status === "inactive" ? "secondary" : "outline"}>
                             {status === "active" ? "Activo" : "Inactivo"}
                         </Badge>
                         {status === "active" && price !== undefined && (
                             <ToolTip tooltip="Vender una unidad">
                                 <div>
-                                    <Button variant="primary" className="h-[30px] w-[30px] py-[4px] px-[4px]" onClick={handleMarkAsSold}>
+                                    <Button variant="primary" className="h-[30px] w-[30px] py-[4px] px-[4px]" testId="sell-button" onClick={handleMarkAsSold}>
                                         <CheckCircle className="h-4 w-4" />
                                     </Button>
                                 </div>
@@ -225,14 +226,14 @@ export function CardProduct({ id, title, description, status, createdAt, image, 
 
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                    <p className="text-sm text-muted-foreground">{description}</p>
-                    <div className="text-sm font-[600]">Stock: {quantity}</div>
+                    <p className="text-sm text-muted-foreground" data-testid="description">{description}</p>
+                    <div className="text-sm font-[600]" data-testid="stock-quantity">Stock: {quantity}</div>
 
                 </div>
             </div>
 
             <div className="border-t-2 bg-muted/30 px-4 py-2">
-                <div className="text-xs text-muted-foreground">Creado: {formatDate(createdAt)}</div>
+                <div className="text-xs text-muted-foreground" data-testid="created-date">Creado: {formatDate(createdAt)}</div>
             </div>
         </div>
     )

@@ -45,7 +45,7 @@ export const SettingsPage = () => {
     }
 
     return (
-        <div className="py-[12px] px-[24px] overflow-y-auto w-full">
+        <div className="py-[12px] px-[24px] overflow-y-auto w-full" data-testid="settings">
             <h1 className="text-3xl font-bold mb-6">Configuración</h1>
 
             <div className="gap-6 flex flex-col">

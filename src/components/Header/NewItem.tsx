@@ -32,7 +32,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
     const [imagePreview, setImagePreview] = useState<string | null>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [quantity, setQuantity] = useState<string>("1")
-
+    const [error, setError] = useState<string | null>(null)
 
     const handleImageClick = () => {
         fileInputRef.current?.click()
@@ -74,7 +74,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
 
         // Validate form
         if (!title.trim()) {
-            toast.error("Por favor, ingresa un título")
+            setError("Por favor, ingresa un título")
             return
         }
 
@@ -155,7 +155,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                                 </div>
                             </div>
                         )}
-                        <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageChange} />
+                        <input type="file" ref={fileInputRef} data-testid="file-input" className="hidden" accept="image/*" onChange={handleImageChange} />
                     </div>
 
                     {/* Title */}
@@ -167,7 +167,9 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                             onChange={(e) => setTitle(e)}
                             placeholder="Ingresa un título"
                             required
+                            testId="title-input"
                         />
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
                     </div>
 
                     {/* Price */}
@@ -179,8 +181,10 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                             value={price}
                             onChange={(e) => handlePriceChange(e)}
                             placeholder="0.00"
+                            testId="price-input"
                             className="font-mono"
                         />
+                        {error && <p data-testid="error" className="text-red-500 text-sm">{error}</p>}
                     </div>
                     <div className="grid gap-2">
                         <label htmlFor="edit-quantity">Cantidad</label>
@@ -191,7 +195,9 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                             onChange={handleQuantityChange}
                             placeholder="1"
                             className="font-mono"
+                            testId="quantity-input"
                         />
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
                     </div>
 
                     {/* Description */}
@@ -203,6 +209,7 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                             onChange={(e) => setDescription(e.target.value)}
                             placeholder="Ingresa una descripción"
                             className="min-h-[100px]"
+                            testId="description-input"
                         />
                     </div>
 
@@ -211,21 +218,22 @@ export function NewCardModal({ open, onOpenChange, onSave }: NewCardModalProps) 
                         <label htmlFor="status">Estado</label>
                         <Select<LabelValue>
                             placeholder="Selecciona un estado"
+                            dataTestId="status-select"
                             onChange={(e) => setStatus(e)}
                             options={STATUS_OPTIONS}
                             dark={dark}
                             value={status}
                             extractLabel={(option) => option.label}
                             extractValue={(option) => option.value} />
-
+                        {error && <p data-testid="error" className="text-red-500 text-sm">{error}</p>}
                     </div>
                 </div>
 
                 <footer className="flex justify-end gap-2">
-                    <Button type="button" variant="secondary" onClick={handleClose}>
+                    <Button type="button" testId="cancel-button" variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button type="submit" variant="primary">Guardar</Button>
+                    <Button type="submit" testId="save-button" variant="primary">Guardar</Button>
                 </footer>
             </form>
         </ModalLayout>

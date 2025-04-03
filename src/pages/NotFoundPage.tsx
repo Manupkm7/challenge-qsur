@@ -3,7 +3,7 @@ import { NotFoundLogoSvg } from "../assets/NotFound";
 const NotFoundPage = () => {
 
     return (
-        <div className='flex justify-center bg-[#222222] h-full w-full font-roboto min-h-screen'>
+        <div className='flex justify-center bg-[#222222] h-full w-full font-roboto min-h-screen' data-testid="not-found">
             <div className='flex flex-col items-center justify-center gap-[30px]'>
                 <div className='flex flex-col gap-5'>
                     <span className='text-[50px] font-bold text-center text-white/50 leading-6 h-auto'>404</span>

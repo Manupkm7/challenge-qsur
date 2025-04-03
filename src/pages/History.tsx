@@ -58,7 +58,7 @@ export const History = () => {
     }
 
     return (
-        <div className="px-[24px] py-[12px] overflow-y-auto">
+        <div className="px-[24px] py-[12px] overflow-y-auto" data-testid="history">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-6">
                 <div>
                     <h1 className="text-3xl font-bold select-none">Historial de Cambios</h1>

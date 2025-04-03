@@ -14,10 +14,10 @@ const ModalLayout = ({ children, handleToggle, title, show, width = '540' }: Mod
         <>
             {show ? (
                 <div className="fixed flex items-center justify-center inset-0 bg-[rgba(0,0,0,0.3)] w-full z-30">
-                    <div className="relative w-full px-4 py-5 bg-white rounded-lg" style={{ maxWidth: `${width}px` }}>
+                    <div className="relative w-full px-4 py-5 bg-white rounded-lg" data-testid="modal-content" style={{ maxWidth: `${width}px` }}>
                         <div className="flex items-center justify-between mb-2">
                             <div className="text-xl font-semibold">{title}</div>
-                            <CloseIcon onClick={handleToggle} className="cursor-pointer" />
+                            <CloseIcon onClick={handleToggle} className="cursor-pointer" data-testid="close-icon" />
                         </div>
                         <div>{children}</div>
                     </div>

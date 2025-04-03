@@ -1,5 +1,5 @@
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import clsx from 'clsx';
+import { clsx } from "clsx"
 
 type Props = {
     label?: string;
@@ -24,8 +24,10 @@ export const Switch = ({ label, disabled, value, onChange, className, name, id }
         disabled:bg-gray-100 disabled:cursor-not-allowed"
                 disabled={disabled}
                 checked={value}
+                data-testid={"switch-root"}
                 onCheckedChange={onChange}>
                 <SwitchPrimitive.Thumb
+                    data-testid={"switch-thumb"}
                     className="
             block w-2.5 h-2.5 rounded-full
             will-change-transform

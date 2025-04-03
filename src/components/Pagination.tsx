@@ -3,7 +3,7 @@ import { MdChevronRight as ChevronRight } from "@react-icons/all-files/md/MdChev
 import { MdChevronLeft as ChevronLeft } from "@react-icons/all-files/md/MdChevronLeft";
 import { MdMoreHoriz as MoreHorizontal } from "@react-icons/all-files/md/MdMoreHoriz";
 
-import clsx from "clsx"
+import { clsx } from "clsx"
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
     <nav
@@ -45,7 +45,7 @@ const PaginationLink = ({ className, isActive, ...props }: PaginationLinkProps) 
 PaginationLink.displayName = "PaginationLink"
 
 const PaginationPrevious = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (
-    <PaginationLink aria-label="Go to previous page" className={clsx("gap-1 px-2 flex items-center underline border-2 justify-center rounded", className)} {...props}>
+    <PaginationLink data-testid="chevron-left" aria-label="Go to previous page" className={clsx("gap-1 px-2 flex items-center underline border-2 justify-center rounded", className)} {...props}>
         <ChevronLeft className="h-4 w-4" />
         <span>Anterior</span>
     </PaginationLink>
@@ -53,7 +53,7 @@ const PaginationPrevious = ({ className, ...props }: React.ComponentProps<typeof
 PaginationPrevious.displayName = "PaginationPrevious"
 
 const PaginationNext = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (
-    <PaginationLink aria-label="Go to next page" className={clsx("gap-1 px-2 flex items-center underline border-2 justify-center rounded", className)} {...props}>
+    <PaginationLink data-testid="chevron-right" aria-label="Go to next page" className={clsx("gap-1 px-2 flex items-center underline border-2 justify-center rounded", className)} {...props}>
         <span>Siguiente</span>
         <ChevronRight className="h-4 w-4" />
     </PaginationLink>
@@ -61,7 +61,7 @@ const PaginationNext = ({ className, ...props }: React.ComponentProps<typeof Pag
 PaginationNext.displayName = "PaginationNext"
 
 const PaginationEllipsis = ({ className, ...props }: React.ComponentProps<"span">) => (
-    <span aria-hidden className={clsx("flex h-9 w-9 items-center justify-center t", className)} {...props}>
+    <span data-testid="more-horizontal" aria-hidden className={clsx("flex h-9 w-9 items-center justify-center", className)} {...props}>
         <MoreHorizontal className="h-4 w-4" />
         <span className="sr-only">More pages</span>
     </span>

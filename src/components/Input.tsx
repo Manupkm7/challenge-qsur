@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, ReactNode, useId } from 'react';
-import clsx from 'clsx';
+import { clsx } from "clsx"
 
 type Props = Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange'> & {
     value: string | number;
@@ -10,6 +10,7 @@ type Props = Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLI
     labelContent?: ReactNode;
     hasError?: boolean;
     dark?: boolean;
+    testId?: string;
 };
 
 const Input = forwardRef<HTMLInputElement, Props>(
@@ -24,6 +25,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
             placeholder,
             hasError,
             dark,
+            testId,
             ...inputProps
         },
         forwardedRef
@@ -50,6 +52,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
                     </label>
                     <div className="flex min-h-[42px] w-full items-center justify-between gap-2.5 px-4 text-sm">
                         <input
+                            data-testid={testId}
                             ref={forwardedRef}
                             className={clsx(
                                 'min-h-[44px] w-full text-sm font-light focus:outline-none active:outline-none blur:ring-0 focus:ring-0 focus-within:ring-0 focus-within:border-primary-500',

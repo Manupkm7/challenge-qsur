@@ -10,10 +10,11 @@ type Props = {
     children?: ReactNode;
     onClick?: MouseEventHandler<HTMLButtonElement>;
     hasError?: boolean;
+    testId?: string;
 };
 
 const Button = forwardRef<HTMLButtonElement, Props>((props, forwardedRef) => {
-    const { variant, isLoading, type = 'button', onClick, disabled, className, children, hasError } = props;
+    const { variant, isLoading, type = 'button', onClick, disabled, className, children, hasError, testId } = props;
 
     const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
         if (isLoading) {
@@ -27,6 +28,7 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, forwardedRef) => {
         <button
             ref={forwardedRef}
             type={type}
+            data-testid={testId}
             data-variant={variant}
             className={clsx(
                 'flex items-center justify-center gap-[10px] py-[10px] px-[20px] rounded-[8px] text-[16px] leading-[20px] border',

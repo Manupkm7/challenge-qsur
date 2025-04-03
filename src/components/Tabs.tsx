@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import * as Tabs from '@radix-ui/react-tabs';
-import clsx from "clsx";
+import { clsx } from "clsx"
 
 interface TabTitleProps {
     trigger: ReactNode;

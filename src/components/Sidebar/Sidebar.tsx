@@ -9,7 +9,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import Button from '../Button';
 import SidebarItem from './SidebarItem';
-import clsx from 'clsx';
+import { clsx } from "clsx"
 
 // Navigation items
 const navItems = [

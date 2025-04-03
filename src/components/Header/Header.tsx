@@ -87,12 +87,13 @@ export function AppHeader({ filters, onFiltersChange, onNewClick }: AppHeaderPro
                                 type="search"
                                 placeholder="Buscar..."
                                 className="w-full"
+                                testId="search-input"
                                 value={searchQuery}
                                 onChange={(value) => handleSearchChange(value)}
                             />
                         </div>
 
-                        <Button variant="primary" type="button" onClick={onNewClick}>Nuevo</Button>
+                        <Button data-testid="new-button" variant="primary" type="button" onClick={onNewClick}>Nuevo</Button>
                     </div>
                 )}
             </div>

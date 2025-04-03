@@ -143,7 +143,7 @@ export default function DashboardPage() {
     const averageSales = getAverageSalesFromJanuary()
 
     return (
-        <div className="flex-1 space-y-4 px-[12px] py-[12px] overflow-y-auto">
+        <div className="flex-1 space-y-4 px-[12px] py-[12px] overflow-y-auto" data-testid="dashboard">
             <div className="grid gap-2 grid-cols-2">
                 <Card className="bg-white" title="Ventas Totales" icon={<DollarSign className="h-4 w-4 text-muted-foreground" />}>
                     <div>

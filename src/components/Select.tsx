@@ -25,6 +25,7 @@ type SelectProps<T> = {
     classNameOption?: string;
     classNameValue?: string;
     dark?: boolean;
+    dataTestId?: string;
 };
 
 export const Select = <T,>({
@@ -46,6 +47,7 @@ export const Select = <T,>({
     classNameOption,
     classNameValue,
     dark,
+    dataTestId,
 }: SelectProps<T>) => {
     const [selectedValue, setSelectedValue] = useState<string>('');
 
@@ -68,6 +70,7 @@ export const Select = <T,>({
     return (
         <div id={id} className={`relative ${className}`}>
             <div
+                data-testid={`label`}
                 className={clsx(
                     dark ? 'bg-[#111317] text-white' : 'bg-[#FFFFFF] text-gray-500',
                     'text-[9px] leading-[12px] absolute -top-1 px-1 rounded-lg left-3.5 select-none'
@@ -76,12 +79,16 @@ export const Select = <T,>({
                 {label}
             </div>
             <SelectPrimitive.Root
+                data-testid={`${dataTestId}-root`}
                 disabled={disabled}
                 value={value ? extractValue(value) : ''}
                 onValueChange={handleChange}
                 name={name}
+
             >
                 <SelectPrimitive.SelectTrigger
+                    data-disabled={disabled}
+                    data-testid={`${dataTestId}-trigger`}
                     className={clsx(
                         'flex items-center justify-between px-4 h-[46px] gap-[5px] focus:border-[#0074B5] rounded-lg w-full outline-none placeholder-shown:text-secondary-gray-2 select-none text-sm truncate',
                         dark ? 'bg-[#111317] text-white border' : 'bg-[#FFFFFF] border',
@@ -89,15 +96,15 @@ export const Select = <T,>({
                         classNameValue
                     )}
                 >
-                    <SelectPrimitive.Value>{value ? extractLabel(value) : placeholder}</SelectPrimitive.Value>
-                    <SelectPrimitive.Icon>
+                    <SelectPrimitive.Value data-testid={`${dataTestId}-value`}>{value ? extractLabel(value) : placeholder}</SelectPrimitive.Value>
+                    <SelectPrimitive.Icon data-testid={`${dataTestId}-icon`}>
                         <ArrowDownIcon color={dark ? 'white' : 'black'} width={9.26} height={4.42} />
                     </SelectPrimitive.Icon>
                 </SelectPrimitive.SelectTrigger>
 
-                <SelectPrimitive.Portal>
-                    <SelectPrimitive.Content position={position} className={contentClass} style={{ width: 'var(--radix-select-trigger-width)' }}>
-                        <SelectPrimitive.Viewport className='p-[2.5px]' contextMenu='px-[5px]'>
+                <SelectPrimitive.Portal data-testid={`${dataTestId}-portal`}>
+                    <SelectPrimitive.Content data-testid={`${dataTestId}-content`} position={position} className={contentClass} style={{ width: 'var(--radix-select-trigger-width)' }}>
+                        <SelectPrimitive.Viewport data-testid={`${dataTestId}-viewport`} className='p-[2.5px]' contextMenu='px-[5px]'>
                             <div className='flex items-center' onKeyDown={(e) => e.stopPropagation()}>
                                 {activeFilter ? (
                                     <div className='flex items-center border-b w-full' onKeyDown={(e) => e.stopPropagation()}>
@@ -119,6 +126,7 @@ export const Select = <T,>({
                                 const optionValue = extractValue(option);
                                 return (
                                     <SelectPrimitive.Item
+                                        data-testid={`${dataTestId}-item`}
                                         key={optionValue}
                                         value={optionValue}
                                         className={clsx(
@@ -129,7 +137,7 @@ export const Select = <T,>({
                                                 : 'bg-[#FFFFFF] focus:bg-[#00000010]'
                                         )}
                                     >
-                                        <SelectPrimitive.ItemText>{optionLabel}</SelectPrimitive.ItemText>
+                                        <SelectPrimitive.ItemText data-testid={`${dataTestId}-item-text`}>{optionLabel}</SelectPrimitive.ItemText>
                                     </SelectPrimitive.Item>
                                 );
                             })}
