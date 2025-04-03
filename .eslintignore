@@ -1,7 +1,8 @@
-node_modules
-dist
+node_modules/
+dist/
 env-config.js
 vite.config.ts
 src/vite-env.d.ts
 public/openvidu-*
 public/debugout-*
+coverage/

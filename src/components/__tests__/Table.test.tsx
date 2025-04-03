@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import Table from '../Table'
+import { render, screen } from '@testing-library/react';
+import Table from '../Table';
 
 describe('Table Components', () => {
   describe('Table', () => {
@@ -12,14 +12,14 @@ describe('Table Components', () => {
             </tr>
           </tbody>
         </Table>
-      )
-      
-      const table = screen.getByRole('table')
-      expect(table).toBeInTheDocument()
-      expect(table).toHaveClass('w-full')
-      expect(table).toHaveClass('caption-bottom')
-      expect(table).toHaveClass('text-sm')
-    })
+      );
+
+      const table = screen.getByRole('table');
+      expect(table).toBeInTheDocument();
+      expect(table).toHaveClass('w-full');
+      expect(table).toHaveClass('caption-bottom');
+      expect(table).toHaveClass('text-sm');
+    });
 
     it('aplica clases personalizadas', () => {
       render(
@@ -30,11 +30,11 @@ describe('Table Components', () => {
             </tr>
           </tbody>
         </Table>
-      )
-      
-      const table = screen.getByRole('table')
-      expect(table).toHaveClass('custom-class')
-    })
+      );
+
+      const table = screen.getByRole('table');
+      expect(table).toHaveClass('custom-class');
+    });
 
     it('renderiza con un contenedor con overflow', () => {
       render(
@@ -45,14 +45,14 @@ describe('Table Components', () => {
             </tr>
           </tbody>
         </Table>
-      )
-      
-      const container = screen.getByRole('table').parentElement
-      expect(container).toHaveClass('relative')
-      expect(container).toHaveClass('w-full')
-      expect(container).toHaveClass('overflow-auto')
-    })
-  })
+      );
+
+      const container = screen.getByRole('table').parentElement;
+      expect(container).toHaveClass('relative');
+      expect(container).toHaveClass('w-full');
+      expect(container).toHaveClass('overflow-auto');
+    });
+  });
 
   describe('Table.Header', () => {
     it('renderiza correctamente con las propiedades básicas', () => {
@@ -64,12 +64,12 @@ describe('Table Components', () => {
             </tr>
           </Table.Header>
         </Table>
-      )
-      
-      const thead = screen.getByRole('rowgroup')
-      expect(thead).toBeInTheDocument()
-      expect(thead).toHaveClass('[&_tr]:border-b')
-    })
+      );
+
+      const thead = screen.getByRole('rowgroup');
+      expect(thead).toBeInTheDocument();
+      expect(thead).toHaveClass('[&_tr]:border-b');
+    });
 
     it('aplica clases personalizadas', () => {
       render(
@@ -80,12 +80,12 @@ describe('Table Components', () => {
             </tr>
           </Table.Header>
         </Table>
-      )
-      
-      const thead = screen.getByRole('rowgroup')
-      expect(thead).toHaveClass('custom-class')
-    })
-  })
+      );
+
+      const thead = screen.getByRole('rowgroup');
+      expect(thead).toHaveClass('custom-class');
+    });
+  });
 
   describe('Table.Body', () => {
     it('renderiza correctamente con las propiedades básicas', () => {
@@ -97,12 +97,12 @@ describe('Table Components', () => {
             </tr>
           </Table.Body>
         </Table>
-      )
-      
-      const tbody = screen.getByRole('rowgroup')
-      expect(tbody).toBeInTheDocument()
-      expect(tbody).toHaveClass('[&_tr:last-child]:border-0')
-    })
+      );
+
+      const tbody = screen.getByRole('rowgroup');
+      expect(tbody).toBeInTheDocument();
+      expect(tbody).toHaveClass('[&_tr:last-child]:border-0');
+    });
 
     it('aplica clases personalizadas', () => {
       render(
@@ -113,12 +113,12 @@ describe('Table Components', () => {
             </tr>
           </Table.Body>
         </Table>
-      )
-      
-      const tbody = screen.getByRole('rowgroup')
-      expect(tbody).toHaveClass('custom-class')
-    })
-  })
+      );
+
+      const tbody = screen.getByRole('rowgroup');
+      expect(tbody).toHaveClass('custom-class');
+    });
+  });
 
   describe('Table.Footer', () => {
     it('renderiza correctamente con las propiedades básicas', () => {
@@ -130,14 +130,14 @@ describe('Table Components', () => {
             </tr>
           </Table.Footer>
         </Table>
-      )
-      
-      const tfoot = screen.getByRole('rowgroup')
-      expect(tfoot).toBeInTheDocument()
-      expect(tfoot).toHaveClass('bg-primary')
-      expect(tfoot).toHaveClass('font-medium')
-      expect(tfoot).toHaveClass('text-primary-foreground')
-    })
+      );
+
+      const tfoot = screen.getByRole('rowgroup');
+      expect(tfoot).toBeInTheDocument();
+      expect(tfoot).toHaveClass('bg-primary');
+      expect(tfoot).toHaveClass('font-medium');
+      expect(tfoot).toHaveClass('text-primary-foreground');
+    });
 
     it('aplica clases personalizadas', () => {
       render(
@@ -148,12 +148,12 @@ describe('Table Components', () => {
             </tr>
           </Table.Footer>
         </Table>
-      )
-      
-      const tfoot = screen.getByRole('rowgroup')
-      expect(tfoot).toHaveClass('custom-class')
-    })
-  })
+      );
+
+      const tfoot = screen.getByRole('rowgroup');
+      expect(tfoot).toHaveClass('custom-class');
+    });
+  });
 
   describe('Table.Row', () => {
     it('renderiza correctamente con las propiedades básicas', () => {
@@ -165,15 +165,15 @@ describe('Table Components', () => {
             </Table.Row>
           </Table.Body>
         </Table>
-      )
-      
-      const tr = screen.getByRole('row')
-      expect(tr).toBeInTheDocument()
-      expect(tr).toHaveClass('border-b')
-      expect(tr).toHaveClass('transition-colors')
-      expect(tr).toHaveClass('hover:bg-muted/50')
-      expect(tr).toHaveClass('data-[state=selected]:bg-muted')
-    })
+      );
+
+      const tr = screen.getByRole('row');
+      expect(tr).toBeInTheDocument();
+      expect(tr).toHaveClass('border-b');
+      expect(tr).toHaveClass('transition-colors');
+      expect(tr).toHaveClass('hover:bg-muted/50');
+      expect(tr).toHaveClass('data-[state=selected]:bg-muted');
+    });
 
     it('aplica clases personalizadas', () => {
       render(
@@ -184,12 +184,12 @@ describe('Table Components', () => {
             </Table.Row>
           </Table.Body>
         </Table>
-      )
-      
-      const tr = screen.getByRole('row')
-      expect(tr).toHaveClass('custom-class')
-    })
-  })
+      );
+
+      const tr = screen.getByRole('row');
+      expect(tr).toHaveClass('custom-class');
+    });
+  });
 
   describe('Table.Head', () => {
     it('renderiza correctamente con las propiedades básicas', () => {
@@ -201,18 +201,18 @@ describe('Table Components', () => {
             </tr>
           </Table.Header>
         </Table>
-      )
-      
-      const th = screen.getByRole('columnheader')
-      expect(th).toBeInTheDocument()
-      expect(th).toHaveClass('h-12')
-      expect(th).toHaveClass('px-4')
-      expect(th).toHaveClass('text-left')
-      expect(th).toHaveClass('align-middle')
-      expect(th).toHaveClass('font-medium')
-      expect(th).toHaveClass('text-muted-foreground')
-      expect(th).toHaveClass('[&:has([role=checkbox])]:pr-0')
-    })
+      );
+
+      const th = screen.getByRole('columnheader');
+      expect(th).toBeInTheDocument();
+      expect(th).toHaveClass('h-12');
+      expect(th).toHaveClass('px-4');
+      expect(th).toHaveClass('text-left');
+      expect(th).toHaveClass('align-middle');
+      expect(th).toHaveClass('font-medium');
+      expect(th).toHaveClass('text-muted-foreground');
+      expect(th).toHaveClass('[&:has([role=checkbox])]:pr-0');
+    });
 
     it('aplica clases personalizadas', () => {
       render(
@@ -223,12 +223,12 @@ describe('Table Components', () => {
             </tr>
           </Table.Header>
         </Table>
-      )
-      
-      const th = screen.getByRole('columnheader')
-      expect(th).toHaveClass('custom-class')
-    })
-  })
+      );
+
+      const th = screen.getByRole('columnheader');
+      expect(th).toHaveClass('custom-class');
+    });
+  });
 
   describe('Table.Cell', () => {
     it('renderiza correctamente con las propiedades básicas', () => {
@@ -240,14 +240,14 @@ describe('Table Components', () => {
             </Table.Row>
           </Table.Body>
         </Table>
-      )
-      
-      const td = screen.getByRole('cell')
-      expect(td).toBeInTheDocument()
-      expect(td).toHaveClass('p-4')
-      expect(td).toHaveClass('align-middle')
-      expect(td).toHaveClass('[&:has([role=checkbox])]:pr-0')
-    })
+      );
+
+      const td = screen.getByRole('cell');
+      expect(td).toBeInTheDocument();
+      expect(td).toHaveClass('p-4');
+      expect(td).toHaveClass('align-middle');
+      expect(td).toHaveClass('[&:has([role=checkbox])]:pr-0');
+    });
 
     it('aplica clases personalizadas', () => {
       render(
@@ -258,12 +258,12 @@ describe('Table Components', () => {
             </Table.Row>
           </Table.Body>
         </Table>
-      )
-      
-      const td = screen.getByRole('cell')
-      expect(td).toHaveClass('custom-class')
-    })
-  })
+      );
+
+      const td = screen.getByRole('cell');
+      expect(td).toHaveClass('custom-class');
+    });
+  });
 
   describe('Table.Caption', () => {
     it('renderiza correctamente con las propiedades básicas', () => {
@@ -276,14 +276,14 @@ describe('Table Components', () => {
             </tr>
           </tbody>
         </Table>
-      )
-      
-      const caption = screen.getByRole('caption')
-      expect(caption).toBeInTheDocument()
-      expect(caption).toHaveClass('mt-4')
-      expect(caption).toHaveClass('text-sm')
-      expect(caption).toHaveClass('text-muted-foreground')
-    })
+      );
+
+      const caption = screen.getByRole('caption');
+      expect(caption).toBeInTheDocument();
+      expect(caption).toHaveClass('mt-4');
+      expect(caption).toHaveClass('text-sm');
+      expect(caption).toHaveClass('text-muted-foreground');
+    });
 
     it('aplica clases personalizadas', () => {
       render(
@@ -295,10 +295,10 @@ describe('Table Components', () => {
             </tr>
           </tbody>
         </Table>
-      )
-      
-      const caption = screen.getByRole('caption')
-      expect(caption).toHaveClass('custom-class')
-    })
-  })
-}) 
+      );
+
+      const caption = screen.getByRole('caption');
+      expect(caption).toHaveClass('custom-class');
+    });
+  });
+});

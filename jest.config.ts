@@ -1,13 +1,13 @@
-import type { Config } from 'jest'
-import { pathsToModuleNameMapper } from 'ts-jest'
-import { compilerOptions } from './tsconfig.json'
+import type { Config } from 'jest';
+import { pathsToModuleNameMapper } from 'ts-jest';
+import { compilerOptions } from './tsconfig.json';
 
 const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   testMatch: ['**/__tests__/**/*.test.tsx'],
@@ -25,7 +25,7 @@ const config: Config = {
     '!src/pages/__tests__/**/*',
     '!src/pages/*',
     '!src/store/**/*',
-    '!src/utils/test-utils.tsx'
+    '!src/utils/test-utils.tsx',
   ],
   coverageThreshold: {
     global: {
@@ -35,6 +35,6 @@ const config: Config = {
       statements: 90,
     },
   },
-}
+};
 
-export default config 
+export default config;

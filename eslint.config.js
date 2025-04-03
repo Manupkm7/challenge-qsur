@@ -23,13 +23,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'react-hooks',
-    'prettier',
-    'import',
-  ],
+  plugins: ['react', '@typescript-eslint', 'react-hooks', 'prettier', 'import'],
   rules: {
     // React
     'react/react-in-jsx-scope': 'off',
@@ -38,36 +32,51 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-uses-react': 'off',
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx', '.jsx'] }],
-    'react/self-closing-comp': ['error', {
-      component: true,
-      html: true,
-    }],
+    'react/self-closing-comp': [
+      'error',
+      {
+        component: true,
+        html: true,
+      },
+    ],
     'react/jsx-boolean-value': ['error', 'never'],
     'react/jsx-curly-brace-presence': ['error', 'never'],
     'react/jsx-no-duplicate-props': 'error',
     'react/jsx-no-useless-fragment': 'error',
     'react/jsx-pascal-case': 'error',
-    'react/jsx-sort-props': ['warn', {
-      callbacksLast: true,
-      shorthandFirst: true,
-    }],
+    'react/jsx-sort-props': [
+      'warn',
+      {
+        callbacksLast: true,
+        shorthandFirst: true,
+      },
+    ],
 
     // TypeScript
-    '@typescript-eslint/explicit-function-return-type': ['warn', {
-      allowExpressions: true,
-      allowTypedFunctionExpressions: true,
-    }],
+    '@typescript-eslint/explicit-function-return-type': [
+      'warn',
+      {
+        allowExpressions: true,
+        allowTypedFunctionExpressions: true,
+      },
+    ],
     '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/no-unused-vars': ['error', {
-      argsIgnorePattern: '^_',
-      varsIgnorePattern: '^_',
-      caughtErrorsIgnorePattern: '^_',
-    }],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
     '@typescript-eslint/no-non-null-assertion': 'warn',
-    '@typescript-eslint/consistent-type-imports': ['error', {
-      prefer: 'type-imports',
-      fixStyle: 'inline-type-imports',
-    }],
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      {
+        prefer: 'type-imports',
+        fixStyle: 'inline-type-imports',
+      },
+    ],
     '@typescript-eslint/no-empty-interface': 'error',
     '@typescript-eslint/no-empty-function': 'warn',
     '@typescript-eslint/no-floating-promises': 'error',
@@ -78,23 +87,17 @@ module.exports = {
     '@typescript-eslint/unified-signatures': 'error',
 
     // Import
-    'import/order': ['error', {
-      'groups': [
-        'builtin',
-        'external',
-        'internal',
-        'parent',
-        'sibling',
-        'index',
-        'object',
-        'type',
-      ],
-      'newlines-between': 'always',
-      'alphabetize': {
-        'order': 'asc',
-        'caseInsensitive': true,
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
       },
-    }],
+    ],
     'import/no-duplicates': 'error',
     'import/no-unresolved': 'error',
     'import/no-cycle': 'error',
@@ -108,12 +111,12 @@ module.exports = {
     'no-unused-vars': 'off', // Desactivado en favor de la regla de TypeScript
     'prefer-const': 'error',
     'no-var': 'error',
-    'eqeqeq': ['error', 'always'],
-    'curly': ['error', 'all'],
+    eqeqeq: ['error', 'always'],
+    curly: ['error', 'all'],
     'brace-style': ['error', '1tbs'],
     'comma-dangle': ['error', 'always-multiline'],
-    'semi': ['error', 'always'],
-    'quotes': ['error', 'single', { avoidEscape: true }],
+    semi: ['error', 'always'],
+    quotes: ['error', 'single', { avoidEscape: true }],
   },
   settings: {
     react: {

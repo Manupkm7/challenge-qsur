@@ -1,10 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
-import { BrowserRouter } from 'react-router-dom';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { useSales } from '@/hooks/useSales';
-import { useHistoryLogger } from '@/hooks/useHistoryStore';
 
 // Mock de Recoil
 jest.mock('recoil', () => ({
@@ -12,7 +8,7 @@ jest.mock('recoil', () => ({
   RecoilRoot: ({ children }: { children: React.ReactNode }) => children,
   useRecoilState: jest.fn(),
   useRecoilValue: jest.fn(),
-  useSetRecoilState: jest.fn()
+  useSetRecoilState: jest.fn(),
 }));
 
 // Mock de react-router-dom
@@ -20,13 +16,13 @@ jest.mock('react-router-dom', () => {
   const originalModule = jest.requireActual('react-router-dom');
   return {
     ...originalModule,
-    useLocation: jest.fn().mockReturnValue({ pathname: '/' })
+    useLocation: jest.fn().mockReturnValue({ pathname: '/' }),
   };
 });
 
 // Mock de useSales
 jest.mock('@/hooks/useSales', () => ({
-  useSales: jest.fn()
+  useSales: jest.fn(),
 }));
 
 // Mock de react-toastify
@@ -35,19 +31,19 @@ jest.mock('react-toastify', () => ({
     error: jest.fn(),
     success: jest.fn(),
     info: jest.fn(),
-    warning: jest.fn()
-  }
+    warning: jest.fn(),
+  },
 }));
 
 // Mock de useHistoryLogger
 jest.mock('@/hooks/useHistoryStore', () => ({
-  useHistoryLogger: jest.fn()
+  useHistoryLogger: jest.fn(),
 }));
 
 // Función para configurar los mocks de Recoil
 export const setupRecoilMocks = (mocks: Record<string, any>) => {
   const { useRecoilState, useRecoilValue } = require('recoil');
-  
+
   // Configurar useRecoilState
   (useRecoilState as jest.Mock).mockImplementation((atom) => {
     if (mocks[atom.key]) {
@@ -55,7 +51,7 @@ export const setupRecoilMocks = (mocks: Record<string, any>) => {
     }
     return [null, jest.fn()];
   });
-  
+
   // Configurar useRecoilValue
   (useRecoilValue as jest.Mock).mockImplementation((atom) => {
     if (mocks[atom.key]) {
@@ -90,9 +86,5 @@ export const TestWrapper: React.FC<{ children: React.ReactNode }> = ({ children 
 
 // Función de renderizado personalizada para tests
 export const renderWithRecoil = (ui: React.ReactElement) => {
-  return render(
-    <TestWrapper>
-      {ui}
-    </TestWrapper>
-  );
-}; 
+  return render(<TestWrapper>{ui}</TestWrapper>);
+};

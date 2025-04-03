@@ -1,4 +1,4 @@
-import './index.css'
+import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import ReactDOM from 'react-dom/client';
@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
     <RecoilRoot>
       <ToastContainer
-        position='top-center'
+        position="top-center"
         autoClose={2000}
         hideProgressBar={true}
         newestOnTop
@@ -19,9 +19,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         rtl={false}
         pauseOnFocusLoss
         draggable={true}
-        theme='colored'
+        theme="colored"
       />
       <Landing />
     </RecoilRoot>
-  </BrowserRouter>,
+  </BrowserRouter>
 );
