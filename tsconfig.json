@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
@@ -9,8 +8,9 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -32,7 +32,7 @@
     }
   },
   "include": ["src", ".eslintrc.cjs"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "extends": ["./tsconfig.node.json"],
   "plugins": [
     {
       "name": "typescript-styled-plugin"
