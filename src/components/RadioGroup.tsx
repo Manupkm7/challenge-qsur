@@ -133,7 +133,7 @@ export const RadixRadioGroup = ({ value, items, onChange = () => { } }: RadixRad
 
     return (
         <RadioGroupRoot name={'radio-group'} onValueChange={handleValueChange} className={`flex flex-row gap-20px w-full`}>
-            <div className="w-full px-4 py-1 mt-1 border-l-2 border-[#279AF1]">
+            <div className="w-full px-4 py-1 mt-1">
                 <div className="-my-3">
                     {items.map(({ value, label, disabled }, index) => (
                         <RadioOption key={index}>

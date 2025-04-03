@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/22</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>3/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/22</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -208,20 +208,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -241,7 +238,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -314,18 +314,18 @@ const navItems = [
     },
 ]
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >AppSidebar(</span>) {
-    const [isSidebarOpen, setIsSidebarOpen] = <span class="cstat-no" title="statement not covered" >useRecoilState(isSidebarOpenAtom);</span>
-    const dark = <span class="cstat-no" title="statement not covered" >useRecoilValue(darkModeAtom);</span>
-    const [, setIsSidebarOpenStored] = <span class="cstat-no" title="statement not covered" >useLocalStorage&lt;boolean&gt;('isSidebarOpen', !isSidebarOpen);</span>
+export function AppSidebar() {
+    const [isSidebarOpen, setIsSidebarOpen] = useRecoilState(isSidebarOpenAtom);
+    const dark = useRecoilValue(darkModeAtom);
+    const [, setIsSidebarOpenStored] = useLocalStorage&lt;boolean&gt;('isSidebarOpen', !isSidebarOpen);
 &nbsp;
 &nbsp;
-    const handleOnClickSidebar = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        setIsSidebarOpen(!isSidebarOpen);</span>
-<span class="cstat-no" title="statement not covered" >        setIsSidebarOpenStored(!isSidebarOpen);</span>
+    const handleOnClickSidebar = () =&gt; {
+        setIsSidebarOpen(!isSidebarOpen);
+        setIsSidebarOpenStored(!isSidebarOpen);
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+    return (
         &lt;aside className={`bg-white transition-all ${isSidebarOpen ? 'w-[280px]' : 'w-[80px]'}`}&gt;
             &lt;section className={`h-full flex flex-col justify-between items-center p-[10px] gap-y-[10px] border-r`}&gt;
                 &lt;div className='h-full flex flex-col gap-y-[10px] overflow-y-auto overflow-x-hidden'&gt;
@@ -337,7 +337,7 @@ export function <span class="fstat-no" title="function not covered" >AppSidebar(
                             variant='secondary'
                             className={`w-[26px] max-h-[26px] flex items-center justify-center rounded-full cursor-pointer bg-transparent border-none`}
                             onClick={handleOnClickSidebar}
-                            data-testid='sidebar-handler-btn'
+                            testId='sidebar-handler-btn'
                         &gt;
                             &lt;MenuIcon color='#279AF1' size='20' strokeWidth='1' /&gt;
                         &lt;/Button&gt;
@@ -347,8 +347,8 @@ export function <span class="fstat-no" title="function not covered" >AppSidebar(
                         {/* Navigation Items */}
                         &lt;section className={`flex flex-col font-roboto w-full min-h-max gap-[5px] ${isSidebarOpen ? 'w-full items-start' : 'items-center'
                             }`}&gt;
-                            {navItems.map(<span class="fstat-no" title="function not covered" >(i</span>tem, index) =&gt; {
-<span class="cstat-no" title="statement not covered" >                                return (</span>
+                            {navItems.map((item, index) =&gt; {
+                                return (
                                     &lt;SidebarItem
                                         key={index}
                                         route={item.url}
@@ -391,7 +391,7 @@ export function <span class="fstat-no" title="function not covered" >AppSidebar(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-03T02:59:31.298Z
+                at 2025-04-03T17:12:03.965Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

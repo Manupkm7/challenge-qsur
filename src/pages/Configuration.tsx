@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 import Button from "@/components/Button"
 import { Card } from "@/components/Cards/Card"
-import { RadioButton } from "@/components/RadioGroup"
+import { RadioButton, RadixRadioGroup } from "@/components/RadioGroup"
 import { FaGlobe as Globe } from "@react-icons/all-files/fa/FaGlobe";
 import { FaMoon as Moon } from "@react-icons/all-files/fa/FaMoon";
 import { FaSun as Sun } from "@react-icons/all-files/fa/FaSun";
@@ -67,8 +67,10 @@ export const SettingsPage = () => {
                 <Card title="Idioma" description="Selecciona el idioma de la interfaz">
                     <div className="space-y-4">
                         <div className="mt-6 flex flex-col gap-4">
-                            <RadioButton value={language === "es"} onChange={() => setLanguage("es")} ><label>Español</label></RadioButton>
-                            <RadioButton value={language === "en"} onChange={() => setLanguage("en")} ><label>Ingles</label></RadioButton>
+                            <RadixRadioGroup value={language} onChange={handleLanguageChange} items={[
+                                { value: "es", label: "Español" },
+                                { value: "en", label: "Ingles" }
+                            ]} />
 
                             <div className="flex flex-col gap-2 w-[350px]">
                                 <Button variant="secondary" className="flex items-center gap-2">

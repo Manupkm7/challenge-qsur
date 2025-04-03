@@ -26,6 +26,24 @@ type EditItemModalProps = {
     onDelete: (id: number) => void
 }
 
+type ErrorMap = {
+    title: string
+    price: string
+    quantity: string
+    description: string
+    status: string
+    image: string
+}
+
+const errorMap = {
+    title: "",
+    price: "",
+    quantity: "",
+    description: "",
+    status: "",
+    image: ""
+}
+
 export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: EditItemModalProps) {
     const dark = useRecoilValue(darkModeAtom);
     const [price, setPrice] = useState<string>("");
@@ -35,8 +53,15 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [quantity, setQuantity] = useState<string>("1")
-    const [error, setError] = useState<string | null>(null)
-
+    const [error, setError] = useState<ErrorMap>({
+        title: "",
+        price: "",
+        quantity: "",
+        description: "",
+        status: "",
+        image: ""
+    })
+    const [loading, setLoading] = useState(false)
 
     // Update form when card changes
     useEffect(() => {
@@ -57,6 +82,63 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
         }
     }, [status])
 
+    const validateForm = (): boolean => {
+        setLoading(true)
+        const newErrors: ErrorMap = { ...errorMap }
+        let isValid = true
+
+        // Validar título
+        if (!title.trim()) {
+            newErrors.title = "El título es requerido"
+            isValid = false
+        } else if (title.length < 3) {
+            newErrors.title = "El título debe tener al menos 3 caracteres"
+            isValid = false
+        }
+
+        // Validar precio
+        if (!price.trim()) {
+            newErrors.price = "El precio es requerido"
+            isValid = false
+        } else if (isNaN(Number(price)) || Number(price) <= 0) {
+            newErrors.price = "El precio debe ser un número mayor a 0"
+            isValid = false
+        }
+
+        // Validar cantidad
+        if (!quantity.trim()) {
+            newErrors.quantity = "La cantidad es requerida"
+            isValid = false
+        } else if (isNaN(Number(quantity)) || Number(quantity) < 0) {
+            newErrors.quantity = "La cantidad debe ser un número mayor o igual a 0"
+            isValid = false
+        }
+
+        // Validar descripción
+        if (!description.trim()) {
+            newErrors.description = "La descripción es requerida"
+            isValid = false
+        } else if (description.length < 10) {
+            newErrors.description = "La descripción debe tener al menos 10 caracteres"
+            isValid = false
+        }
+
+        // Validar estado
+        if (!status.value) {
+            newErrors.status = "El estado es requerido"
+            isValid = false
+        }
+
+        // Validar imagen
+        if (!imagePreview) {
+            newErrors.image = "La imagen es requerida"
+            isValid = false
+        }
+
+        setError(newErrors)
+        setLoading(false)
+        return isValid
+    }
 
     const handleImageClick = () => {
         fileInputRef.current?.click()
@@ -69,12 +151,14 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
         // Check if file is an image
         if (!file.type.startsWith("image/")) {
             toast.error("Por favor, selecciona una imagen válida")
+            setError({ ...error, image: "Por favor, selecciona una imagen válida" })
             return
         }
 
         // Check file size (max 5MB)
         if (file.size > 5 * 1024 * 1024) {
             toast.error("La imagen es demasiado grande. El tamaño máximo es 5MB.")
+            setError({ ...error, image: "La imagen es demasiado grande. El tamaño máximo es 5MB." })
             return
         }
 
@@ -82,6 +166,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
         reader.onload = (event) => {
             const result = event.target?.result as string
             setImagePreview(result)
+            setError({ ...error, image: "" })
         }
         reader.readAsDataURL(file)
     }
@@ -91,14 +176,13 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
         if (fileInputRef.current) {
             fileInputRef.current.value = ""
         }
+        setError({ ...error, image: "La imagen es requerida" })
     }
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
 
-        // Validate form
-        if (!title.trim()) {
-            setError("Por favor, ingresa un título")
+        if (!validateForm()) {
             return
         }
 
@@ -124,6 +208,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
         setDescription("")
         setStatus({ label: "Activo", value: "active" })
         setImagePreview(null)
+        setError(errorMap)
         if (fileInputRef.current) {
             fileInputRef.current.value = ""
         }
@@ -147,14 +232,23 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
         // Only allow numbers and decimal point
         const value = num.replace(/[^0-9.]/g, "")
         setPrice(value)
+        if (value && (isNaN(Number(value)) || Number(value) <= 0)) {
+            setError({ ...error, price: "El precio debe ser un número mayor a 0" })
+        } else {
+            setError({ ...error, price: "" })
+        }
     }
 
     const handleQuantityChange = (num: string) => {
         // Only allow positive integers
         const value = num.replace(/[^0-9]/g, "")
         setQuantity(value)
+        if (value && (isNaN(Number(value)) || Number(value) < 0)) {
+            setError({ ...error, quantity: "La cantidad debe ser un número mayor o igual a 0" })
+        } else {
+            setError({ ...error, quantity: "" })
+        }
     }
-
 
     if (!card) return null
 
@@ -193,6 +287,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             </div>
                         )}
                         <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageChange} />
+                        {error.image && <p className="text-red-500 text-sm mt-1">{error.image}</p>}
                     </div>
 
                     {/* Title */}
@@ -201,14 +296,21 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                         <Input
                             id="title"
                             value={title}
-                            onChange={(e) => setTitle(e)}
+                            onChange={(e) => {
+                                setTitle(e)
+                                if (e.length < 3) {
+                                    setError({ ...error, title: "El título debe tener al menos 3 caracteres" })
+                                } else {
+                                    setError({ ...error, title: "" })
+                                }
+                            }}
                             placeholder="Ingresa un título"
                             required
                             testId="title-input"
                         />
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
-
+                        {error.title && <p className="text-red-500 text-sm">{error.title}</p>}
                     </div>
+
                     {/* Price */}
                     <div className="grid gap-2">
                         <label htmlFor="price">Precio</label>
@@ -221,9 +323,9 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             testId="price-input"
                             className="font-mono"
                         />
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
-
+                        {error.price && <p className="text-red-500 text-sm">{error.price}</p>}
                     </div>
+
                     {/* Quantity */}
                     <div className="grid gap-2">
                         <label htmlFor="edit-quantity">Cantidad</label>
@@ -236,8 +338,7 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                             className="font-mono"
                             testId="quantity-input"
                         />
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
-
+                        {error.quantity && <p className="text-red-500 text-sm">{error.quantity}</p>}
                     </div>
 
                     {/* Description */}
@@ -246,13 +347,19 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                         <Textarea
                             id="description"
                             value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            onChange={(e) => {
+                                setDescription(e.target.value)
+                                if (e.target.value.length < 10) {
+                                    setError({ ...error, description: "La descripción debe tener al menos 10 caracteres" })
+                                } else {
+                                    setError({ ...error, description: "" })
+                                }
+                            }}
                             placeholder="Ingresa una descripción"
                             className="min-h-[100px]"
                             testId="description-input"
                         />
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
-
+                        {error.description && <p className="text-red-500 text-sm">{error.description}</p>}
                     </div>
 
                     {/* Status */}
@@ -260,32 +367,32 @@ export function EditItemModal({ open, onOpenChange, card, onSave, onDelete }: Ed
                         <label htmlFor="status">Estado</label>
                         <Select<LabelValue>
                             placeholder="Selecciona un estado"
-                            onChange={(e) => setStatus(e)}
+                            onChange={(e) => {
+                                setStatus(e)
+                                setError({ ...error, status: "" })
+                            }}
                             options={STATUS_OPTIONS}
                             data-testid="status-select"
                             dark={dark}
                             value={status}
                             extractLabel={(option) => option.label}
                             extractValue={(option) => option.value} />
-                        {error && <p className="text-red-500 text-sm">{error}</p>}
-
+                        {error.status && <p className="text-red-500 text-sm">{error.status}</p>}
                     </div>
                 </div>
 
                 <footer className="flex gap-2 justify-between items-center">
-                    <Button type="button" testId="delete-button" variant="primary" className="bg-red-500" onClick={handleDelete}>
+                    <Button type="button" testId="delete-button" variant="primary" className="bg-red-500" onClick={handleDelete} isLoading={loading} disabled={loading}>
                         Eliminar
                     </Button>
                     <div className="flex gap-2 items-center">
-                        <Button type="button" testId="cancel-button" variant="secondary" onClick={handleClose}>
+                        <Button type="button" testId="cancel-button" variant="secondary" onClick={handleClose} isLoading={loading} disabled={loading}>
                             Cancelar
                         </Button>
-                        <Button type="submit" testId="save-button" variant="primary">Guardar</Button>
+                        <Button type="submit" testId="save-button" variant="primary" disabled={loading} isLoading={loading}>Guardar</Button>
                     </div>
-
                 </footer>
             </form>
         </ModalLayout>
-
     )
 }

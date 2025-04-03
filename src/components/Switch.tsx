@@ -24,6 +24,7 @@ export const Switch = ({ label, disabled, value, onChange, className, name, id }
         disabled:bg-gray-100 disabled:cursor-not-allowed"
                 disabled={disabled}
                 checked={value}
+                data-disabled={disabled}
                 data-testid={"switch-root"}
                 onCheckedChange={onChange}>
                 <SwitchPrimitive.Thumb

@@ -118,7 +118,7 @@ export const History = () => {
             </div>
 
             {filteredEvents.length === 0 ? (
-                <div className="flex flex-col items-center justify-center p-8 text-center border rounded-lg">
+                <div className="flex flex-col items-center justify-center p-8 text-center border rounded-lg" data-testid="empty-state">
                     <h2 className="text-xl font-semibold">No hay eventos en el historial</h2>
                     <p className="text-muted-foreground mt-2">
                         {events.length === 0

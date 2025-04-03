@@ -1,6 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
+import { BrowserRouter } from 'react-router-dom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSales } from '@/hooks/useSales';
+import { useHistoryLogger } from '@/hooks/useHistoryStore';
 
 // Mock de Recoil
 jest.mock('recoil', () => ({
@@ -22,11 +26,7 @@ jest.mock('react-router-dom', () => {
 
 // Mock de useSales
 jest.mock('@/hooks/useSales', () => ({
-  useSales: () => ({
-    markAsSold: jest.fn(),
-    updateSoldItemQuantity: jest.fn(),
-    getAverageSalesFromJanuary: jest.fn().mockReturnValue(0)
-  })
+  useSales: jest.fn()
 }));
 
 // Mock de react-toastify
@@ -41,12 +41,7 @@ jest.mock('react-toastify', () => ({
 
 // Mock de useHistoryLogger
 jest.mock('@/hooks/useHistoryStore', () => ({
-  useHistoryLogger: () => ({
-    logCardCreation: jest.fn(),
-    logCardUpdate: jest.fn(),
-    logCardDeletion: jest.fn(),
-    logItemSold: jest.fn()
-  })
+  useHistoryLogger: jest.fn()
 }));
 
 // Función para configurar los mocks de Recoil

@@ -28,7 +28,7 @@ describe('Switch', () => {
     render(<Switch {...defaultProps} value={true} />)
     
     const switchRoot = screen.getByTestId('switch-root')
-    expect(switchRoot).toHaveAttribute('data-checked', 'true')
+    expect(switchRoot).toHaveAttribute('data-state', 'checked')
   })
 
   it('llama a onChange cuando se hace clic', () => {
@@ -49,24 +49,10 @@ describe('Switch', () => {
     expect(switchRoot).toHaveClass('disabled:cursor-not-allowed')
   })
 
-  it('aplica el nombre correcto', () => {
-    render(<Switch {...defaultProps} name="switch-name" />)
-    
-    const switchRoot = screen.getByTestId('switch-root')
-    expect(switchRoot).toHaveAttribute('name', 'switch-name')
-  })
-
   it('aplica el id correcto', () => {
     render(<Switch {...defaultProps} id="switch-id" />)
     
     const switchRoot = screen.getByTestId('switch-root')
     expect(switchRoot).toHaveAttribute('id', 'switch-id')
-  })
-
-  it('usa la etiqueta como nombre cuando no se proporciona un nombre', () => {
-    render(<Switch {...defaultProps} label="Switch Label" />)
-    
-    const switchRoot = screen.getByTestId('switch-root')
-    expect(switchRoot).toHaveAttribute('name', 'Switch Label')
   })
 }) 

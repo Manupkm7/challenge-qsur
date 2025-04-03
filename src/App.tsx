@@ -20,7 +20,6 @@ function App() {
         <AppHeader filters={filters} onFiltersChange={handleFiltersChange} onNewClick={() => setIsNewCardModalOpen(true)} />
         <Outlet />
       </section>
-
     </div>
   )
 }

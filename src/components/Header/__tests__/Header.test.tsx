@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { AppHeader } from '../Header'
+import { useLocation } from 'react-router-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
-import { FilterState } from '@/types/common'
+import { AppHeader } from '../Header'
 
 const mockFilters = {
   status: { label: 'Todos', value: 'all' },
@@ -20,61 +20,92 @@ const renderWithProviders = (component: React.ReactNode) => {
   )
 }
 
-describe('AppHeader', () => {
-  const defaultProps = {
-    filters: mockFilters,
-    onFiltersChange: (filters: FilterState) => jest.fn(),
-    onNewClick: jest.fn()
-  }
+// Mock useLocation
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: jest.fn()
+}))
 
+describe('AppHeader', () => {
+  const mockOnNewClick = jest.fn()
+  const mockOnFiltersChange = jest.fn()
   beforeEach(() => {
     jest.clearAllMocks()
+    // Configurar useLocation para simular la ruta /home por defecto
+    jest.mocked(useLocation).mockReturnValue({
+      pathname: '/home',
+      state: undefined,
+      key: '',
+      search: '',
+      hash: ''
+    })
   })
 
   it('renderiza el título correctamente en la página de inicio', () => {
-    renderWithProviders(<AppHeader {...defaultProps} />)
+    (useLocation as jest.Mock).mockReturnValue({
+      pathname: '/'
+    })
+
+    renderWithProviders(
+      <AppHeader 
+        filters={mockFilters} 
+        onNewClick={mockOnNewClick} 
+        onFiltersChange={mockOnFiltersChange} 
+      />
+    )
     expect(screen.getByText('Inicio')).toBeInTheDocument()
   })
 
   it('renderiza los filtros en la página /home', () => {
-    // Mock de useLocation para simular la ruta /home
-    jest.spyOn(require('react-router-dom'), 'useLocation').mockImplementation(() => ({
-      pathname: '/home'
-    }))
+    renderWithProviders(
+      <AppHeader 
+        filters={mockFilters} 
+        onNewClick={mockOnNewClick} 
+        onFiltersChange={mockOnFiltersChange} 
+      />
+    )
 
-    renderWithProviders(<AppHeader {...defaultProps} />)
+    // Verificar que los selects están presentes
+    const selects = screen.getAllByRole('combobox')
+    expect(selects).toHaveLength(2)
 
-    expect(screen.getByText('Todos')).toBeInTheDocument()
-    expect(screen.getByText('Más recientes')).toBeInTheDocument()
+    // Verificar que el input de búsqueda está presente
     expect(screen.getByPlaceholderText('Buscar...')).toBeInTheDocument()
+
+    // Verificar que el botón Nuevo está presente
     expect(screen.getByText('Nuevo')).toBeInTheDocument()
   })
 
   it('no renderiza los filtros en otras páginas', () => {
-    // Mock de useLocation para simular una ruta diferente
-    jest.spyOn(require('react-router-dom'), 'useLocation').mockImplementation(() => ({
-      pathname: 'settings'
-    }))
+    (useLocation as jest.Mock).mockReturnValue({
+      pathname: '/settings'
+    })
 
-    renderWithProviders(<AppHeader {...defaultProps} />)
+    renderWithProviders(
+      <AppHeader 
+        filters={mockFilters} 
+        onNewClick={mockOnNewClick} 
+        onFiltersChange={mockOnFiltersChange} 
+      />
+    )
 
-    expect(screen.queryByText('Todos')).not.toBeInTheDocument()
-    expect(screen.queryByText('Más recientes')).not.toBeInTheDocument()
+    expect(screen.queryByRole('combobox')).not.toBeInTheDocument()
     expect(screen.queryByPlaceholderText('Buscar...')).not.toBeInTheDocument()
     expect(screen.queryByText('Nuevo')).not.toBeInTheDocument()
   })
 
-
   it('llama a onNewClick cuando se hace clic en el botón Nuevo', () => {
-    jest.spyOn(require('react-router-dom'), 'useLocation').mockImplementation(() => ({
-      pathname: '/home'
-    }))
-
-    renderWithProviders(<AppHeader {...defaultProps} />)
+    renderWithProviders(
+      <AppHeader 
+        filters={mockFilters} 
+        onNewClick={mockOnNewClick} 
+        onFiltersChange={mockOnFiltersChange} 
+      />
+    )
 
     const newButton = screen.getByText('Nuevo')
     fireEvent.click(newButton)
 
-    expect(defaultProps.onNewClick).toHaveBeenCalled()
+    expect(mockOnNewClick).toHaveBeenCalled()
   })
 }) 

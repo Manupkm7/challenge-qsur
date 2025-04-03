@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.42% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -170,7 +170,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,7 +183,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,7 +194,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -210,7 +210,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -249,8 +249,8 @@ interface TabsRootProps {
     className?: string;
 }
 &nbsp;
-const TabsRoot = <span class="fstat-no" title="function not covered" >({</span> defaultValue, value, onValueChange, children, className }: TabsRootProps) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return (</span>
+const TabsRoot = ({ defaultValue, value, onValueChange, children, className }: TabsRootProps) =&gt; {
+    return (
         &lt;Tabs.Root
             defaultValue={defaultValue}
             value={value}
@@ -262,8 +262,8 @@ const TabsRoot = <span class="fstat-no" title="function not covered" >({</span> 
     );
 };
 &nbsp;
-const TabsList = <span class="fstat-no" title="function not covered" >({</span> children, className }: { children: ReactNode; className?: string }) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return (</span>
+const TabsList = ({ children, className }: { children: ReactNode; className?: string }) =&gt; {
+    return (
         &lt;Tabs.List className={clsx(
             "flex h-10 items-center justify-center rounded-md p-1 text-slate-500",
             className
@@ -273,8 +273,8 @@ const TabsList = <span class="fstat-no" title="function not covered" >({</span> 
     );
 };
 &nbsp;
-const TabTitle = <span class="fstat-no" title="function not covered" >({</span> trigger, value, className, disabled, icon }: TabTitleProps) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return (</span>
+const TabTitle = ({ trigger, value, className, disabled, icon }: TabTitleProps) =&gt; {
+    return (
         &lt;Tabs.Trigger
             value={value}
             disabled={disabled}
@@ -289,8 +289,8 @@ const TabTitle = <span class="fstat-no" title="function not covered" >({</span> 
     );
 };
 &nbsp;
-const TabContent = <span class="fstat-no" title="function not covered" >({</span> value, children, className }: TabContentProps) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return (</span>
+const TabContent = ({ value, children, className }: TabContentProps) =&gt; {
+    return (
         &lt;Tabs.Content
             value={value}
             className={clsx(
@@ -310,7 +310,7 @@ export { TabsRoot, TabsList, TabTitle, TabContent };</pre></td></tr></table></pr
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-03T02:59:31.298Z
+                at 2025-04-03T17:12:03.965Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

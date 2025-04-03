@@ -93,7 +93,7 @@ export function AppHeader({ filters, onFiltersChange, onNewClick }: AppHeaderPro
                             />
                         </div>
 
-                        <Button data-testid="new-button" variant="primary" type="button" onClick={onNewClick}>Nuevo</Button>
+                        <Button testId="new-button" variant="primary" type="button" onClick={onNewClick}>Nuevo</Button>
                     </div>
                 )}
             </div>

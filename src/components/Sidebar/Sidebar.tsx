@@ -58,7 +58,7 @@ export function AppSidebar() {
                             variant='secondary'
                             className={`w-[26px] max-h-[26px] flex items-center justify-center rounded-full cursor-pointer bg-transparent border-none`}
                             onClick={handleOnClickSidebar}
-                            data-testid='sidebar-handler-btn'
+                            testId='sidebar-handler-btn'
                         >
                             <MenuIcon color='#279AF1' size='20' strokeWidth='1' />
                         </Button>

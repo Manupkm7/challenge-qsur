@@ -23,6 +23,7 @@ export default function Dropdown({ items, button, onOpenChange, defaultOpen, ope
           {items.map(({ content, onClick }, index) => (
             <DropdownMenu.Item
               onClick={onClick}
+              data-testid="dropdown-item"
               className="flex items-center p-2 rounded-md cursor-pointer hover:bg-primary-100 focus:bg-primary-100 gap-x-2"
               key={index}>
               {content}
