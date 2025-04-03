@@ -1,9 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import { AppSidebar } from './components/Sidebar/Sidebar';
-import { AppHeader } from './components/Header/Header';
+
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { darkModeAtom, filtersAtom, isNewCardModalOpenAtom } from '@/atoms/index';
 import { FilterState } from './types/common';
+
+import { AppSidebar } from './components/Sidebar/Sidebar';
+import { AppHeader } from './components/Header/Header';
 
 function App() {
   const [filters, setFilters] = useRecoilState(filtersAtom);

@@ -1,9 +1,26 @@
+// React
 import { ReactNode, useEffect, useState } from 'react';
+
+// Librerías externas
 import * as RadioGroup from '@radix-ui/react-radio-group';
-import { MdRadioButtonChecked as RadioButtonCheckIcon } from '@react-icons/all-files/md/MdRadioButtonChecked';
-import { MdRadioButtonUnchecked as RadioButtonUncheckIcon } from '@react-icons/all-files/md/MdRadioButtonUnchecked';
 import { clsx } from 'clsx';
 
+// Iconos o SVGs
+import { MdRadioButtonChecked as RadioButtonCheckIcon } from '@react-icons/all-files/md/MdRadioButtonChecked';
+import { MdRadioButtonUnchecked as RadioButtonUncheckIcon } from '@react-icons/all-files/md/MdRadioButtonUnchecked';
+
+/**
+ * Grupo de botones de radio para seleccionar opciones.
+ * 
+ * Props:
+ * - `value`: Valor seleccionado.
+ * - `onChange`: Callback para manejar cambios.
+ * - `items`: Lista de opciones disponibles.
+ * - `radioStyle`: Clases CSS para el estilo del radio.
+ * - `selectedRadioStyle`: Clases CSS para el estilo del radio seleccionado.
+ * - `indicatorStyle`: Clases CSS para el estilo del indicador.
+ * - `orientation`: Orientación del grupo de botones de radio.
+ */
 export interface RadioButtonProps {
   disabled?: boolean;
   className?: string;

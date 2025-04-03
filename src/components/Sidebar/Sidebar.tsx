@@ -1,15 +1,31 @@
+// React
+import React from 'react';
+
+// Recoil
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { darkModeAtom, isSidebarOpenAtom } from '../../atoms';
+
+// Librerías externas
+import { clsx } from 'clsx';
+
+// Hooks
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+
+// Componentes
+import Button from '../Button';
+import SidebarItem from './SidebarItem';
+
+// Iconos o SVGs
 import { MdHome as HomeIcon } from '@react-icons/all-files/md/MdHome';
 import { MdDashboard as DashboardIcon } from '@react-icons/all-files/md/MdDashboard';
 import { MdHistory as HistoryIcon } from '@react-icons/all-files/md/MdHistory';
 import { MdSettings as SettingsIcon } from '@react-icons/all-files/md/MdSettings';
 import { MdHelp as HelpIcon } from '@react-icons/all-files/md/MdHelp';
 import { MdDehaze as MenuIcon } from '@react-icons/all-files/md/MdDehaze';
-import { darkModeAtom, isSidebarOpenAtom } from '../../atoms';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
-import Button from '../Button';
-import SidebarItem from './SidebarItem';
-import { clsx } from 'clsx';
+
+/**
+ * Barra lateral con navegación principal.
+ */
 
 // Navigation items
 const navItems = [

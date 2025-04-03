@@ -1,5 +1,19 @@
+//Librerias externas
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { clsx } from 'clsx';
+
+/**
+ * Componente de interruptor para alternar valores booleanos.
+ *
+ * Props:
+ * - `value`: Estado actual del interruptor.
+ * - `onChange`: Callback para manejar cambios.
+ * - `disabled`: Indica si el interruptor está deshabilitado.
+ * - `label`: Etiqueta del interruptor.
+ * - `className`: Clases CSS adicionales.
+ * - `name`: Nombre del interruptor.
+ * - `id`: ID del interruptor.
+ */
 
 type Props = {
   label?: string;

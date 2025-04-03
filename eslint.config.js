@@ -128,4 +128,34 @@ module.exports = {
       },
     },
   },
+  groups: [
+    'builtin', // Importaciones nativas de Node.js
+    'external', // Librerías externas
+    'internal', // Alias internos (como '@/hooks', '@/components')
+    'parent', // Importaciones relativas al directorio padre
+    'sibling', // Importaciones relativas al mismo nivel
+    'index', // Importaciones del archivo `index`
+  ],
+  pathGroups: [
+    {
+      pattern: 'react',
+      group: 'builtin',
+      position: 'before',
+    },
+    {
+      pattern: 'recoil',
+      group: 'builtin',
+      position: 'after',
+    },
+    {
+      pattern: '@/**',
+      group: 'internal',
+    },
+  ],
+  pathGroupsExcludedImportTypes: ['builtin'],
+  'newlines-between': 'always',
+  alphabetize: {
+    order: 'asc',
+    caseInsensitive: true,
+  },
 };

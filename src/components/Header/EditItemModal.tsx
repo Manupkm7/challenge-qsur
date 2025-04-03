@@ -1,17 +1,39 @@
+// React
 import { useState, useRef, useEffect } from 'react';
-import { MdClose as CloseIcon } from '@react-icons/all-files/md/MdClose';
-import { MdFileUpload as Upload } from '@react-icons/all-files/md/MdFileUpload';
-import { MdImage as ImageIcon } from '@react-icons/all-files/md/MdImage';
+
+// Recoil
+import { useRecoilValue } from 'recoil';
+import { darkModeAtom } from '@/atoms/index';
+
+// Librerías externas
+import { toast } from 'react-toastify';
+
+// Componentes
 import Input from '@/components/Input';
 import { CardProductProps } from '@/components/Cards/CardProduct';
 import Button from '../Button';
-import { toast } from 'react-toastify';
 import { Textarea } from '../Textarea';
 import ModalLayout from '../Modal';
 import { Select } from '../Select';
+
+// Tipos
 import { LabelValue } from '@/types/common';
-import { useRecoilValue } from 'recoil';
-import { darkModeAtom } from '@/atoms/index';
+
+// Iconos o SVGs
+import { MdClose as CloseIcon } from '@react-icons/all-files/md/MdClose';
+import { MdFileUpload as Upload } from '@react-icons/all-files/md/MdFileUpload';
+import { MdImage as ImageIcon } from '@react-icons/all-files/md/MdImage';
+
+/**
+ * Modal para editar un producto existente.
+ * 
+ * Props:
+ * - `open`: Indica si el modal está abierto.
+ * - `onOpenChange`: Callback para manejar el estado del modal.
+ * - `card`: Datos del producto a editar.
+ * - `onSave`: Callback para guardar los cambios.
+ * - `onDelete`: Callback para eliminar el producto.
+ */
 
 const STATUS_OPTIONS = [
   { label: 'Activo', value: 'active' },

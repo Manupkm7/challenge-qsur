@@ -1,7 +1,25 @@
-import { useRecoilValue } from 'recoil';
-import { isSidebarOpenAtom } from '../../atoms';
+// React
 import { JSX } from 'react';
 import { Link } from 'react-router-dom';
+
+//Recoil
+import { useRecoilValue } from 'recoil';
+import { isSidebarOpenAtom } from '../../atoms';
+
+
+/**
+ * Elemento individual de la barra lateral.
+ * 
+ * Props:
+ * - `name`: Nombre del elemento.
+ * - `route`: Ruta asociada al elemento.
+ * - `icon`: Icono del elemento.
+ * - `onClick`: Callback para manejar clics.
+ * - `testId`: ID para pruebas.
+ * - `className`: Clases CSS adicionales.
+ * - `dark`: Indica si el tema oscuro está activado.
+ * - `isActive`: Indica si el elemento está activo.
+ */
 
 const SidebarItem = ({
   name,

@@ -1,11 +1,37 @@
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import Button from '../Button';
-import { Select } from '../Select';
-import Input from '../Input';
-import { darkModeAtom } from '@/atoms/index';
+// React
+import { useState, useRef, useEffect } from 'react';
+
+// Recoil
 import { useRecoilValue } from 'recoil';
-import { AppHeaderProps, LabelValue } from '@/types/common';
+import { darkModeAtom } from '@/atoms/index';
+
+// Librerías externas
+import { toast } from 'react-toastify';
+
+// Componentes
+import Input from '@/components/Input';
+import { CardProductProps } from '@/components/Cards/CardProduct';
+import Button from '../Button';
+import { Textarea } from '../Textarea';
+import ModalLayout from '../Modal';
+import { Select } from '../Select';
+
+// Tipos
+import { LabelValue } from '@/types/common';
+
+// Iconos o SVGs
+import { MdClose as CloseIcon } from '@react-icons/all-files/md/MdClose';
+import { MdFileUpload as Upload } from '@react-icons/all-files/md/MdFileUpload';
+import { MdImage as ImageIcon } from '@react-icons/all-files/md/MdImage';
+
+/**
+ * Encabezado principal de la aplicación.
+ *
+ * Props:
+ * - `filters`: Filtros aplicados actualmente.
+ * - `onFiltersChange`: Callback para manejar cambios en los filtros.
+ * - `onNewClick`: Callback para abrir el modal de creación de un nuevo producto.
+ */
 
 const STATUS_OPTIONS = [
   { label: 'Todos', value: 'all' },

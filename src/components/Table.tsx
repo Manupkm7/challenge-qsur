@@ -1,5 +1,27 @@
+//React
 import * as React from 'react';
+
+//Librerias externas
 import { clsx } from 'clsx';
+
+/**
+ * Componente para mostrar datos tabulares.
+ *
+ * Subcomponentes:
+ * - `Table.Header`: Encabezado de la tabla.
+ * - `Table.Body`: Cuerpo de la tabla.
+ * - `Table.Row`: Fila de la tabla.
+ * - `Table.Cell`: Celda de la tabla.
+ * - `Table.Head`: Encabezado de la celda.
+ * - `Table.Footer`: Pie de la tabla.
+ * - `Table.Caption`: Título de la tabla.
+ * - `Table.RowGroup`: Grupo de filas de la tabla.
+ * 
+ * Props:
+ * - `className`: Clases CSS adicionales.
+ * - `children`: Contenido de la tabla.
+ * - `isActive`: Indica si el elemento está activo.
+ */
 
 interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode;

@@ -1,16 +1,38 @@
+// React
 import { useState, useRef } from 'react';
+
+// Recoil
+import { useRecoilValue } from 'recoil';
+import { darkModeAtom } from '@/atoms/index';
+
+// Librerías externas
+import { toast } from 'react-toastify';
+
+// Componentes
+import Button from '../Button';
+import { Badge } from '../Badge';
+import ToolTip from '../Tooltip';
+
+// Iconos o SVGs
 import { MdClose as CloseIcon } from '@react-icons/all-files/md/MdClose';
 import { MdFileUpload as UploadIcon } from '@react-icons/all-files/md/MdFileUpload';
 import { MdImage as ImageIcon } from '@react-icons/all-files/md/MdImage';
 import { MdCheckCircle as CheckCircle } from '@react-icons/all-files/md/MdCheckCircle';
 
-import { toast } from 'react-toastify';
-
-import Button from '../Button';
-import { Badge } from '../Badge';
-import ToolTip from '../Tooltip';
-import { darkModeAtom } from '@/atoms/index';
-import { useRecoilValue } from 'recoil';
+/**
+ * Extiende `Card` para mostrar productos con detalles específicos.
+ * 
+ * Props:
+ * - `id`: Identificador único del producto.
+ * - `title`: Título del producto.
+ * - `description`: Descripción del producto.
+ * - `status`: Estado del producto ('active' o 'inactive').
+ * - `price`: Precio del producto.
+ * - `quantity`: Cantidad disponible.
+ * - `image`: URL de la imagen del producto.
+ * - `onImageChange`: Callback para manejar cambios en la imagen.
+ * - `onCardClick`: Callback para manejar clics en la tarjeta.
+ */
 
 type CardProductBaseProps = {
   id: number;

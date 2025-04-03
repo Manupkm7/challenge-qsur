@@ -1,15 +1,24 @@
+// React
 import { useState, useEffect } from 'react';
-import { Card } from '@/components/Cards/Card';
+
+// Recoil
 import { useRecoilValue } from 'recoil';
 import { salesByMonthState, totalSalesState, soldItemsState } from '@/store/salesAtoms';
 import { darkModeAtom, filtersAtom } from '../atoms';
+
+// Librerías externas
+import ReactApexChart from 'react-apexcharts';
+
+// Hooks
+import { useSales } from '@/hooks/useSales';
+
+// Componentes
+import { Card } from '@/components/Cards/Card';
+import { TabsRoot, TabContent, TabsList, TabTitle } from '@/components/Tabs';
+
+// Iconos o SVGs
 import { FaDollarSign as DollarSign } from '@react-icons/all-files/fa/FaDollarSign';
 import { FaCalendar as Calendar } from '@react-icons/all-files/fa/FaCalendar';
-
-import ReactApexChart from 'react-apexcharts';
-import { TabContent, TabsList, TabTitle } from '@/components/Tabs';
-import { TabsRoot } from '@/components/Tabs';
-import { useSales } from '@/hooks/useSales';
 
 // Categories for x-axis (months)
 const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];

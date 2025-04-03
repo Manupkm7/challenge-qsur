@@ -1,21 +1,31 @@
+// React
 import { useState } from 'react';
+
+// Recoil
+import { useRecoilValue } from 'recoil';
+import { darkModeAtom } from '../atoms';
+
+// Librerías externas
+import moment from 'moment';
+import Papa from 'papaparse';
+
+// Hooks
+import { useHistory, type HistoryAction } from '@/hooks/useHistoryStore';
+
+// Componentes
 import Input from '@/components/Input';
 import Table from '@/components/Table';
-import { useHistory, type HistoryAction } from '@/hooks/useHistoryStore';
-import moment from 'moment';
+import { Badge } from '@/components/Badge';
+import Dropdown from '@/components/Dropdown';
+import Button from '@/components/Button';
+
+// Iconos o SVGs
 import { FaFilter as Filter } from '@react-icons/all-files/fa/FaFilter';
-import { SearchIcon as Search } from '../assets/SearchIcon';
 import { MdChevronRight as ChevronDown } from '@react-icons/all-files/md/MdChevronRight';
 import { FaPlusCircle as PlusCircle } from '@react-icons/all-files/fa/FaPlusCircle';
 import { FaPencilAlt as Pencil } from '@react-icons/all-files/fa/FaPencilAlt';
 import { FaTrash as Trash2 } from '@react-icons/all-files/fa/FaTrash';
-import Papa from 'papaparse';
-
-import { Badge } from '@/components/Badge';
-import Dropdown from '@/components/Dropdown';
-import Button from '@/components/Button';
-import { darkModeAtom } from '../atoms';
-import { useRecoilValue } from 'recoil';
+import { SearchIcon as Search } from '../assets/SearchIcon';
 
 export const History = () => {
   const { events } = useHistory();

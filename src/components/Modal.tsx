@@ -1,5 +1,20 @@
+//React
 import { ReactNode } from 'react';
+
+//Iconos o SVG
 import { MdClose as CloseIcon } from '@react-icons/all-files/md/MdClose';
+
+/**
+ * Componente para mostrar un modal (diálogo emergente).
+ *
+ * Props:
+ * - `isOpen`: Indica si el modal está abierto.
+ * - `onClose`: Callback para cerrar el modal.
+ * - `title`: Título del modal.
+ * - `children`: Contenido del modal.
+ * - `footer`: Contenido opcional para el pie del modal.
+ * - `className`: Clases CSS adicionales para personalización.
+ */
 
 type ModalLayoutProps = {
   children: ReactNode;

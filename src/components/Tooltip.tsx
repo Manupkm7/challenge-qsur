@@ -1,6 +1,21 @@
+//React
 import { ReactNode } from 'react';
+
+// Librerias externas
 import { clsx } from 'clsx';
 import { Tooltip } from 'radix-ui';
+
+/**
+ * Componente para mostrar información adicional al pasar el cursor.
+ *
+ * Props:
+ * - `tooltip`: Texto a mostrar en el tooltip.
+ * - `size`: Tamaño del tooltip.
+ * - `className`: Clases CSS adicionales.
+ * - `side`: Lado donde se mostrará el tooltip.
+ * - `delayDuration`: Duración del retraso para mostrar el tooltip.
+ * - `children`: Elemento hijo que activa el tooltip.
+ */
 
 type Props = {
   children: ReactNode;

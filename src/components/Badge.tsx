@@ -1,5 +1,18 @@
+//React
 import type * as React from 'react';
+
+// Librerías externas
 import { clsx } from 'clsx';
+
+/**
+ * Etiqueta para mostrar estados o categorías.
+ *
+ * Props:
+ * - `variant`: Variante de estilo ('default', 'secondary', etc.).
+ * - `children`: Contenido de la etiqueta.
+ * - `className`: Clases CSS adicionales.
+ * - `testId`: ID para pruebas.
+ */
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: 'default' | 'secondary' | 'destructive' | 'outline';

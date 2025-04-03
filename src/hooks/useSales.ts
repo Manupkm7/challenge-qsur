@@ -1,8 +1,8 @@
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 import { soldItemsState } from '@/store/salesAtoms';
-import type { CardProductProps } from '@/components/Cards/CardProduct';
-import { randomUUID } from 'crypto';
 import { cardsAtom } from '../atoms';
+
+import type { CardProductProps } from '@/components/Cards/CardProduct';
 
 interface SoldItem {
   id: number;

@@ -1,6 +1,24 @@
+//React
 import { ReactNode } from 'react';
+
+//Librerias externas
 import * as Tabs from '@radix-ui/react-tabs';
 import { clsx } from 'clsx';
+
+/**
+ * Sistema de pestañas para organizar contenido.
+ * 
+ * Subcomponentes:
+ * - `TabsRoot`: Contenedor principal de las pestañas.
+ * - `TabsList`: Lista de pestañas.
+ * - `TabTitle`: Título de una pestaña.
+ * - `TabContent`: Contenido asociado a una pestaña.
+ * 
+ * Props:
+ * - `className`: Clases CSS adicionales.
+ * - `children`: Contenido de la tabla.
+ * - `isActive`: Indica si el elemento está activo.
+ */
 
 interface TabTitleProps {
   trigger: ReactNode;

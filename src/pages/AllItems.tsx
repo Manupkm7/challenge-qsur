@@ -1,5 +1,7 @@
-import { CardProduct, CardProductProps } from '@/components/Cards/CardProduct';
+// React
 import { useEffect, useMemo, useState } from 'react';
+
+// Recoil
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   cardsAtom,
@@ -11,12 +13,21 @@ import {
   totalPagesAtom,
   viewModeAtom,
 } from '@/atoms/index';
-import { NewCardModal } from '@/components/Header/NewItem';
-import Button from '@/components/Button';
-import { EditItemModal } from '@/components/Header/EditItemModal';
-import { useHistoryLogger } from '@/hooks/useHistoryStore';
+
+// Librerías externas
 import { MdFormatListBulleted as List } from '@react-icons/all-files/md/MdFormatListBulleted';
 import { MdGridOn as Grid3x3 } from '@react-icons/all-files/md/MdGridOn';
+
+// Hooks
+import { useHistoryLogger } from '@/hooks/useHistoryStore';
+import { useSales } from '@/hooks/useSales';
+
+// Componentes
+import { CardProduct, CardProductProps } from '@/components/Cards/CardProduct';
+import { NewCardModal } from '@/components/Header/NewItem';
+import { EditItemModal } from '@/components/Header/EditItemModal';
+import Button from '@/components/Button';
+import { Select } from '@/components/Select';
 import {
   Pagination,
   PaginationContent,
@@ -26,8 +37,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/Pagination';
-import { useSales } from '@/hooks/useSales';
-import { Select } from '@/components/Select';
 
 type CardProductBase = Omit<CardProductProps, 'viewMode'>;
 

@@ -1,9 +1,31 @@
+// React
 import * as React from 'react';
+
+// Librerías externas
+import { clsx } from 'clsx';
+
+// Iconos o SVGs
 import { MdChevronRight as ChevronRight } from '@react-icons/all-files/md/MdChevronRight';
 import { MdChevronLeft as ChevronLeft } from '@react-icons/all-files/md/MdChevronLeft';
 import { MdMoreHoriz as MoreHorizontal } from '@react-icons/all-files/md/MdMoreHoriz';
 
-import { clsx } from 'clsx';
+/**
+ * Componente para manejar la paginación.
+ *
+ * Subcomponentes:
+ * - `PaginationPrevious`: Botón para ir a la página anterior.
+ * - `PaginationNext`: Botón para ir a la página siguiente.
+ * - `PaginationEllipsis`: Indicador de páginas omitidas.
+ * - `PaginationLink`: Enlace de paginación.
+ * - `PaginationItem`: Elemento de paginación.
+ * - `PaginationContent`: Contenedor de los elementos de paginación.
+ *
+ * Props:
+ * - `className`: Clases CSS adicionales.
+ * - `children`: Contenido de la tabla.
+ * - `isActive`: Indica si el elemento está activo.
+ * - `...props`: Props adicionales para el componente `nav`.
+ */
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
   <nav

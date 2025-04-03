@@ -1,9 +1,36 @@
-import { clsx } from 'clsx';
+// React
 import { ReactNode, useMemo, useState } from 'react';
 
+// Librerías externas
+import { clsx } from 'clsx';
 import * as SelectPrimitive from '@radix-ui/react-select';
+
+// Iconos o SVGs
 import { MdKeyboardArrowDown as ArrowDownIcon } from '@react-icons/all-files/md/MdKeyboardArrowDown';
 import { SearchIcon } from '../assets/SearchIcon';
+
+/**
+ * Componente de selección con opciones desplegables.
+ *
+ * Props:
+ * - `options`: Lista de opciones disponibles.
+ * - `value`: Valor seleccionado.
+ * - `onChange`: Callback para manejar cambios.
+ * - `placeholder`: Texto de marcador de posición.
+ * - `label`: Etiqueta del campo.
+ * - `className`: Clases CSS adicionales.
+ * - `activeFilter`: Indica si se debe mostrar un filtro activo.
+ * - `disabled`: Indica si el campo está deshabilitado.
+ * - `extractLabel`: Función para extraer la etiqueta de una opción.
+ * - `extractValue`: Función para extraer el valor de una opción.
+ * - `onChangeInput`: Callback para manejar cambios en el campo de entrada.
+ * - `position`: Posición del contenido desplegable.
+ * - `contentClassName`: Clases CSS adicionales para el contenido.
+ * - `classNameOption`: Clases CSS adicionales para las opciones.
+ * - `classNameValue`: Clases CSS adicionales para el valor seleccionado.
+ * - `dark`: Indica si el tema oscuro está activado.
+ * - `dataTestId`: ID para pruebas.
+ */
 
 type SelectProps<T> = {
   id?: string;

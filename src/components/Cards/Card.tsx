@@ -1,7 +1,23 @@
+// React
 import * as React from 'react';
-import { clsx } from 'clsx';
-import { darkModeAtom } from '@/atoms/index';
+
+// Recoil
 import { useRecoilValue } from 'recoil';
+import { darkModeAtom } from '@/atoms/index';
+
+// Librerías externas
+import { clsx } from 'clsx';
+
+/**
+ * Componente base para mostrar información en formato de tarjeta.
+ * 
+ * Props:
+ * - `title`: Título de la tarjeta.
+ * - `description`: Descripción de la tarjeta.
+ * - `icon`: Icono opcional para el encabezado.
+ * - `footer`: Contenido opcional para el pie de la tarjeta.
+ * - `children`: Contenido principal de la tarjeta.
+ */
 
 type CardProps = {
   className?: string;

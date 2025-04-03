@@ -1,5 +1,23 @@
+//React
 import { ButtonHTMLAttributes, forwardRef, MouseEventHandler, ReactNode } from 'react';
+
+//Librerias externas
 import { clsx } from 'clsx';
+
+/**
+ * Componente reutilizable para botones con diferentes variantes y estados.
+ *
+ * Props:
+ * - `variant`: Estilo del botón ('primary', 'secondary', 'destructive').
+ * - `type`: Tipo del botón (por defecto, 'button').
+ * - `className`: Clases CSS adicionales para personalización.
+ * - `isLoading`: Indica si el botón está en estado de carga.
+ * - `disabled`: Indica si el botón está deshabilitado.
+ * - `children`: Contenido del botón.
+ * - `onClick`: Callback para manejar clics en el botón.
+ * - `hasError`: Indica si el botón tiene un estado de error.
+ * - `testId`: ID para pruebas.
+ */
 
 type Props = {
   variant: 'primary' | 'secondary' | 'destructive';

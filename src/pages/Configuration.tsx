@@ -1,15 +1,21 @@
+// React
 import { useState, useEffect } from 'react';
 
+// Recoil
+import { useRecoilState } from 'recoil';
+import { darkModeAtom } from '../atoms';
+
+// Componentes
 import Button from '@/components/Button';
 import { Card } from '@/components/Cards/Card';
 import { RadixRadioGroup } from '@/components/RadioGroup';
+import { Divider } from '@/components/Divider';
+import { Switch } from '@/components/Switch';
+
+// Iconos o SVGs
 import { FaGlobe as Globe } from '@react-icons/all-files/fa/FaGlobe';
 import { FaMoon as Moon } from '@react-icons/all-files/fa/FaMoon';
 import { FaSun as Sun } from '@react-icons/all-files/fa/FaSun';
-import { Divider } from '@/components/Divider';
-import { Switch } from '@/components/Switch';
-import { darkModeAtom } from '../atoms';
-import { useRecoilState } from 'recoil';
 
 export const SettingsPage = () => {
   const [dark, setDark] = useRecoilState(darkModeAtom);

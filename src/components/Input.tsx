@@ -1,5 +1,24 @@
+//React
 import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, ReactNode, useId } from 'react';
+
+//Librerias externas
 import { clsx } from 'clsx';
+
+/**
+ * Campo de entrada reutilizable.
+ * 
+ * Props:
+ * - `value`: Valor del campo.
+ * - `onChange`: Callback para manejar cambios.
+ * - `placeholder`: Texto de marcador de posición.
+ * - `dark`: Indica si el tema oscuro está activado.
+ * - `inputClassName`: Clases CSS adicionales para el input.
+ * - `labelClassName`: Clases CSS adicionales para la etiqueta.
+ * - `primaryColor`: Color primario para el input.
+ * - `labelContent`: Contenido de la etiqueta.
+ * - `hasError`: Indica si hay un error en el input.
+ * - `testId`: ID para pruebas.
+ */
 
 type Props = Omit<
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,

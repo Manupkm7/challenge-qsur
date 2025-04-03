@@ -1,5 +1,18 @@
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+//React
 import { MouseEventHandler, ReactNode } from 'react';
+
+//Librerias externas
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+
+/**
+ * Componente para mostrar un menú desplegable.
+ *
+ * Props:
+ * - `trigger`: Elemento que activa el menú desplegable.
+ * - `items`: Lista de elementos del menú (cada uno con `label` y `onClick`).
+ * - `className`: Clases CSS adicionales para personalización.
+ * - `position`: Posición del menú desplegable ('top', 'bottom', 'left', 'right').
+ */
 
 type DropdownProps = {
   items: { content: ReactNode; onClick?: MouseEventHandler<HTMLDivElement> }[];
@@ -8,6 +21,8 @@ type DropdownProps = {
   defaultOpen?: boolean;
   open?: boolean;
   align?: DropdownMenu.DropdownMenuContentProps['align'];
+  className?: string;
+  position?: 'top' | 'bottom' | 'left' | 'right';
 };
 
 export default function Dropdown({
