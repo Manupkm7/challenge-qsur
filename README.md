@@ -1,54 +1,51 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Challenge Qisur
 
-Currently, two official plugins are available:
+Sistema de gestion de productos y categorias hecho en React - Vite, Tailwind Css, Recoil para estados globales y Radix para algunos componentes reutilizables.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### Aclaraciones importantes: La funcionalidad de configurar el cliente HTTP no esta hecha porque no tengo enpoints creados y tampoco tenia tanto tiempo para crear un backend teniendo en cuenta que la prueba es de frontend.
 
-## Expanding the ESLint configuration
+## Requerimientos Tecnicos
+###  1) Layout principal con:
+- Sidebar navegación ✅
+- Header con búsqueda y filtros ✅
+- Área principal de contenido ✅
+- Tema claro/oscuro ✅
+### 2) Lista de Productos:
+- Vista grid/lista toggleable ✅
+-  Ordenamiento por múltiples campos ✅
+- Filtros avanzados ✅
+- Paginación ✅
+- Actualizaciones en tiempo real ✅
+### 3) Formularios:
+- Crear/Editar producto ✅
+- Gestión de categorías ✅
+- Validación de campos ✅
+- Upload de imágenes (mock) ✅
+- Feedback visual de estados ✅
+### 4) Visualizaciones:
+- Dashboard con métricas ✅
+- Gráficos de stock/precios usando ApexCharts ✅
+- Vista de histórico de cambios ✅
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Funcionalidades Requeridas:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 1) Gestión de Productos:
+- CRUD completo ✅
+- Búsqueda y filtrado ✅
+- Ordenamiento múltiple ✅
+- Paginación ✅
+- Exportación a CSV ✅
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 2) Gestión de Categorías:
+- Modal CRUD ✅
+- Validaciones ✅
+## 3) Real-time:
+- Integración con WebSockets ❌ (la base esta pero no tengo a donde enviar la data asi que no iba a hacer algo si no iba a funcionar)
+- Notificaciones de cambios ✅
+- Actualización automática de vistas ✅
+## 4) UX/UI:
+- Diseño responsivo ✅
+- Feedback de acciones ✅
+- Manejo de estados de carga ✅ (Como estoy haciendo todo local no se nota pero esta codeado)
+- Manejo de errores ✅
