@@ -23,6 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
+# Coverage
+coverage
+
 # Env
 env-config.js
 public/env-config.js
