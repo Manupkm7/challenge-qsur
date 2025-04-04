@@ -6,6 +6,11 @@ Sistema de gestion de productos y categorias hecho en React - Vite, Tailwind Css
 #### Aclaraciones importantes: La funcionalidad de configurar el cliente HTTP no esta hecha porque no tengo enpoints creados y tampoco tenia tanto tiempo para crear un backend teniendo en cuenta que la prueba es de frontend.
 La app esta deployada en este link [https://challenge-qsur.vercel.app/home](https://challenge-qsur.vercel.app/home)
 
+Forma de instalar el proyecto
+Clonar el repositorio
+Npm install
+Npm run dev y listo
+
 ## Requerimientos Tecnicos
 ###  1) Layout principal con:
 - Sidebar navegación ✅
